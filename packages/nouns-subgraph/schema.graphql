@@ -48,14 +48,14 @@ type Seed @entity {
   "The body index"
   body: BigInt!
 
-  "The accessory index"
-  accessory: BigInt!
-
   "The head index"
   head: BigInt!
 
   "The glasses index"
   glasses: BigInt!
+
+  "The skill index"
+  skill: BigInt!
 }
 
 type Noun @entity {
