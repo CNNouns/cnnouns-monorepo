@@ -17,6 +17,13 @@
 
 pragma solidity ^0.8.6;
 
+// LICENSE
+// This file is a modified version of nounsDAO's INounsDescriptor.sol:
+// https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/interfaces/INounsDescriptor.sol
+//
+// INounsDescriptor.sol licensed under the GPL-3.0 license.
+// With modifications by CNNouns DAO.
+
 import { INounsSeeder } from './INounsSeeder.sol';
 import { INounsDescriptorMinimal } from './INounsDescriptorMinimal.sol';
 
@@ -39,21 +46,21 @@ interface INounsDescriptor is INounsDescriptorMinimal {
 
     function bodies(uint256 index) external view returns (bytes memory);
 
-    function accessories(uint256 index) external view returns (bytes memory);
-
     function heads(uint256 index) external view returns (bytes memory);
 
     function glasses(uint256 index) external view returns (bytes memory);
+
+    function skills(uint256 index) external view returns (bytes memory);
 
     function backgroundCount() external view override returns (uint256);
 
     function bodyCount() external view override returns (uint256);
 
-    function accessoryCount() external view override returns (uint256);
-
     function headCount() external view override returns (uint256);
 
     function glassesCount() external view override returns (uint256);
+
+    function skillCount() external view override returns (uint256);
 
     function addManyColorsToPalette(uint8 paletteIndex, string[] calldata newColors) external;
 
@@ -61,11 +68,11 @@ interface INounsDescriptor is INounsDescriptorMinimal {
 
     function addManyBodies(bytes[] calldata bodies) external;
 
-    function addManyAccessories(bytes[] calldata accessories) external;
-
     function addManyHeads(bytes[] calldata heads) external;
 
     function addManyGlasses(bytes[] calldata glasses) external;
+
+    function addManySkills(bytes[] calldata skills) external;
 
     function addColorToPalette(uint8 paletteIndex, string calldata color) external;
 
@@ -73,11 +80,11 @@ interface INounsDescriptor is INounsDescriptorMinimal {
 
     function addBody(bytes calldata body) external;
 
-    function addAccessory(bytes calldata accessory) external;
-
     function addHead(bytes calldata head) external;
 
     function addGlasses(bytes calldata glasses) external;
+
+    function addSkill(bytes calldata skill) external;
 
     function lockParts() external;
 
