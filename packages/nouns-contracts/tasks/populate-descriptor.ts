@@ -26,12 +26,12 @@ task('populate-descriptor', 'Populates the descriptor with color palettes and No
     const descriptorContract = descriptorFactory.attach(nounsDescriptor);
 
     const { bgcolors, palette, images } = ImageData;
-    const { bodies, accessories, heads, glasses } = images;
+    const { bodies, heads, glasses, skills } = images;
 
     const bodiesPage = dataToDescriptorInput(bodies.map(({ data }) => data));
     const headsPage = dataToDescriptorInput(heads.map(({ data }) => data));
     const glassesPage = dataToDescriptorInput(glasses.map(({ data }) => data));
-    const accessoriesPage = dataToDescriptorInput(accessories.map(({ data }) => data));
+    const skillsPage = dataToDescriptorInput(skills.map(({ data }) => data));
 
     await descriptorContract.addManyBackgrounds(bgcolors);
     await descriptorContract.setPalette(0, `0x000000${palette.join('')}`);
@@ -54,10 +54,10 @@ task('populate-descriptor', 'Populates the descriptor with color palettes and No
       glassesPage.itemCount,
       options,
     );
-    await descriptorContract.addAccessories(
-      accessoriesPage.encodedCompressed,
-      accessoriesPage.originalLength,
-      accessoriesPage.itemCount,
+    await descriptorContract.addSkills(
+      skillsPage.encodedCompressed,
+      skillsPage.originalLength,
+      skillsPage.itemCount,
       options,
     );
 
