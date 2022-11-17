@@ -23,7 +23,7 @@ contract NounsDescriptorWithRealArtTest is DeployUtils {
     function testGeneratesValidTokenURI() public {
         string memory uri = descriptor.tokenURI(
             0,
-            INounsSeeder.Seed({ background: 0, body: 0, accessory: 0, head: 0, glasses: 0 })
+            INounsSeeder.Seed({ background: 0, body: 0, head: 0, glasses: 0, skill: 0 })
         );
 
         string memory json = string(removeDataTypePrefix(uri).decode());
@@ -32,7 +32,7 @@ contract NounsDescriptorWithRealArtTest is DeployUtils {
 
         assertEq(json.readString('.name'), 'Noun 0');
         assertEq(json.readString('.description'), 'Noun 0 is a member of the Nouns DAO');
-        assertEq(bytes(imageDecoded).length, 6849);
+        assertEq(bytes(imageDecoded).length, 17683);
         assertTrue(
             imageSlice.startsWith(
                 '<svg width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">'
@@ -41,7 +41,7 @@ contract NounsDescriptorWithRealArtTest is DeployUtils {
         );
         assertTrue(
             imageSlice.endsWith(
-                '<rect width="60" height="10" x="100" y="160" fill="#ff638d" /><rect width="60" height="10" x="170" y="160" fill="#ff638d" /></svg>'
+                '<rect width="10" height="10" x="150" y="310" fill="#1f1d29" /><rect width="10" height="10" x="160" y="310" fill="#62616d" /></svg>'
                     .toSlice()
             )
         );

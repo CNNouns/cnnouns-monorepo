@@ -20,9 +20,9 @@ describe('NounsDescriptorV2', () => {
   };
   const longest: Record<string, LongestPart> = {
     bodies: part,
-    accessories: part,
     heads: part,
     glasses: part,
+    skills: part,
   };
 
   before(async () => {
@@ -57,15 +57,15 @@ describe('NounsDescriptorV2', () => {
     console.log('Running... this may take a little while...');
 
     const { bgcolors, images } = ImageData;
-    const { bodies, accessories, heads, glasses } = images;
-    const max = Math.max(bodies.length, accessories.length, heads.length, glasses.length);
+    const { bodies, heads, glasses, skills } = images;
+    const max = Math.max(bodies.length, heads.length, glasses.length, skills.length);
     for (let i = 0; i < max; i++) {
       const tokenUri = await nounsDescriptor.tokenURI(i, {
         background: Math.min(i, bgcolors.length - 1),
         body: Math.min(i, bodies.length - 1),
-        accessory: Math.min(i, accessories.length - 1),
         head: Math.min(i, heads.length - 1),
         glasses: Math.min(i, glasses.length - 1),
+        skill: Math.min(i, skills.length - 1),
       });
       const { name, description, image } = JSON.parse(
         Buffer.from(tokenUri.replace('data:application/json;base64,', ''), 'base64').toString(

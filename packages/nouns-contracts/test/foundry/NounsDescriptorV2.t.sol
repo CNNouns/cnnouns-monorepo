@@ -148,13 +148,13 @@ contract NounsDescriptorV2Test is Test {
         vm.clearMockedCalls();
     }
 
-    function testAccessoryCountUsesArt() public {
+    function testSkillCountUsesArt() public {
         vm.mockCall(
             address(art),
-            abi.encodeWithSelector(NounsArt.getAccessoriesTrait.selector),
+            abi.encodeWithSelector(NounsArt.getSkillsTrait.selector),
             abi.encode(INounsArt.Trait({ storedImagesCount: 42, storagePages: new INounsArt.NounArtStoragePage[](0) }))
         );
-        assertEq(descriptor.accessoryCount(), 42);
+        assertEq(descriptor.skillCount(), 42);
         vm.clearMockedCalls();
     }
 
@@ -258,24 +258,24 @@ contract NounsDescriptorV2Test is Test {
         descriptor.addBodies('00', 1, 1);
     }
 
-    function testAddAccessoriesUsesArt() public {
+    function testAddSkillsUsesArt() public {
         bytes memory someBytes = 'some bytes';
         uint80 decompressedLen = 123;
         uint16 imageCount = 456;
-        vm.expectCall(address(art), abi.encodeCall(art.addAccessories, (someBytes, decompressedLen, imageCount)));
-        descriptor.addAccessories(someBytes, decompressedLen, imageCount);
+        vm.expectCall(address(art), abi.encodeCall(art.addSkills, (someBytes, decompressedLen, imageCount)));
+        descriptor.addSkills(someBytes, decompressedLen, imageCount);
     }
 
-    function testCannotAddAccessoriesWhenPartsLocked() public {
+    function testCannotAddSkillsWhenPartsLocked() public {
         descriptor.lockParts();
         vm.expectRevert(bytes('Parts are locked'));
-        descriptor.addAccessories('00', 1, 1);
+        descriptor.addSkills('00', 1, 1);
     }
 
-    function testCannotAddAccessoriesIfNotOwner() public {
+    function testCannotAddSkillsIfNotOwner() public {
         vm.prank(address(1));
         vm.expectRevert(bytes('Ownable: caller is not the owner'));
-        descriptor.addAccessories('00', 1, 1);
+        descriptor.addSkills('00', 1, 1);
     }
 
     function testAddHeadsUsesArt() public {
@@ -341,27 +341,27 @@ contract NounsDescriptorV2Test is Test {
         descriptor.addBodiesFromPointer(address(1337), 1, 1);
     }
 
-    function testAddAccessoriesFromPointerUsesArt() public {
+    function testAddSkillsFromPointerUsesArt() public {
         address somePointer = address(1337);
         uint80 decompressedLen = 123;
         uint16 imageCount = 456;
         vm.expectCall(
             address(art),
-            abi.encodeCall(art.addAccessoriesFromPointer, (somePointer, decompressedLen, imageCount))
+            abi.encodeCall(art.addSkillsFromPointer, (somePointer, decompressedLen, imageCount))
         );
-        descriptor.addAccessoriesFromPointer(somePointer, decompressedLen, imageCount);
+        descriptor.addSkillsFromPointer(somePointer, decompressedLen, imageCount);
     }
 
-    function testCannotAddAccessoriesFromPointerWhenPartsLocked() public {
+    function testCannotAddSkillsFromPointerWhenPartsLocked() public {
         descriptor.lockParts();
         vm.expectRevert(bytes('Parts are locked'));
-        descriptor.addAccessoriesFromPointer(address(1337), 1, 1);
+        descriptor.addSkillsFromPointer(address(1337), 1, 1);
     }
 
-    function testCannotAddAccessoriesFromPointerIfNotOwner() public {
+    function testCannotAddSkillsFromPointerIfNotOwner() public {
         vm.prank(address(1));
         vm.expectRevert(bytes('Ownable: caller is not the owner'));
-        descriptor.addAccessoriesFromPointer(address(1337), 1, 1);
+        descriptor.addSkillsFromPointer(address(1337), 1, 1);
     }
 
     function testAddHeadsFromPointerUsesArt() public {
@@ -432,13 +432,13 @@ contract NounsDescriptorV2Test is Test {
         vm.clearMockedCalls();
     }
 
-    function testAccessoriesUsesArt() public {
+    function testSkillsUsesArt() public {
         vm.mockCall(
             address(art),
-            abi.encodeWithSelector(INounsArt.accessories.selector, 17),
+            abi.encodeWithSelector(INounsArt.skills.selector, 17),
             abi.encode('return value')
         );
-        assertEq(descriptor.accessories(17), 'return value');
+        assertEq(descriptor.skills(17), 'return value');
         vm.clearMockedCalls();
     }
 
@@ -456,9 +456,9 @@ contract NounsDescriptorV2Test is Test {
 
     function testGetPartsForSeedWorks() public {
         vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.bodies.selector), abi.encode('the body'));
-        vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.accessories.selector), abi.encode('the accessory'));
         vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.heads.selector), abi.encode('the head'));
         vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.glasses.selector), abi.encode('the glasses'));
+        vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.skills.selector), abi.encode('the skill'));
         vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.palettes.selector), abi.encode('the palette'));
 
         ISVGRenderer.Part[] memory parts = descriptor.getPartsForSeed(INounsSeeder.Seed(0, 0, 0, 0, 0));
@@ -466,13 +466,13 @@ contract NounsDescriptorV2Test is Test {
         assertEq(parts[0].image, 'the body');
         assertEq(parts[0].palette, 'the palette');
 
-        assertEq(parts[1].image, 'the accessory');
+        assertEq(parts[1].image, 'the head');
         assertEq(parts[1].palette, 'the palette');
 
-        assertEq(parts[2].image, 'the head');
+        assertEq(parts[2].image, 'the glasses');
         assertEq(parts[2].palette, 'the palette');
 
-        assertEq(parts[3].image, 'the glasses');
+        assertEq(parts[3].image, 'the skill');
         assertEq(parts[3].palette, 'the palette');
     }
 
@@ -480,9 +480,9 @@ contract NounsDescriptorV2Test is Test {
         vm.mockCall(address(art), abi.encodeWithSelector(NounsArt.backgroundsCount.selector), abi.encode(123));
         vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.backgrounds.selector), abi.encode('return value'));
         vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.bodies.selector), abi.encode('return value'));
-        vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.accessories.selector), abi.encode('return value'));
         vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.heads.selector), abi.encode('return value'));
         vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.glasses.selector), abi.encode('return value'));
+        vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.skills.selector), abi.encode('return value'));
         vm.mockCall(address(art), abi.encodeWithSelector(INounsArt.palettes.selector), abi.encode('return value'));
     }
 }
@@ -501,7 +501,7 @@ contract NounsDescriptorV2WithRealArtTest is DeployUtils {
     function testGeneratesValidTokenURI() public {
         string memory uri = descriptor.tokenURI(
             0,
-            INounsSeeder.Seed({ background: 0, body: 0, accessory: 0, head: 0, glasses: 0 })
+            INounsSeeder.Seed({ background: 0, body: 0, head: 0, glasses: 0, skill: 0 })
         );
 
         string memory json = string(removeDataTypePrefix(uri).decode());
@@ -510,7 +510,7 @@ contract NounsDescriptorV2WithRealArtTest is DeployUtils {
 
         assertEq(json.readString('.name'), 'Noun 0');
         assertEq(json.readString('.description'), 'Noun 0 is a member of the Nouns DAO');
-        assertEq(bytes(imageDecoded).length, 6849);
+        assertEq(bytes(imageDecoded).length, 17683);
         assertTrue(
             imageSlice.startsWith(
                 '<svg width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">'
@@ -519,7 +519,7 @@ contract NounsDescriptorV2WithRealArtTest is DeployUtils {
         );
         assertTrue(
             imageSlice.endsWith(
-                '<rect width="60" height="10" x="100" y="160" fill="#ff638d" /><rect width="60" height="10" x="170" y="160" fill="#ff638d" /></svg>'
+                '<rect width="10" height="10" x="150" y="310" fill="#1f1d29" /><rect width="10" height="10" x="160" y="310" fill="#62616d" /></svg>'
                     .toSlice()
             )
         );

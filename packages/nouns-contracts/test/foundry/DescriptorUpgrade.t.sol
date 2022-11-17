@@ -69,9 +69,9 @@ contract DescriptorUpgradeTest is Test, DeployUtils {
                 INounsSeeder.Seed({
                     background: uint48(i % d.backgroundCount()),
                     body: uint48(i % d.bodyCount()),
-                    accessory: uint48(i % d.accessoryCount()),
                     head: uint48(i % d.headCount()),
-                    glasses: uint48(i % d.glassesCount())
+                    glasses: uint48(i % d.glassesCount()),
+                    skill: uint48(i % d.skillCount())
                 })
             );
 
