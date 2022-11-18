@@ -11,9 +11,9 @@ export interface NormalizedVote {
 export interface Seed {
   background: number;
   body: number;
-  accessory: number;
   head: number;
   glasses: number;
+  skill: number;
 }
 
 export interface NormalizedNoun {
@@ -43,9 +43,9 @@ const nounsGql = `
     seed {
       background
       body
-      accessory
       head
       glasses
+      skill
     }
   }
 }
@@ -60,8 +60,8 @@ export const normalizeSeed = (seed: any): Seed => ({
   background: Number(seed.background),
   body: Number(seed.body),
   glasses: Number(seed.glasses),
-  accessory: Number(seed.accessory),
   head: Number(seed.head),
+  skill: Number(seed.skill),
 });
 
 export const normalizeNoun = (noun: any): NormalizedNoun => ({

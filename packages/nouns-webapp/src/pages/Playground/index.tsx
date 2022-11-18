@@ -64,7 +64,7 @@ const traitKeyToTitle: Record<string, string> = {
   heads: 'head',
   glasses: 'glasses',
   bodies: 'body',
-  accessories: 'accessory',
+  skill: 'skill',
 };
 
 const parseTraitName = (partName: string): string =>
@@ -76,9 +76,9 @@ const traitKeyToLocalizedTraitKeyFirstLetterCapitalized = (s: string): ReactNode
   const traitMap = new Map([
     ['background', <Trans>Background</Trans>],
     ['body', <Trans>Body</Trans>],
-    ['accessory', <Trans>Accessory</Trans>],
     ['head', <Trans>Head</Trans>],
     ['glasses', <Trans>Glasses</Trans>],
+    ['skill', <Trans>Skill</Trans>],
   ]);
 
   return traitMap.get(s);
@@ -113,7 +113,7 @@ const Playground: React.FC = () => {
   );
 
   useEffect(() => {
-    const traitTitles = ['background', 'body', 'accessory', 'head', 'glasses'];
+    const traitTitles = ['background', 'body', 'head', 'glasses', 'skill' ];
     const traitNames = [
       ['cool', 'warm'],
       ...Object.values(ImageData.images).map(i => {

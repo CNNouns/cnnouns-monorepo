@@ -175,9 +175,9 @@ components:
           type: integer
         background:
           type: integer
-        accessory:
-          type: integer
         glasses:
+          type: integer
+        skill:
           type: integer
     NormalizedNoun:
       type: object
