@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title The Nouns DAO auction house
+/// @title The CNNouns DAO auction house
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -21,6 +21,7 @@
 //
 // AuctionHouse.sol source code Copyright Zora licensed under the GPL-3.0 license.
 // With modifications by Nounders DAO.
+// With modifications by CNNouns DAO.
 
 pragma solidity ^0.8.6;
 

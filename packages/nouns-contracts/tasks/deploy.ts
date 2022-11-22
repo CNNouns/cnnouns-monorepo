@@ -47,8 +47,8 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     types.int,
   )
   .addOptionalParam(
-    'auctionDuration',
-    'The auction duration (seconds)',
+    'auctionBaseDuration',
+    'The auction base duration (seconds)',
     60 * 60 * 24 /* 24 hours */,
     types.int,
   )
@@ -160,7 +160,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
               args.auctionTimeBuffer,
               args.auctionReservePrice,
               args.auctionMinIncrementBidPercentage,
-              args.auctionDuration,
+              args.auctionBaseDuration,
             ]),
         ],
         waitForConfirmation: true,
