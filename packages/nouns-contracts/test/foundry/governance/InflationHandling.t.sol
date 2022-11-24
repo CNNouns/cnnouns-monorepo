@@ -10,7 +10,7 @@ import { NounsDAOStorageV1, NounsDAOStorageV2 } from '../../../contracts/governa
 import { Utils } from '../helpers/Utils.sol';
 
 abstract contract NounsDAOLogicV2InflationHandlingTest is NounsDAOLogicSharedBaseTest, Utils {
-    uint256 constant proposalThresholdBPS_ = 678; // 6.78%
+    uint256 constant proposalThreshold_ = 1;
     uint16 constant minQuorumVotesBPS = 1100; // 11%
     address tokenHolder;
     address user1;
@@ -35,7 +35,7 @@ abstract contract NounsDAOLogicV2InflationHandlingTest is NounsDAOLogicSharedBas
                         address(daoLogic),
                         votingPeriod,
                         votingDelay,
-                        proposalThresholdBPS_,
+                        proposalThreshold_,
                         NounsDAOStorageV2.DynamicQuorumParams({
                             minQuorumVotesBPS: minQuorumVotesBPS,
                             maxQuorumVotesBPS: 2000,
@@ -77,15 +77,15 @@ contract NounsDAOLogicV2InflationHandling40TotalSupplyTest is NounsDAOLogicV2Inf
     }
 
     function testSetsParametersCorrectly() public {
-        assertEq(daoProxy.proposalThresholdBPS(), proposalThresholdBPS_);
+        assertEq(daoProxy.proposalThreshold(), proposalThreshold_);
         // assertEq(daoProxyAsV2().minQuorumVotesBPS(), minQuorumVotesBPS);
 
         assertEq(daoProxyAsV2().getDynamicQuorumParamsAt(block.number).minQuorumVotesBPS, minQuorumVotesBPS);
     }
 
     function testProposalThresholdBasedOnTotalSupply() public {
-        // 6.78% of 40 = 2.712, floored to 2
-        assertEq(daoProxy.proposalThreshold(), 2);
+        // always 1
+        assertEq(daoProxy.proposalThreshold(), 1);
     }
 
     function testMinimumQuorumVotes() public {
@@ -94,31 +94,22 @@ contract NounsDAOLogicV2InflationHandling40TotalSupplyTest is NounsDAOLogicV2Inf
     }
 
     function testRejectsIfProposingBelowThreshold() public {
-        // Give user1 2 tokens, proposal requires 3
-        vm.startPrank(tokenHolder);
-        nounsToken.transferFrom(tokenHolder, user1, 1);
-        nounsToken.transferFrom(tokenHolder, user1, 2);
-        vm.stopPrank();
-
-        vm.roll(block.number + 1);
-
-        assertEq(nounsToken.getPriorVotes(user1, block.number - 1), 2);
+        // Give user1 0 tokens, proposal requires 1
+        assertEq(nounsToken.getPriorVotes(user1, block.number - 1), 0);
 
         vm.expectRevert('NounsDAO::propose: proposer votes below proposal threshold');
         propose(user1, address(0), 0, '', '');
     }
 
     function testAllowsProposingIfAboveTreshold() public {
-        // Give user1 3 tokens, proposal requires 3
+        // Give user1 1 tokens, proposal requires 1
         vm.startPrank(tokenHolder);
         nounsToken.transferFrom(tokenHolder, user1, 1);
-        nounsToken.transferFrom(tokenHolder, user1, 2);
-        nounsToken.transferFrom(tokenHolder, user1, 3);
         vm.stopPrank();
 
         vm.roll(block.number + 1);
 
-        assertEq(nounsToken.getPriorVotes(user1, block.number - 1), 3);
+        assertEq(nounsToken.getPriorVotes(user1, block.number - 1), 1);
 
         propose(user1, address(0), 0, '', '');
     }
@@ -161,7 +152,7 @@ abstract contract TotalSupply40WithAProposalState is NounsDAOLogicV2InflationHan
 
 contract InflationHandlingWithAProposalTest is TotalSupply40WithAProposalState {
     function testSetsProposalAttrbiutesCorrectly() public {
-        assertEq(daoProxyAsV2().proposals(proposalId).proposalThreshold, 2);
+        assertEq(daoProxyAsV2().proposals(proposalId).proposalThreshold, 1);
         assertEq(daoProxyAsV2().proposals(proposalId).quorumVotes, 4);
     }
 }
@@ -175,20 +166,27 @@ abstract contract SupplyIncreasedState is TotalSupply40WithAProposalState {
 
 contract SupplyIncreasedStateTest is SupplyIncreasedState {
     function testQuorumAndProposalThresholdChangedBasedOnTotalSupply() public {
-        // 6.78% of 80 = 5.424, floored to 5
-        assertEq(daoProxy.proposalThreshold(), 5);
+        // always 1
+        assertEq(daoProxy.proposalThreshold(), 1);
 
         // 11% of 80 = 8.88, floored to 8
         assertEq(daoProxyAsV2().minQuorumVotes(), 8);
     }
 
     function testRejectsProposalsPreviouslyAboveThresholdButNowBelowBecauseSupplyIncreased() public {
+        vm.startPrank(user1);
+        nounsToken.transferFrom(user1, user2, 1);
+        nounsToken.transferFrom(user1, user2, 2);
+        nounsToken.transferFrom(user1, user2, 3);
+        vm.stopPrank();
+        vm.roll(block.number + 1);
+
         vm.expectRevert('NounsDAO::propose: proposer votes below proposal threshold');
         propose(user1, address(0), 0, '', '');
     }
 
     function testDoesntChangePreviousProposalAttributes() public {
-        assertEq(daoProxyAsV2().proposals(proposalId).proposalThreshold, 2);
+        assertEq(daoProxyAsV2().proposals(proposalId).proposalThreshold, 1);
         assertEq(daoProxyAsV2().proposals(proposalId).quorumVotes, 4);
     }
 

@@ -40,15 +40,17 @@ export type TestSigners = {
   account0: SignerWithAddress;
   account1: SignerWithAddress;
   account2: SignerWithAddress;
+  account3: SignerWithAddress;
 };
 
 export const getSigners = async (): Promise<TestSigners> => {
-  const [deployer, account0, account1, account2] = await ethers.getSigners();
+  const [deployer, account0, account1, account2, account3] = await ethers.getSigners();
   return {
     deployer,
     account0,
     account1,
     account2,
+    account3,
   };
 };
 
@@ -180,7 +182,7 @@ export const populateDescriptorV2 = async (nounsDescriptor: NounsDescriptorV2): 
 export const deployGovAndToken = async (
   deployer: SignerWithAddress,
   timelockDelay: number,
-  proposalThresholdBPS: number,
+  proposalThreshold: number,
   quorumVotesBPS: number,
   vetoer?: string,
 ): Promise<{ token: NounsToken; gov: NounsDAOLogicV1; timelock: NounsDAOExecutor }> => {
@@ -222,7 +224,7 @@ export const deployGovAndToken = async (
     govDelegateAddress,
     5760,
     1,
-    proposalThresholdBPS,
+    proposalThreshold,
     quorumVotesBPS,
   );
 

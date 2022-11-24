@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
-/// @title The Nouns DAO logic version 1
+/// @title The CNNouns DAO logic version 1
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -21,6 +21,7 @@
 //
 // GovernorBravoDelegate.sol source code Copyright 2020 Compound Labs, Inc. licensed under the BSD-3-Clause license.
 // With modifications by Nounders DAO.
+// With modifications by CNNouns DAO.
 //
 // Additional conditions of BSD-3-Clause can be found here: https://opensource.org/licenses/BSD-3-Clause
 //
@@ -48,6 +49,8 @@
 //   The `veto(uint proposalId)` logic is a modified version of `cancel(uint proposalId)`
 //   A `vetoed` flag was added to the `Proposal` struct to support this.
 //
+// - `proposalThreshold` storing as fixed value (instead of basis points)
+//
 // NounsDAOLogicV1 removes:
 // - `initialProposalId` and `_initiate()` due to this being the
 //   first instance of the governance contract unlike
@@ -56,7 +59,6 @@
 // - Value passed along using `timelock.executeTransaction{value: proposal.value}`
 //   in `execute(uint proposalId)`. This contract should not hold funds and does not
 //   implement `receive()` or `fallback()` functions.
-//
 
 pragma solidity ^0.8.6;
 
@@ -67,10 +69,10 @@ contract NounsDAOLogicV1 is NounsDAOStorageV1, NounsDAOEvents {
     string public constant name = 'Nouns DAO';
 
     /// @notice The minimum setable proposal threshold
-    uint256 public constant MIN_PROPOSAL_THRESHOLD_BPS = 1; // 1 basis point or 0.01%
+    uint256 public constant MIN_PROPOSAL_THRESHOLD = 1;
 
     /// @notice The maximum setable proposal threshold
-    uint256 public constant MAX_PROPOSAL_THRESHOLD_BPS = 1_000; // 1,000 basis points or 10%
+    uint256 public constant MAX_PROPOSAL_THRESHOLD = 1_000;
 
     /// @notice The minimum setable voting period
     uint256 public constant MIN_VOTING_PERIOD = 5_760; // About 24 hours
@@ -107,7 +109,7 @@ contract NounsDAOLogicV1 is NounsDAOStorageV1, NounsDAOEvents {
      * @param vetoer_ The address allowed to unilaterally veto proposals
      * @param votingPeriod_ The initial voting period
      * @param votingDelay_ The initial voting delay
-     * @param proposalThresholdBPS_ The initial proposal threshold in basis points
+     * @param proposalThreshold_ The initial proposal threshold
      * * @param quorumVotesBPS_ The initial quorum votes threshold in basis points
      */
     function initialize(
@@ -116,7 +118,7 @@ contract NounsDAOLogicV1 is NounsDAOStorageV1, NounsDAOEvents {
         address vetoer_,
         uint256 votingPeriod_,
         uint256 votingDelay_,
-        uint256 proposalThresholdBPS_,
+        uint256 proposalThreshold_,
         uint256 quorumVotesBPS_
     ) public virtual {
         require(address(timelock) == address(0), 'NounsDAO::initialize: can only initialize once');
@@ -132,7 +134,7 @@ contract NounsDAOLogicV1 is NounsDAOStorageV1, NounsDAOEvents {
             'NounsDAO::initialize: invalid voting delay'
         );
         require(
-            proposalThresholdBPS_ >= MIN_PROPOSAL_THRESHOLD_BPS && proposalThresholdBPS_ <= MAX_PROPOSAL_THRESHOLD_BPS,
+            proposalThreshold_ >= MIN_PROPOSAL_THRESHOLD && proposalThreshold_ <= MAX_PROPOSAL_THRESHOLD,
             'NounsDAO::initialize: invalid proposal threshold'
         );
         require(
@@ -142,7 +144,7 @@ contract NounsDAOLogicV1 is NounsDAOStorageV1, NounsDAOEvents {
 
         emit VotingPeriodSet(votingPeriod, votingPeriod_);
         emit VotingDelaySet(votingDelay, votingDelay_);
-        emit ProposalThresholdBPSSet(proposalThresholdBPS, proposalThresholdBPS_);
+        emit ProposalThresholdSet(proposalThreshold, proposalThreshold_);
         emit QuorumVotesBPSSet(quorumVotesBPS, quorumVotesBPS_);
 
         timelock = INounsDAOExecutor(timelock_);
@@ -150,7 +152,7 @@ contract NounsDAOLogicV1 is NounsDAOStorageV1, NounsDAOEvents {
         vetoer = vetoer_;
         votingPeriod = votingPeriod_;
         votingDelay = votingDelay_;
-        proposalThresholdBPS = proposalThresholdBPS_;
+        proposalThreshold = proposalThreshold_;
         quorumVotesBPS = quorumVotesBPS_;
     }
 
@@ -182,10 +184,10 @@ contract NounsDAOLogicV1 is NounsDAOStorageV1, NounsDAOEvents {
 
         temp.totalSupply = nouns.totalSupply();
 
-        temp.proposalThreshold = bps2Uint(proposalThresholdBPS, temp.totalSupply);
+        temp.proposalThreshold = proposalThreshold;
 
         require(
-            nouns.getPriorVotes(msg.sender, block.number - 1) > temp.proposalThreshold,
+            nouns.getPriorVotes(msg.sender, block.number - 1) >= temp.proposalThreshold,
             'NounsDAO::propose: proposer votes below proposal threshold'
         );
         require(
@@ -555,21 +557,20 @@ contract NounsDAOLogicV1 is NounsDAOStorageV1, NounsDAOEvents {
     }
 
     /**
-     * @notice Admin function for setting the proposal threshold basis points
-     * @dev newProposalThresholdBPS must be greater than the hardcoded min
-     * @param newProposalThresholdBPS new proposal threshold
+     * @notice Admin function for setting the proposal threshold
+     * @dev newProposalThreshold must be greater than the hardcoded min
+     * @param newProposalThreshold new proposal threshold
      */
-    function _setProposalThresholdBPS(uint256 newProposalThresholdBPS) external {
-        require(msg.sender == admin, 'NounsDAO::_setProposalThresholdBPS: admin only');
+    function _setProposalThreshold(uint256 newProposalThreshold) external {
+        require(msg.sender == admin, 'NounsDAO::_setProposalThreshold: admin only');
         require(
-            newProposalThresholdBPS >= MIN_PROPOSAL_THRESHOLD_BPS &&
-                newProposalThresholdBPS <= MAX_PROPOSAL_THRESHOLD_BPS,
+            newProposalThreshold >= MIN_PROPOSAL_THRESHOLD && newProposalThreshold <= MAX_PROPOSAL_THRESHOLD,
             'NounsDAO::_setProposalThreshold: invalid proposal threshold'
         );
-        uint256 oldProposalThresholdBPS = proposalThresholdBPS;
-        proposalThresholdBPS = newProposalThresholdBPS;
+        uint256 oldProposalThreshold = proposalThreshold;
+        proposalThreshold = newProposalThreshold;
 
-        emit ProposalThresholdBPSSet(oldProposalThresholdBPS, proposalThresholdBPS);
+        emit ProposalThresholdSet(oldProposalThreshold, proposalThreshold);
     }
 
     /**
@@ -653,12 +654,8 @@ contract NounsDAOLogicV1 is NounsDAOStorageV1, NounsDAOEvents {
         _setVetoer(address(0));
     }
 
-    /**
-     * @notice Current proposal threshold using Noun Total Supply
-     * Differs from `GovernerBravo` which uses fixed amount
-     */
-    function proposalThreshold() public view returns (uint256) {
-        return bps2Uint(proposalThresholdBPS, nouns.totalSupply());
+    function bps2Uint(uint256 bps, uint256 number) internal pure returns (uint256) {
+        return (number * bps) / 10000;
     }
 
     /**
@@ -667,10 +664,6 @@ contract NounsDAOLogicV1 is NounsDAOStorageV1, NounsDAOEvents {
      */
     function quorumVotes() public view returns (uint256) {
         return bps2Uint(quorumVotesBPS, nouns.totalSupply());
-    }
-
-    function bps2Uint(uint256 bps, uint256 number) internal pure returns (uint256) {
-        return (number * bps) / 10000;
     }
 
     function getChainIdInternal() internal view returns (uint256) {

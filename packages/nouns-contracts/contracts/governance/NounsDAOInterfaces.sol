@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
-/// @title Nouns DAO Logic interfaces and events
+/// @title CNNouns DAO Logic interfaces and events
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -21,6 +21,7 @@
 //
 // GovernorBravoInterfaces.sol source code Copyright 2020 Compound Labs, Inc. licensed under the BSD-3-Clause license.
 // With modifications by Nounders DAO.
+// With modifications by CNNouns DAO.
 //
 // Additional conditions of BSD-3-Clause can be found here: https://opensource.org/licenses/BSD-3-Clause
 //
@@ -28,6 +29,8 @@
 // NounsDAOEvents, NounsDAOProxyStorage, NounsDAOStorageV1 add support for changes made by Nouns DAO to GovernorBravo.sol
 // See NounsDAOLogicV1.sol for more details.
 // NounsDAOStorageV1Adjusted and NounsDAOStorageV2 add support for a dynamic vote quorum.
+// See NounsDAOLogicV2.sol for more details.
+// NounsDAOEvents and NounsDAOStorageV1Adjusted add support for fixed proposal threshold.
 // See NounsDAOLogicV2.sol for more details.
 
 pragma solidity ^0.8.6;
@@ -90,8 +93,8 @@ contract NounsDAOEvents {
     /// @notice Emitted when implementation is changed
     event NewImplementation(address oldImplementation, address newImplementation);
 
-    /// @notice Emitted when proposal threshold basis points is set
-    event ProposalThresholdBPSSet(uint256 oldProposalThresholdBPS, uint256 newProposalThresholdBPS);
+    /// @notice Emitted when proposal threshold is set
+    event ProposalThresholdSet(uint256 oldProposalThreshold, uint256 newProposalThreshold);
 
     /// @notice Emitted when quorum votes basis points is set
     event QuorumVotesBPSSet(uint256 oldQuorumVotesBPS, uint256 newQuorumVotesBPS);
@@ -153,8 +156,8 @@ contract NounsDAOStorageV1 is NounsDAOProxyStorage {
     /// @notice The duration of voting on a proposal, in blocks
     uint256 public votingPeriod;
 
-    /// @notice The basis point number of votes required in order for a voter to become a proposer. *DIFFERS from GovernerBravo
-    uint256 public proposalThresholdBPS;
+    /// @notice The number of votes required in order for a voter to become a proposer *DIFFERS from GovernerBravo and NounsDAO: When calling propose(), getPriorVotes() must be **greater equal** than proposalThreshold in the current implementation, but in the original implementation, getPriorVotes() must be **greater than** proposalThreshold
+    uint256 public proposalThreshold;
 
     /// @notice The basis point number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed. *DIFFERS from GovernerBravo
     uint256 public quorumVotesBPS;
@@ -254,7 +257,7 @@ contract NounsDAOStorageV1Adjusted is NounsDAOProxyStorage {
     uint256 public votingPeriod;
 
     /// @notice The basis point number of votes required in order for a voter to become a proposer. *DIFFERS from GovernerBravo
-    uint256 public proposalThresholdBPS;
+    uint256 public proposalThreshold;
 
     /// @notice The basis point number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed. *DIFFERS from GovernerBravo
     uint256 public quorumVotesBPS;

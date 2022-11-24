@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
-/// @title The Nouns DAO proxy contract
+/// @title The CNNouns DAO proxy contract
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -21,6 +21,7 @@
 //
 // GovernorBravoDelegator.sol source code Copyright 2020 Compound Labs, Inc. licensed under the BSD-3-Clause license.
 // With modifications by Nounders DAO.
+// With modifications by CNNouns DAO.
 //
 // Additional conditions of BSD-3-Clause can be found here: https://opensource.org/licenses/BSD-3-Clause
 //
@@ -46,7 +47,7 @@ contract NounsDAOProxy is NounsDAOProxyStorage, NounsDAOEvents {
         address implementation_,
         uint256 votingPeriod_,
         uint256 votingDelay_,
-        uint256 proposalThresholdBPS_,
+        uint256 proposalThreshold_,
         uint256 quorumVotesBPS_
     ) {
         // Admin set to msg.sender for initialization
@@ -61,7 +62,7 @@ contract NounsDAOProxy is NounsDAOProxyStorage, NounsDAOEvents {
                 vetoer_,
                 votingPeriod_,
                 votingDelay_,
-                proposalThresholdBPS_,
+                proposalThreshold_,
                 quorumVotesBPS_
             )
         );
