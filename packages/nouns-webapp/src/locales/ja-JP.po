@@ -612,10 +612,6 @@ msgstr "入札額が不足しています🤏"
 msgid "Invalid Arguments"
 msgstr ""
 
-#: src/components/NavLocaleSwitcher/index.tsx
-msgid "Language"
-msgstr "言語"
-
 #: src/components/NounderNounContent/index.tsx
 msgid "Learn more"
 msgstr "詳細はこちら"

@@ -19,7 +19,6 @@ import NavBarTreasury from '../NavBarTreasury';
 import NavWallet from '../NavWallet';
 import { Trans } from '@lingui/macro';
 import { useState } from 'react';
-import NavLocaleSwitcher from '../NavLocaleSwitcher';
 import NavDropdown from '../NavDropdown';
 import { Dropdown } from 'react-bootstrap';
 import navDropdownClasses from '../NavWallet/NavBarDropdown.module.css';
@@ -181,7 +180,6 @@ const NavBar = () => {
                 </Dropdown.Item>
               </NavDropdown>
             </div>
-            <NavLocaleSwitcher buttonStyle={nonWalletButtonStyle} />
             <NavWallet address={activeAccount || '0'} buttonStyle={nonWalletButtonStyle} />{' '}
           </Navbar.Collapse>
         </Container>
