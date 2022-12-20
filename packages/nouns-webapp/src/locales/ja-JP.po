@@ -667,8 +667,8 @@ msgid "Note"
 msgstr ""
 
 #: src/pages/Governance/index.tsx
-msgid "Noun"
-msgstr "Noun"
+msgid "CN Noun"
+msgstr "CN Noun"
 
 #: src/components/Documentation/index.tsx
 msgid "Noun Seeder Contract"
@@ -707,8 +707,8 @@ msgid "Nounders' Reward"
 msgstr "Nounderへの報酬"
 
 #: src/pages/Governance/index.tsx
-msgid "Nouns"
-msgstr "Nouns"
+msgid "CN Nouns"
+msgstr "CN Nouns"
 
 #: src/components/NavBar/index.tsx
 msgid "Nouns & Traits"
@@ -721,8 +721,8 @@ msgstr "Nounsオークションハウス"
 #: src/components/Documentation/index.tsx
 #: src/components/NounderNounContent/index.tsx
 #: src/pages/Governance/index.tsx
-msgid "Nouns DAO"
-msgstr "Nouns DAO"
+msgid "CN Nouns DAO"
+msgstr "CN Nouns DAO"
 
 #: src/components/Documentation/index.tsx
 msgid "Nouns DAO uses a fork of {compoundGovLink}."
@@ -753,8 +753,8 @@ msgid "Nouns artwork is in the {publicDomainLink}."
 msgstr "Nounsのアートワークは {publicDomainLink} にあります。"
 
 #: src/pages/Governance/index.tsx
-msgid "Nouns govern <0>Nouns DAO</0>. Nouns can vote on proposals or delegate their vote to a third party. A minimum of <1>{nounsRequired} {0}</1> is required to submit proposals."
-msgstr "Nounsが統治する <0>Nouns DAO</0> 。Nounsは提案に対して投票したり、第三者に投票を委任することができますが、提案の提出には最低でも <1>{nounsRequired} {0}</1> 以上が必要です。"
+msgid "Nouns govern <0>CN Nouns DAO</0>. Nouns can vote on proposals or delegate their vote to a third party. A minimum of <1>{nounsRequired} {0}</1> is required to submit proposals."
+msgstr "CN Nounsが統治する <0>CN Nouns DAO</0> 。CN Nounsは提案に対して投票したり、第三者に投票を委任することができますが、提案の提出には最低でも <1>{nounsRequired} {0}</1> 以上が必要です。"
 
 #: src/components/DelegationCandidateInfo/index.tsx
 msgid "Now has"
@@ -1084,8 +1084,8 @@ msgid "This transaction was automatically added to refill the TokenBuyer. Propos
 msgstr ""
 
 #: src/pages/Governance/index.tsx
-msgid "This treasury exists for <0>Nouns DAO</0> participants to allocate resources for the long-term growth and prosperity of the Nouns project."
-msgstr "このトレジャリーは、<0>Nouns DAO</0>の参加者がNounsプロジェクトの長期的な成長と繁栄目的に、リソースを配分するために存在しています。"
+msgid "This treasury exists for <0>CN Nouns DAO</0> participants to allocate resources for the long-term growth and prosperity of the Nouns project."
+msgstr "このトレジャリーは、<0>CN Nouns DAO</0>の参加者がCN Nounsプロジェクトの長期的な成長と繁栄目的に、リソースを配分するために存在しています。"
 
 #: src/pages/Vote/index.tsx
 #: src/pages/Vote/index.tsx
