@@ -1234,7 +1234,7 @@ msgstr "<0>{0}</0>票を投票"
 
 #: src/components/Documentation/index.tsx
 msgid "WTF?"
-msgstr "WTF?"
+msgstr "これはなに?"
 
 #: src/components/NounProfileVoteRow/index.tsx
 #: src/components/profileEvent/eventData/ProposalVoteHeadline/index.tsx
