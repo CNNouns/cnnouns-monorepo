@@ -553,8 +553,8 @@ msgid "Gas spent on voting will be refunded to you. Gnosis Safe is not yet suppo
 msgstr ""
 
 #: src/pages/Playground/index.tsx
-msgid "Generate Nouns"
-msgstr "Nounsを作る"
+msgid "Generate CN Nouns"
+msgstr "CN Nounsを作る"
 
 #: src/components/Winner/index.tsx
 #: src/components/Winner/index.tsx
@@ -733,8 +733,8 @@ msgid "Nouns DAO utilizes a fork of {compoundGovLink} and is the main governing 
 msgstr "Nouns DAOは {compoundGovLink} のフォークを利用しており、Nounsエコシステムの主要な統治機関です。毎日起こるNounオークションから得られるETHの収益の100％はNouns DAO トレジャリーにて受け取られています。各NounはNouns DAOの変更不可能なメンバーであり、すべてのガバナンスの問題で1票の投票権を有します。Nounの票は譲渡できませんが (Nounの売却にはそれに応じて票も移ります)、委任することができます。"
 
 #: src/pages/Playground/index.tsx
-msgid "Nouns Protocol"
-msgstr "Nounsプロトコル"
+msgid "CN Nouns Protocol"
+msgstr "CN Nounsプロトコル"
 
 #: src/components/Documentation/index.tsx
 msgid "Nouns are an experimental attempt to improve the formation of on-chain avatar communities. While projects such as {cryptopunksLink} have attempted to bootstrap digital community and identity, Nouns attempt to bootstrap identity, community, governance, and a treasury that can be used by the community."
@@ -1052,8 +1052,8 @@ msgid "The compressed parts are efficiently converted into a single base64 encod
 msgstr "圧縮されたパーツは、オンチェインで効率よく1つのbase64エンコードされたSVG画像に変換されます。そのために、各パーツは中間フォーマットにデコードされた後、オンチェーンでの文字列連結により一連のSVG rectsに変換されます。SVG全体が生成されると、それはbase64でエンコードされます。"
 
 #: src/pages/Playground/index.tsx
-msgid "The playground was built using the {nounsProtocolLink}. Noun's traits are determined by the Noun Seed. The seed was generated using {nounsAssetsLink} and rendered using the {nounsSDKLink}."
-msgstr "遊び場は{nounsProtocolLink} を使用して作られており、Nounの特徴は、Nounシードによって決まります。{nounsAssetsLink} でシードを生成し、{nounsSDKLink} でレンダリングされています。"
+msgid "The playground was built using the {nounsProtocolLink}. CN Noun's traits are determined by the CN Noun Seed. The seed was generated using {nounsAssetsLink} and rendered using the {nounsSDKLink}."
+msgstr "遊び場は{nounsProtocolLink} を使用して作られており、CN Nounの特徴は、CN Nounシードによって決まります。{nounsAssetsLink} でシードを生成し、{nounsSDKLink} でレンダリングされています。"
 
 #: src/components/Documentation/index.tsx
 msgid "The proposal veto right was initially envisioned as a temporary solution to the problem of ‘51% attacks’ on the Nouns DAO treasury. While Nounders initially believed that a healthy distribution of Nouns would be sufficient protection for the DAO, a more complete understanding of the incentives and risks has led to general consensus within the Nounders, the Nouns Foundation, and the wider community that a more robust game-theoretic solution should be implemented before the right is removed."
@@ -1315,7 +1315,7 @@ msgid "You've already delegated to this address"
 msgstr "あなたはすでにこのアドレスに委任しています"
 
 #: src/pages/Playground/index.tsx
-msgid "You've generated {0} years worth of Nouns"
+msgid "You've generated {0} years worth of CN Nouns"
 msgstr "{0} 年分のナウンを生成しました"
 
 #: src/components/VoteModal/index.tsx
@@ -1421,3 +1421,8 @@ msgstr ""
 #: src/components/profileEvent/eventData/ProposalVoteHeadline/index.tsx
 msgid "{voterComponent} voted for"
 msgstr ""
+
+#: src/components/ExploreGrid/ExploreNounDetail/index.tsx
+#: src/pages/Playground/index.tsx
+msgid "Skill"
+msgstr "スキル"
