@@ -124,62 +124,6 @@ const NavBar = () => {
                 buttonStyle={nonWalletButtonStyle}
               />
             </Nav.Link>
-            <div className={clsx(responsiveUiUtilsClasses.mobileOnly)}>
-              <Nav.Link
-                as={Link}
-                to="/playground"
-                className={classes.nounsNavLink}
-                onClick={closeNav}
-              >
-                <NavBarButton
-                  buttonText={<Trans>Playground</Trans>}
-                  buttonIcon={<FontAwesomeIcon icon={faPlay} />}
-                  buttonStyle={nonWalletButtonStyle}
-                />
-              </Nav.Link>
-              <Nav.Link
-                as={Link}
-                to="/explore"
-                className={clsx(classes.nounsNavLink, classes.exploreButton)}
-                onClick={closeNav}
-              >
-                <NavBarButton
-                  buttonText={<Trans>Nouns &amp; Traits</Trans>}
-                  buttonIcon={<Noggles />}
-                  buttonStyle={nonWalletButtonStyle}
-                />
-              </Nav.Link>
-            </div>
-            <div className={clsx(responsiveUiUtilsClasses.desktopOnly)}>
-              <NavDropdown buttonIcon={<Noggles />} buttonStyle={nonWalletButtonStyle}>
-                <Dropdown.Item
-                  className={clsx(
-                    usePickByState(
-                      navDropdownClasses.whiteInfoSelectedBottom,
-                      navDropdownClasses.coolInfoSelected,
-                      navDropdownClasses.warmInfoSelected,
-                      history,
-                    ),
-                  )}
-                  href="/explore"
-                >
-                  Nouns &amp; Traits
-                </Dropdown.Item>
-                <Dropdown.Item
-                  className={clsx(
-                    usePickByState(
-                      navDropdownClasses.whiteInfoSelectedBottom,
-                      navDropdownClasses.coolInfoSelected,
-                      navDropdownClasses.warmInfoSelected,
-                      history,
-                    ),
-                  )}
-                  href="/playground"
-                >
-                  Playground
-                </Dropdown.Item>
-              </NavDropdown>
-            </div>
             <NavWallet address={activeAccount || '0'} buttonStyle={nonWalletButtonStyle} />{' '}
           </Navbar.Collapse>
         </Container>
