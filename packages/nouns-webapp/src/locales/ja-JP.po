@@ -550,7 +550,7 @@ msgstr "関数（記入は任意）"
 
 #: src/components/VoteModal/index.tsx
 msgid "Gas spent on voting will be refunded to you. Gnosis Safe is not yet supported."
-msgstr ""
+msgstr "投票に使用したガスは返金されます。Gnosis Safeはまだサポートされていません"
 
 #: src/pages/Playground/index.tsx
 msgid "Generate CN Nouns"
@@ -785,8 +785,8 @@ msgid "Only 32x32 PNG images are accepted"
 msgstr "32x32 PNG画像のみ受け付けています"
 
 #: src/components/ProposalHeader/index.tsx
-msgid "Only Nouns you owned or were delegated to you before {0} are eligible to vote."
-msgstr "投票できるのは {0} 以前に所有していた、または委任されたNounsのみです。"
+msgid "Only CN Nouns you owned or were delegated to you before {0} are eligible to vote."
+msgstr "投票できるのは {0} 以前に所有していたCN Nounのみです。"
 
 #: src/components/NounProfileVoteRow/index.tsx
 #: src/components/ProposalStatus/index.tsx
@@ -879,7 +879,7 @@ msgstr "キューに入りました"
 
 #: src/components/VoteModal/index.tsx
 msgid "Reason (Optional)"
-msgstr "理由\"(任意)\""
+msgstr "理由（任意）"
 
 #: src/components/DynamicQuorumInfoModal/index.tsx
 msgid "Required % of Nouns to Pass"
@@ -956,11 +956,11 @@ msgstr "提案を提出"
 
 #: src/components/VoteModal/index.tsx
 msgid "Submit Vote"
-msgstr "投票を提出"
+msgstr "投票する"
 
 #: src/components/ProposalHeader/index.tsx
 msgid "Submit vote"
-msgstr "投票を提出"
+msgstr "投票する"
 
 #: src/components/NounProfileVoteRow/index.tsx
 #: src/components/ProposalStatus/index.tsx
@@ -1090,7 +1090,7 @@ msgstr "このトレジャリーは、<0>CN Nouns DAO</0>の参加者がCN Nouns
 #: src/pages/Vote/index.tsx
 #: src/pages/Vote/index.tsx
 msgid "Threshold"
-msgstr "しきい値"
+msgstr "承認に必要な投票数"
 
 #: src/components/AuctionTimer/index.tsx
 msgid "Time left"
@@ -1226,11 +1226,11 @@ msgstr "<0>{numVotesForProp}</0>のNounで投票"
 
 #: src/components/VoteModal/index.tsx
 msgid "Voting with <0>{0}</0> Noun"
-msgstr ""
+msgstr "<0>{0}</0>票を投票"
 
 #: src/components/VoteModal/index.tsx
 msgid "Voting with <0>{0}</0> Nouns"
-msgstr ""
+msgstr "<0>{0}</0>票を投票"
 
 #: src/components/Documentation/index.tsx
 msgid "WTF?"
@@ -1308,7 +1308,7 @@ msgstr "あなたはこの提案に<0>反対</0>を投票しました"
 
 #: src/components/ProposalHeader/index.tsx
 msgid "You voted <0>For</0> this proposal"
-msgstr "あなたはこの提案<0>に</0>投票しました"
+msgstr "あなたはこの提案に<0>賛成</0>を投票しました"
 
 #: src/components/ChangeDelegatePannel/index.tsx
 msgid "You've already delegated to this address"
@@ -1426,3 +1426,7 @@ msgstr ""
 #: src/pages/Playground/index.tsx
 msgid "Skill"
 msgstr "スキル"
+
+#: src/pages/Vote/index.tsx
+msgid "Snapshot"
+msgstr "スナップショット"

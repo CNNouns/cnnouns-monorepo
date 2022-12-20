@@ -485,7 +485,7 @@ const VotePage = ({
               <Card.Body className="p-2">
                 <div className={classes.voteMetadataRow}>
                   <div className={classes.voteMetadataRowTitle}>
-                    <h1>Snapshot</h1>
+                    <h1><Trans>Snapshot</Trans></h1>
                   </div>
                   <div className={classes.snapshotBlock}>
                     <span>
