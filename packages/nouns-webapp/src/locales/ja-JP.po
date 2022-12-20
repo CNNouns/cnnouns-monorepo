@@ -915,7 +915,7 @@ msgstr "オークションを決済する"
 
 #: src/components/SettleManuallyBtn/index.tsx
 msgid "Settle manually"
-msgstr "手動で決済する"
+msgstr "トランザクションを動かす"
 
 #: src/components/Bid/index.tsx
 msgid "Settled auction successfully!"
