@@ -103,7 +103,7 @@ msgstr "付属品"
 #: src/components/ProposalStatus/index.tsx
 #: src/components/ProposalStatusCopy/index.tsx
 msgid "Active"
-msgstr "実行されました"
+msgstr "投票受付中"
 
 #: src/components/ProfileActivityFeed/index.tsx
 #: src/components/ProfileActivityFeed/index.tsx
@@ -275,7 +275,7 @@ msgstr ""
 #: src/components/ProposalStatus/index.tsx
 #: src/components/ProposalStatusCopy/index.tsx
 msgid "Canceled"
-msgstr "キャンセルしました"
+msgstr "キャンセル"
 
 #: src/components/VoteModal/index.tsx
 #~ msgid "Cast 1 vote against Prop {0}"
@@ -373,7 +373,7 @@ msgstr "デイリーオークション"
 #: src/components/ProposalStatus/index.tsx
 #: src/components/ProposalStatusCopy/index.tsx
 msgid "Defeated"
-msgstr "却下"
+msgstr "否決"
 
 #: src/components/Proposals/index.tsx
 #: src/components/Proposals/index.tsx
@@ -492,7 +492,7 @@ msgstr "実行する"
 #: src/components/ProposalStatus/index.tsx
 #: src/components/ProposalStatusCopy/index.tsx
 msgid "Executed"
-msgstr "実行しました"
+msgstr "実行"
 
 #: src/components/NounProfileVoteRow/index.tsx
 #: src/components/ProposalStatus/index.tsx
@@ -871,7 +871,7 @@ msgstr "キュー"
 #: src/components/ProposalStatus/index.tsx
 #: src/components/ProposalStatusCopy/index.tsx
 msgid "Queued"
-msgstr "キューに入りました"
+msgstr "実行待ち"
 
 #: src/pages/Vote/index.tsx
 #~ msgid "Quorum"
@@ -966,7 +966,7 @@ msgstr "投票する"
 #: src/components/ProposalStatus/index.tsx
 #: src/components/ProposalStatusCopy/index.tsx
 msgid "Succeeded"
-msgstr "成功しました"
+msgstr "可決"
 
 #: src/components/Bid/index.tsx
 #: src/components/Bid/index.tsx
