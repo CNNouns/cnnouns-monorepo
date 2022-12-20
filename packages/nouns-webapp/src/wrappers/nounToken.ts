@@ -185,3 +185,14 @@ export const useUserNounTokenBalance = (): number | undefined => {
     }) || [];
   return tokenBalance?.toNumber();
 };
+
+export const useNoundersDAO = (): string | undefined => {
+  const [noundersDAO] =
+    useContractCall<[EthersBN]>({
+      abi,
+      address: config.addresses.nounsToken,
+      method: 'noundersDAO',
+      args: [],
+    }) || [];
+  return noundersDAO?.toString();
+};

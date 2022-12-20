@@ -9,6 +9,8 @@ import { useActiveLocale } from '../../hooks/useActivateLocale';
 import React from 'react';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
 import Tooltip from '../Tooltip';
+import { useShortAddress } from '../../utils/addressAndENSDisplayUtils';
+import { useNoundersDAO } from '../../wrappers/nounToken';
 
 interface WinnerProps {
   winner: string;
@@ -21,6 +23,8 @@ const Winner: React.FC<WinnerProps> = props => {
 
   const isCool = useAppSelector(state => state.application.isCoolBackground);
   const isMobile = isMobileScreen();
+
+  const noundersDAO = useNoundersDAO() ?? '';
 
   const isWinnerYou =
     activeAccount !== undefined && activeAccount.toLocaleLowerCase() === winner.toLocaleLowerCase();
@@ -70,7 +74,7 @@ const Winner: React.FC<WinnerProps> = props => {
 
   const nounderNounContent = (
     <a
-      href={buildEtherscanAddressLink('nounders.eth')}
+      href={buildEtherscanAddressLink(noundersDAO)}
       target={'_blank'}
       rel="noreferrer"
       className={classes.link}
@@ -82,7 +86,7 @@ const Winner: React.FC<WinnerProps> = props => {
         }}
         id="holder-etherscan-tooltip"
       >
-        nounders.eth
+        {useShortAddress(noundersDAO)}
       </Tooltip>
     </a>
   );
