@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useBlockNumber, useEthers } from '@usedapp/core';
 import { isMobileScreen } from '../../utils/isMobile';
 import clsx from 'clsx';
-import { useUserNounTokenBalance, useUserVotes } from '../../wrappers/nounToken';
+import { useUserVotes } from '../../wrappers/nounToken';
 import { Trans } from '@lingui/macro';
 import { ClockIcon } from '@heroicons/react/solid';
 import proposalStatusClasses from '../ProposalStatus/ProposalStatus.module.css';
@@ -84,7 +84,6 @@ const Proposals = ({ proposals }: { proposals: PartialProposal[] }) => {
 
   const threshold = (useProposalThreshold() ?? 1);
   const hasEnoughVotesToPropose = account !== undefined && connectedAccountNounVotes >= threshold;
-  const hasNounBalance = (useUserNounTokenBalance() ?? 0) > 0;
 
   const nullStateCopy = () => {
     if (account !== null) {
@@ -119,16 +118,6 @@ const Proposals = ({ proposals }: { proposals: PartialProposal[] }) => {
               </Button>
             </div>
 
-            {hasNounBalance && (
-              <div className={classes.delegateBtnWrapper}>
-                <Button
-                  className={classes.changeDelegateBtn}
-                  onClick={() => setShowDelegateModal(true)}
-                >
-                  <Trans>Delegate</Trans>
-                </Button>
-              </div>
-            )}
           </div>
         ) : (
           <div className={clsx('d-flex', classes.nullStateSubmitProposalBtnWrapper)}>
@@ -138,27 +127,10 @@ const Proposals = ({ proposals }: { proposals: PartialProposal[] }) => {
                 <Trans>Submit Proposal</Trans>
               </Button>
             </div>
-            {!isMobile && hasNounBalance && (
-              <div className={classes.delegateBtnWrapper}>
-                <Button
-                  className={classes.changeDelegateBtn}
-                  onClick={() => setShowDelegateModal(true)}
-                >
-                  <Trans>Delegate</Trans>
-                </Button>
-              </div>
-            )}
           </div>
         )}
       </div>
       {isMobile && <div className={classes.nullStateCopy}>{nullStateCopy()}</div>}
-      {isMobile && hasNounBalance && (
-        <div>
-          <Button className={classes.changeDelegateBtn} onClick={() => setShowDelegateModal(true)}>
-            <Trans>Delegate</Trans>
-          </Button>
-        </div>
-      )}
       {proposals?.length ? (
         proposals
           .slice(0)
