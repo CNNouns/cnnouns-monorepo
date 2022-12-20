@@ -158,8 +158,8 @@ msgid "Address"
 msgstr "アドレス"
 
 #: src/components/ProposalTransactionFormModal/index.tsx
-#~ msgid "Address (Callee or Recipient)"
-#~ msgstr "アドレス (他のスマート契約者であるカーリー、又はETHを受け取る受信者)"
+msgid "Address (Callee or Recipient)"
+msgstr "アドレス（他のスマートコントラクト、もしくはETHの受け取りアドレス）"
 
 #: src/components/VoteCard/index.tsx
 msgid "Addresses"
@@ -545,8 +545,8 @@ msgid "Function"
 msgstr "関数"
 
 #: src/components/ProposalTransactionFormModal/index.tsx
-#~ msgid "Function (Optional)"
-#~ msgstr "関数 (任意)"
+msgid "Function (Optional)"
+msgstr "関数（記入は任意）"
 
 #: src/components/VoteModal/index.tsx
 msgid "Gas spent on voting will be refunded to you. Gnosis Safe is not yet supported."
@@ -1161,8 +1161,8 @@ msgid "Value"
 msgstr "値"
 
 #: src/components/ProposalTransactionFormModal/index.tsx
-#~ msgid "Value in ETH (Optional)"
-#~ msgstr "ETHの価格 (任意)"
+msgid "Value in ETH (Optional)"
+msgstr "必要なETH額（記入は任意／半角数値のみ）"
 
 #: src/components/NounProfileVoteRow/index.tsx
 #: src/components/ProposalStatus/index.tsx
