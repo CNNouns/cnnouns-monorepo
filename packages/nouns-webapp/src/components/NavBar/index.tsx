@@ -8,12 +8,9 @@ import testnetNoun from '../../assets/testnet-noun.png';
 import config, { CHAIN_ID } from '../../config';
 import { utils } from 'ethers';
 import { buildEtherscanHoldingsLink } from '../../utils/etherscan';
-import { ExternalURL, externalURL } from '../../utils/externalURL';
 import NavBarButton, { NavBarButtonStyle } from '../NavBarButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
-import { faComments } from '@fortawesome/free-solid-svg-icons';
 import NavBarTreasury from '../NavBarTreasury';
 import NavWallet from '../NavWallet';
 import { Trans } from '@lingui/macro';
@@ -87,32 +84,6 @@ const NavBar = () => {
               <NavBarButton
                 buttonText={<Trans>DAO</Trans>}
                 buttonIcon={<FontAwesomeIcon icon={faUsers} />}
-                buttonStyle={nonWalletButtonStyle}
-              />
-            </Nav.Link>
-            <Nav.Link
-              href={externalURL(ExternalURL.nounsCenter)}
-              className={classes.nounsNavLink}
-              target="_blank"
-              rel="noreferrer"
-              onClick={closeNav}
-            >
-              <NavBarButton
-                buttonText={<Trans>Docs</Trans>}
-                buttonIcon={<FontAwesomeIcon icon={faBookOpen} />}
-                buttonStyle={nonWalletButtonStyle}
-              />
-            </Nav.Link>
-            <Nav.Link
-              href={externalURL(ExternalURL.discourse)}
-              className={classes.nounsNavLink}
-              target="_blank"
-              rel="noreferrer"
-              onClick={closeNav}
-            >
-              <NavBarButton
-                buttonText={<Trans>Discourse</Trans>}
-                buttonIcon={<FontAwesomeIcon icon={faComments} />}
                 buttonStyle={nonWalletButtonStyle}
               />
             </Nav.Link>
