@@ -381,7 +381,7 @@ const VotePage = ({
           className={classes.toggleDelegateVoteView}
         >
           {isDelegateView ? (
-            <Trans>Switch to Noun view</Trans>
+            <Trans>Switch to CN Noun view</Trans>
           ) : (
             <Trans>Switch to delegate view</Trans>
           )}

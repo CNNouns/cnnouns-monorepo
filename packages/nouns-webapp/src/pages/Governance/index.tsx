@@ -63,7 +63,7 @@ const GovernancePage = () => {
             <Trans>
               This treasury exists for <span className={classes.boldText}>CN Nouns DAO</span>{' '}
               participants to allocate resources for the long-term growth and prosperity of the
-              Nouns project.
+              CN Nouns project.
             </Trans>
           </Col>
         </Row>

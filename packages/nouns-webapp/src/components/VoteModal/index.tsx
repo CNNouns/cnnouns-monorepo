@@ -120,11 +120,11 @@ const VoteModal = ({ show, onHide, proposalId, availableVotes }: VoteModalProps)
       <div className={classes.voteModalSubtitle}>
         {availableVotes === 1 ? (
           <Trans>
-            Voting with <span className={classes.bold}>{i18n.number(availableVotes)}</span> Noun
+            Voting with <span className={classes.bold}>{i18n.number(availableVotes)}</span> CN Noun
           </Trans>
         ) : (
           <Trans>
-            Voting with <span className={classes.bold}>{i18n.number(availableVotes)}</span> Nouns
+            Voting with <span className={classes.bold}>{i18n.number(availableVotes)}</span> CN Nouns
           </Trans>
         )}
       </div>

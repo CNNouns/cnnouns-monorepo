@@ -19,7 +19,7 @@ msgstr ""
 "Last-Translator: \n"
 
 #: src/components/DynamicQuorumInfoModal/index.tsx
-msgid "% of Nouns Currently Against"
+msgid "% of CN Nouns Currently Against"
 msgstr ""
 
 #: src/components/Documentation/index.tsx
@@ -52,21 +52,21 @@ msgstr "404: お探しの人、場所、物は見つかりませんでした。"
 
 #: src/components/profileEvent/event/DesktopNounWinEvent/index.tsx
 #: src/components/profileEvent/event/MobileNounWinEvent/index.tsx
-msgid "<0> Noun {0} </0> sent to <1><2/></1>"
+msgid "<0> CN Noun {0} </0> sent to <1><2/></1>"
 msgstr ""
 
 #: src/components/profileEvent/event/DesktopNounWinEvent/index.tsx
 #: src/components/profileEvent/event/MobileNounWinEvent/index.tsx
-msgid "<0> Noun {0} </0> won by <1><2/></1>"
+msgid "<0> CN Noun {0} </0> won by <1><2/></1>"
 msgstr ""
 
 #: src/components/ByLineHoverCard/index.tsx
-msgid "<0>Delegated Noun: </0>"
-msgstr "委任Noun: "
+msgid "<0>Delegated CN Noun: </0>"
+msgstr "委任CN Noun: "
 
 #: src/components/ByLineHoverCard/index.tsx
-msgid "<0>Delegated Nouns: </0>"
-msgstr "委任Noun: "
+msgid "<0>Delegated CN Nouns: </0>"
+msgstr "委任CN Noun: "
 
 #: src/components/ProposalHeader/index.tsx
 msgid "<0>Proposed by: </0><1>{proposer}</1><2>{proposedAtTransactionHash}</2>"
@@ -270,6 +270,26 @@ msgstr "誕生"
 #: src/pages/Vote/index.tsx
 msgid "Cancel"
 msgstr ""
+
+#: src/components/CurrentDelegatePannel/index.tsx
+msgid "CN Noun votes are not transferable, but are <0>delegatable</0>, which means you can assign your vote to someone else as long as you own your CN Noun."
+msgstr "CN Nounの票は譲渡できませんが (CN Nounの売却にはそれに応じて票も移ります)、委任することができます。"
+
+#: src/components/AuctionActivityNounTitle/index.tsx
+msgid "CN Noun {0}"
+msgstr "CN Noun {0}"
+
+#: src/components/NounInfoRowHolder/index.tsx
+msgid "CN Nouns Auction House"
+msgstr "CN Nounsオークションハウス"
+
+#: src/pages/Governance/index.tsx
+msgid "CN Nouns DAO"
+msgstr "CN Nouns DAO"
+
+#: src/pages/Playground/index.tsx
+msgid "CN Nouns Protocol"
+msgstr "CN Nounsプロトコル"
 
 #: src/components/NounProfileVoteRow/index.tsx
 #: src/components/ProposalStatus/index.tsx
@@ -476,8 +496,8 @@ msgid "Error"
 msgstr "エラー"
 
 #: src/components/NounInfoRowBirthday/index.tsx
-msgid "Error fetching Noun birthday"
-msgstr "Nounの誕生日を取得できませんでした"
+msgid "Error fetching CN Noun birthday"
+msgstr "CN Nounの誕生日を取得できませんでした"
 
 #: src/components/Footer/index.tsx
 #: src/components/NounInfoCard/index.tsx
@@ -519,13 +539,13 @@ msgid "Failed to fetch"
 msgstr "取得できませんでした"
 
 #: src/components/ProfileActivityFeed/index.tsx
-msgid "Failed to fetch Noun activity history"
-msgstr "Noun の活動履歴の取得に失敗しました。"
+msgid "Failed to fetch CN Noun activity history"
+msgstr "CN Noun の活動履歴の取得に失敗しました。"
 
 #: src/components/Holder/index.tsx
 #: src/components/NounInfoRowHolder/index.tsx
-msgid "Failed to fetch Noun info"
-msgstr "Nounに関する情報の取得に失敗しました"
+msgid "Failed to fetch CN Noun info"
+msgstr "CN Nounに関する情報の取得に失敗しました"
 
 #: src/components/VoteCard/index.tsx
 #: src/components/VoteModal/index.tsx
@@ -882,7 +902,7 @@ msgid "Reason (Optional)"
 msgstr "理由（任意）"
 
 #: src/components/DynamicQuorumInfoModal/index.tsx
-msgid "Required % of Nouns to Pass"
+msgid "Required % of CN Nouns to Pass"
 msgstr ""
 
 #: src/components/ProposalActionsModal/steps/FunctionCallReviewStep/index.tsx
@@ -984,8 +1004,8 @@ msgid "Switch"
 msgstr "切り替え"
 
 #: src/pages/Vote/index.tsx
-msgid "Switch to Noun view"
-msgstr "Nounビューに切り替えます"
+msgid "Switch to CN Noun view"
+msgstr "CN Nounビューに切り替えます"
 
 #: src/pages/Vote/index.tsx
 msgid "Switch to delegate view"
@@ -1036,7 +1056,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/DynamicQuorumInfoModal/index.tsx
-msgid "The Threshold (minimum number of For votes required to pass a proposal) is set as a function of the number of Against votes a proposal has recieved. It increases linearly as a function of the % of Nouns voting against a prop, varying between Min Threshold and Max Threshold."
+msgid "The Threshold (minimum number of For votes required to pass a proposal) is set as a function of the number of Against votes a proposal has recieved. It increases linearly as a function of the % of CN Nouns voting against a prop, varying between Min Threshold and Max Threshold."
 msgstr ""
 
 #: src/components/DynamicQuorumInfoModal/index.tsx
@@ -1072,8 +1092,8 @@ msgid "There was an error voting for your account."
 msgstr "アカウントの投票中にエラーが発生しました。"
 
 #: src/components/ProfileActivityFeed/index.tsx
-msgid "This Noun has no activity, since it was just created. Check back soon!"
-msgstr "このNounは作成されたばかりで、動きがありません。また後ほどご確認ください！"
+msgid "This CN Noun has no activity, since it was just created. Check back soon!"
+msgstr "このCN Nounは作成されたばかりで、動きがありません。また後ほどご確認ください！"
 
 #: src/components/ProposalContent/index.tsx
 msgid "This transaction sends {0} USDC to <0/> via the DAO's PayerContract."
@@ -1084,7 +1104,7 @@ msgid "This transaction was automatically added to refill the TokenBuyer. Propos
 msgstr ""
 
 #: src/pages/Governance/index.tsx
-msgid "This treasury exists for <0>CN Nouns DAO</0> participants to allocate resources for the long-term growth and prosperity of the Nouns project."
+msgid "This treasury exists for <0>CN Nouns DAO</0> participants to allocate resources for the long-term growth and prosperity of the CN Nouns project."
 msgstr "このトレジャリーは、<0>CN Nouns DAO</0>の参加者がCN Nounsプロジェクトの長期的な成長と繁栄目的に、リソースを配分するために存在しています。"
 
 #: src/pages/Vote/index.tsx
@@ -1217,19 +1237,19 @@ msgid "Voted for"
 msgstr "賛成に投票"
 
 #: src/components/DelegateHoverCard/index.tsx
-msgid "Voted with<0>{numVotesForProp}</0>Noun"
-msgstr "<0>{numVotesForProp}</0>のNounで投票"
+msgid "Voted with<0>{numVotesForProp}</0>CN Noun"
+msgstr "<0>{numVotesForProp}</0>のCN Nounで投票"
 
 #: src/components/DelegateHoverCard/index.tsx
-msgid "Voted with<0>{numVotesForProp}</0>Nouns"
-msgstr "<0>{numVotesForProp}</0>のNounで投票"
+msgid "Voted with<0>{numVotesForProp}</0>CN Nouns"
+msgstr "<0>{numVotesForProp}</0>のCN Nounで投票"
 
 #: src/components/VoteModal/index.tsx
-msgid "Voting with <0>{0}</0> Noun"
+msgid "Voting with <0>{0}</0> CN Noun"
 msgstr "<0>{0}</0>票を投票"
 
 #: src/components/VoteModal/index.tsx
-msgid "Voting with <0>{0}</0> Nouns"
+msgid "Voting with <0>{0}</0> CN Nouns"
 msgstr "<0>{0}</0>票を投票"
 
 #: src/components/Documentation/index.tsx
@@ -1316,7 +1336,7 @@ msgstr "あなたはすでにこのアドレスに委任しています"
 
 #: src/pages/Playground/index.tsx
 msgid "You've generated {0} years worth of CN Nouns"
-msgstr "{0} 年分のナウンを生成しました"
+msgstr "{0} 年分のCN Nounsを生成しました"
 
 #: src/components/VoteModal/index.tsx
 msgid "You've successfully voted on on prop {0}"
