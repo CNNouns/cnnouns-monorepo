@@ -204,8 +204,8 @@ const DynamicQuorumInfoModalOverlay: React.FC<{
                       <text x="20" y="280">
                         Min Threshold: {Math.floor((minQuorumBps * totalNounSupply) / 10_000)}{' '}
                         {Math.floor((minQuorumBps * totalNounSupply) / 10_000) === 1
-                          ? 'Noun'
-                          : 'Nouns'}{' '}
+                          ? 'CN Noun'
+                          : 'CN Nouns'}{' '}
                         <tspan fill="var(--brand-gray-light-text)">
                           ({minQuorumBps / 100}% of Nouns)
                         </tspan>
@@ -234,7 +234,7 @@ const DynamicQuorumInfoModalOverlay: React.FC<{
                     >
                       Current Threshold: {currentQuorum}{' '}
                       <tspan fill="var(--brand-gray-light-text)">
-                        ({againstVotesAbs} {againstVotesAbs === 1 ? 'Noun' : 'Nouns'} Currently
+                        ({againstVotesAbs} {againstVotesAbs === 1 ? 'CN Noun' : 'CN Nouns'} Currently
                         Against)
                       </tspan>
                     </text>
@@ -245,7 +245,7 @@ const DynamicQuorumInfoModalOverlay: React.FC<{
                     >
                       Current Threshold: {currentQuorum}{' '}
                       <tspan fill="var(--brand-gray-light-text)">
-                        ({againstVotesAbs} {againstVotesAbs === 1 ? 'Noun' : 'Nouns'} Currently
+                        ({againstVotesAbs} {againstVotesAbs === 1 ? 'CN Noun' : 'CN Nouns'} Currently
                         Against)
                       </tspan>
                     </text>
