@@ -109,7 +109,6 @@ const DynamicQuorumInfoModalOverlay: React.FC<{
             </div>
 
             <div className={classes.mobileQuorumInfo}>
-              <span>Current Threshold:</span>{' '}
               {Math.floor(
                 (Math.min(maxQuorumBps, dqmFunction(againstVotesBps)) * totalNounSupply) / 10_000,
               )}{' '}
@@ -232,7 +231,7 @@ const DynamicQuorumInfoModalOverlay: React.FC<{
                       x={x - 390}
                       y={y + (againstVotesBps > 0.9 * linearToConstantCrossoverBPS ? 20 : -10)}
                     >
-                      Current Threshold: {currentQuorum}{' '}
+                      {currentQuorum}{' '}
                       <tspan fill="var(--brand-gray-light-text)">
                         ({againstVotesAbs} {againstVotesAbs === 1 ? 'CN Noun' : 'CN Nouns'} Currently
                         Against)
@@ -243,7 +242,7 @@ const DynamicQuorumInfoModalOverlay: React.FC<{
                       x={x + 10}
                       y={y + (againstVotesBps > 0.9 * linearToConstantCrossoverBPS ? 20 : -10)}
                     >
-                      Current Threshold: {currentQuorum}{' '}
+                      {currentQuorum}{' '}
                       <tspan fill="var(--brand-gray-light-text)">
                         ({againstVotesAbs} {againstVotesAbs === 1 ? 'CN Noun' : 'CN Nouns'} Currently
                         Against)
