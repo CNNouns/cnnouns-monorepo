@@ -1110,7 +1110,7 @@ msgstr "このトレジャリーは、<0>CN Nouns DAO</0>の参加者がCN Nouns
 #: src/pages/Vote/index.tsx
 #: src/pages/Vote/index.tsx
 msgid "Threshold"
-msgstr "承認に必要な投票数"
+msgstr "定足数"
 
 #: src/components/AuctionTimer/index.tsx
 msgid "Time left"
