@@ -18,10 +18,10 @@ const Documentation = (props: DocumentationProps = { backgroundColor: '#FFF' }) 
       leavesPage={true}
     />
   );
-  const compoundGovLink = (
+  const nounsGovLink = (
     <Link
-      text={<Trans>Compound Governance</Trans>}
-      url="https://compound.finance/governance"
+      text={<Trans>Nouns DAO</Trans>}
+      url="https://nouns.wtf/vote"
       leavesPage={true}
     />
   );
@@ -94,7 +94,7 @@ const Documentation = (props: DocumentationProps = { backgroundColor: '#FFF' }) 
                 </li>
                 <li>
                   <NoTrans>
-                    CN Nouns DAOは「{compoundGovLink}」のフォークを使用しています
+                    CN Nouns DAOは「{nounsGovLink}」のフォークを使用しています
                   </NoTrans>
                 </li>
                 <li>
@@ -119,7 +119,7 @@ const Documentation = (props: DocumentationProps = { backgroundColor: '#FFF' }) 
                 </li>
                 <li>
                   <NoTrans>
-                    DAO投票をより円滑にするためガスレス投票の仕組みを導入しています。投票の際に掛かったGAS代の一定額が返還されます。この費用はトレジャリーから捻出されます
+                    DAO投票をより円滑にするため、投票にかかったガス代返還の仕組みを備えています。投票の際に掛かったGAS代の一定額が返還されます。この費用はトレジャリーを介して捻出されます
                   </NoTrans>
                 </li>
                 <li>
