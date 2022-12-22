@@ -1308,11 +1308,11 @@ msgstr "提案を提出するのに十分な投票がありません"
 
 #: src/components/Proposals/index.tsx
 msgid "You have no Votes."
-msgstr "投票がありません。"
+msgstr "投票はできません"
 
 #: src/components/ProposalHeader/index.tsx
 msgid "You have no votes."
-msgstr "投票がありません。"
+msgstr "投票はできません"
 
 #: src/components/CreateProposalButton/index.tsx
 msgid "You must have {0} votes to submit a proposal"
