@@ -57,7 +57,7 @@ const VotePage = ({
   const [showVoteModal, setShowVoteModal] = useState<boolean>(false);
   const [showDynamicQuorumInfoModal, setShowDynamicQuorumInfoModal] = useState<boolean>(false);
   // Toggle between Noun centric view and delegate view
-  const [isDelegateView, setIsDelegateView] = useState(false);
+  const [isDelegateView] = useState(false);
 
   const [isQueuePending, setQueuePending] = useState<boolean>(false);
   const [isExecutePending, setExecutePending] = useState<boolean>(false);
@@ -376,16 +376,6 @@ const VotePage = ({
           </Row>
         )}
 
-        <p
-          onClick={() => setIsDelegateView(!isDelegateView)}
-          className={classes.toggleDelegateVoteView}
-        >
-          {isDelegateView ? (
-            <Trans>Switch to CN Noun view</Trans>
-          ) : (
-            <Trans>Switch to delegate view</Trans>
-          )}
-        </p>
         <Row>
           <VoteCard
             proposal={proposal}
