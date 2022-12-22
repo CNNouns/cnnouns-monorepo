@@ -1117,12 +1117,8 @@ msgid "Time left"
 msgstr "残り時間"
 
 #: src/pages/CreateProposal/index.tsx
-msgid "Tip"
-msgstr ""
-
-#: src/pages/CreateProposal/index.tsx
-#~ msgid "Tip:"
-#~ msgstr "コツ："
+msgid "Tip:"
+msgstr "提案のコツ："
 
 #: src/components/Documentation/index.tsx
 msgid "Trait generation is not truly random. Traits can be predicted when minting a Noun on the pending block."
