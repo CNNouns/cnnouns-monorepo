@@ -961,6 +961,10 @@ msgstr "少なく表示する"
 msgid "Sign out"
 msgstr "サインアウト"
 
+#: src/pages/Playground/index.tsx
+msgid "Skill"
+msgstr "スキル"
+
 #: src/pages/Vote/index.tsx
 msgid "Starts"
 msgstr "開始"
