@@ -34,6 +34,7 @@ import {
 } from '../../wrappers/subgraph';
 import { getNounVotes } from '../../utils/getNounsVotes';
 import { Trans } from '@lingui/macro';
+import { NoTrans } from '../../i18n/NoTrans';
 import { i18n } from '@lingui/core';
 import { ReactNode } from 'react-markdown/lib/react-markdown';
 import { AVERAGE_BLOCK_TIME_IN_SECS } from '../../utils/constants';
@@ -156,7 +157,6 @@ const VotePage = ({
     return endDate;
   };
 
-  const moveStateButtonAction = hasSucceeded ? <Trans>Queue</Trans> : <Trans>Execute</Trans>;
   const moveStateAction = (() => {
     if (hasSucceeded) {
       return () => {
@@ -353,7 +353,11 @@ const VotePage = ({
                   {isQueuePending || isExecutePending ? (
                     <Spinner animation="border" />
                   ) : (
-                    <Trans>{moveStateButtonAction} Proposal ⌐◧-◧</Trans>
+                    hasSucceeded ? (
+                      <NoTrans>提案を実行待ちにする ⌐◧-◧</NoTrans>
+                    ) : (
+                      <NoTrans>提案を実行する ⌐◧-◧</NoTrans>
+                    )
                   )}
                 </Button>
               )}
