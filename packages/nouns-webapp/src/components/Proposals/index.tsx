@@ -55,21 +55,23 @@ const getCountdownCopy = (
       </Trans>
     );
   }
-  if (endDate?.isBefore(now)) {
+  if (endDate?.isBefore(now) && expiresDate?.isAfter(now)) {
     return (
       <Trans>
         Expires {expiresDate.locale(SUPPORTED_LOCALE_TO_DAYSJS_LOCALE[locale] || en).fromNow()}
       </Trans>
     );
   }
-  return (
-    <Trans>
-      Starts{' '}
-      {dayjs(startDate)
-        .locale(SUPPORTED_LOCALE_TO_DAYSJS_LOCALE[locale] || en)
-        .fromNow()}
-    </Trans>
-  );
+  if (startDate?.isAfter(now)) {
+    return (
+      <Trans>
+        Starts{' '}
+        {dayjs(startDate)
+          .locale(SUPPORTED_LOCALE_TO_DAYSJS_LOCALE[locale] || en)
+          .fromNow()}
+      </Trans>
+    );
+  }
 };
 
 const Proposals = ({ proposals }: { proposals: PartialProposal[] }) => {
@@ -136,10 +138,15 @@ const Proposals = ({ proposals }: { proposals: PartialProposal[] }) => {
           .slice(0)
           .reverse()
           .map((p, i) => {
-            const isPropInStateToHaveCountDown =
+            let isPropInStateToHaveCountDown =
               p.status === ProposalState.PENDING ||
               p.status === ProposalState.ACTIVE ||
               p.status === ProposalState.QUEUED;
+
+            const countDownCopy = getCountdownCopy(p, currentBlock || 0, activeLocale);
+            if (!countDownCopy) {
+              isPropInStateToHaveCountDown = false;
+            }
 
             const countdownPill = (
               <div className={classes.proposalStatusWrapper}>
@@ -149,7 +156,7 @@ const Proposals = ({ proposals }: { proposals: PartialProposal[] }) => {
                       <ClockIcon height={16} width={16} />
                     </span>{' '}
                     <span className={classes.countdownPillText}>
-                      {getCountdownCopy(p, currentBlock || 0, activeLocale)}
+                      {countDownCopy}
                     </span>
                   </div>
                 </div>
