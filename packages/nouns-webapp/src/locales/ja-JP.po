@@ -861,11 +861,11 @@ msgstr "提案を作成しました！"
 
 #: src/pages/Vote/index.tsx
 msgid "Proposal Executed!"
-msgstr "提案が実行されました！"
+msgstr "提案が実行されました"
 
 #: src/pages/Vote/index.tsx
 msgid "Proposal Queued!"
-msgstr "提案が待機されました！"
+msgstr "提案は実行待ちです"
 
 #: src/components/ProposalHeader/index.tsx
 msgid "Proposal {0}"
