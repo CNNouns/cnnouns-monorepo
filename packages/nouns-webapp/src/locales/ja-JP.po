@@ -518,7 +518,7 @@ msgstr "実行"
 #: src/components/ProposalStatus/index.tsx
 #: src/components/ProposalStatusCopy/index.tsx
 msgid "Expired"
-msgstr "期限切れです"
+msgstr "期限切れ"
 
 #: src/components/Proposals/index.tsx
 msgid "Expires {0}"
@@ -1188,7 +1188,7 @@ msgstr "必要なETH額（記入は任意／半角数値のみ）"
 #: src/components/ProposalStatus/index.tsx
 #: src/components/ProposalStatusCopy/index.tsx
 msgid "Vetoed"
-msgstr "拒否"
+msgstr "却下"
 
 #: src/pages/Vote/index.tsx
 #~ msgid "View Dynamic Quorum Info"
