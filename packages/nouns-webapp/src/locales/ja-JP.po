@@ -522,7 +522,7 @@ msgstr "期限切れ"
 
 #: src/components/Proposals/index.tsx
 msgid "Expires {0}"
-msgstr "残り {0} で期限切れになります"
+msgstr "{0}に期限切れになります"
 
 #: src/components/ExploreGrid/ExploreNav/index.tsx
 #: src/components/NavDropdown/index.tsx
