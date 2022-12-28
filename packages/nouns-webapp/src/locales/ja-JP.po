@@ -606,7 +606,7 @@ msgstr "頭"
 #: src/components/Holder/index.tsx
 #: src/components/NounHoverCard/index.tsx
 msgid "Held by"
-msgstr "主催者"
+msgstr "落札者"
 
 #: src/components/AuctionActivity/index.tsx
 msgid "Help mint the next CN Noun"
