@@ -250,7 +250,7 @@ const VotePage = ({
   );
 
   useEffect(
-    () => onTransactionStateChange(cancelProposalState, 'Proposal Canceled!', setCancelPending),
+    () => onTransactionStateChange(cancelProposalState, '提案をキャンセルしました！', setCancelPending),
     [cancelProposalState, onTransactionStateChange, setModal],
   );
 
