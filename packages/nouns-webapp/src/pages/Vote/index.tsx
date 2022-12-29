@@ -172,7 +172,6 @@ const VotePage = ({
     };
   })();
 
-  const destructiveStateButtonAction = isCancellable ? <Trans>Cancel</Trans> : '';
   const destructiveStateAction = (() => {
     if (isCancellable) {
       return () => {
@@ -372,7 +371,7 @@ const VotePage = ({
                   {isCancelPending ? (
                     <Spinner animation="border" />
                   ) : (
-                    <Trans>{destructiveStateButtonAction} Proposal ⌐◧-◧</Trans>
+                    <NoTrans>提案をキャンセルする ⌐◧-◧</NoTrans>
                   )}
                 </Button>
               )}
