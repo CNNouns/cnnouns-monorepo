@@ -188,7 +188,7 @@ const Documentation = (props: DocumentationProps = { backgroundColor: '#FFF' }) 
                   <Link text="paji.eth" url="https://twitter.com/paji_a" leavesPage={true} />
                 </li>
                 <li>
-                  <Link text="yampy.eth" url="https://twitter.com/yampy_eth" leavesPage={true} />
+                  <Link text="madorominn" url="https://twitter.com/madorominn" leavesPage={true} />
                 </li>
                 <li>
                   <Link text="hanatochill" url="https://twitter.com/hanatochill" leavesPage={true} />
@@ -203,7 +203,7 @@ const Documentation = (props: DocumentationProps = { backgroundColor: '#FFF' }) 
                   <Link text="m2dxnft" url="https://twitter.com/m2dxnft" leavesPage={true} />
                 </li>
                 <li>
-                  <Link text="munakata_nft" url="https://twitter.com/munakata_nft" leavesPage={true} />
+                  <Link text="munakata_souri" url="https://twitter.com/munakata_souri" leavesPage={true} />
                 </li>
               </ul>
               <div>
