@@ -76,7 +76,7 @@ msgstr "アクティビティ"
 #: src/components/ProposalActionsModal/steps/FunctionCallReviewStep/index.tsx
 #: src/pages/CreateProposal/index.tsx
 msgid "Add Action"
-msgstr ""
+msgstr "アクションを追加"
 
 #: src/components/ProposalActionsModal/steps/SelectProposalActionStep/index.tsx
 msgid "Add Action Details"
@@ -102,7 +102,7 @@ msgstr ""
 
 #: src/pages/CreateProposal/index.tsx
 msgid "Add one or more proposal actions and describe your proposal for the community. The proposal cannot be modified after submission, so please verify all information before submitting. The voting period will begin after 2 days and last for 5 days."
-msgstr ""
+msgstr "提案アクションを1つ以上追加して、コミュニティへの提案を説明してください。提出後は修正ができませんので、内容に間違いがないかご確認の上、提出をお願いします。投票期間は2日後から5日間続きます。"
 
 #: src/components/ProposalActionsModal/steps/FunctionCallReviewStep/index.tsx
 msgid "Address"
@@ -563,7 +563,7 @@ msgstr ""
 
 #: src/components/ProposalActionsModal/steps/FunctionCallReviewStep/index.tsx
 msgid "Review Function Call Action"
-msgstr ""
+msgstr "コントラクト呼び出しの引数を追加"
 
 #: src/components/ProposalActionsModal/steps/TransferFundsReviewStep/index.tsx
 msgid "Review Transfer Funds Action"
@@ -827,7 +827,7 @@ msgstr "あなたはこの提案から<0>棄権</0>しました"
 
 #: src/pages/CreateProposal/index.tsx
 msgid "You <0>MUST</0> maintain enough voting power to meet the proposal threshold until your proposal is executed. If you fail to do so, anyone can cancel your proposal."
-msgstr ""
+msgstr "提案が実行されるまでしきい値を超える<0>投票権の維持が必要</0>になります。維持できない場合は誰でもあなたの提案をキャンセルすることができます。"
 
 #: src/components/CreateProposalButton/index.tsx
 msgid "You already have an active or pending proposal"

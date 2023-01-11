@@ -31,12 +31,12 @@ const TransferFundsReviewStep: React.FC<FinalProposalActionStepProps> = props =>
         <Trans>Review Transfer Funds Action</Trans>
       </ModalTitle>
 
-      <span className={classes.label}>Pay</span>
+      <span className={classes.label}>支払額</span>
       <div className={classes.text}>
         {Intl.NumberFormat(undefined, { maximumFractionDigits: 18 }).format(Number(state.amount))}{' '}
         {state.TransferFundsCurrency}
       </div>
-      <span className={classes.label}>To</span>
+      <span className={classes.label}>受取ウォレットアドレス</span>
       <div className={classes.text}>
         <ShortAddress address={state.address} />
       </div>

@@ -36,11 +36,11 @@ const TransferFundsDetailsStep: React.FC<ProposalActionModalStepProps> = props =
         <Trans>Add Transfer Funds Action</Trans>
       </ModalTitle>
 
-      <span className={classes.label}>Currency</span>
+      <span className={classes.label}>通貨</span>
       <div className={classes.text}>ETH</div>
 
       <BrandNumericEntry
-        label={'Amount'}
+        label={'金額'}
         value={formattedAmount}
         onValueChange={e => {
           setAmount(e.value);
@@ -51,7 +51,7 @@ const TransferFundsDetailsStep: React.FC<ProposalActionModalStepProps> = props =
       />
 
       <BrandTextEntry
-        label={'Recipient'}
+        label={'受取ウォレットアドレス'}
         onChange={e => setAddress(e.target.value)}
         value={address}
         type="string"

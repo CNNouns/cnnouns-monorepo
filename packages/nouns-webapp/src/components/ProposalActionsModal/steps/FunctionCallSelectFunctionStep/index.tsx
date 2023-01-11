@@ -134,7 +134,7 @@ const FunctionCallSelectFunctionStep: React.FC<ProposalActionModalStepProps> = p
       </ModalTitle>
 
       <BrandTextEntry
-        label={'Contract Address'}
+        label={'コントラクトアドレス'}
         onChange={e => {
           setAddress(e.target.value);
           addressValidator(e.target.value);
@@ -146,7 +146,7 @@ const FunctionCallSelectFunctionStep: React.FC<ProposalActionModalStepProps> = p
       />
 
       <BrandTextEntry
-        label={'Included ETH (optional)'}
+        label={'含まれるETH（任意）'}
         onChange={e => setValue(e.target.value)}
         value={value}
         type="number"
@@ -156,7 +156,7 @@ const FunctionCallSelectFunctionStep: React.FC<ProposalActionModalStepProps> = p
       <BrandDropdown
         value={func}
         onChange={e => setFunction(e.target.value)}
-        label={'Select Contract Function'}
+        label={'コントラクトの関数を選択'}
         chevronTop={35}
       >
         {abi && Object.keys(abi.functions).map(func => <option value={func}>{func}</option>)}
