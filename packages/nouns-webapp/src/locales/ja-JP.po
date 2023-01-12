@@ -42,7 +42,7 @@ msgstr "<2>{proposedAtTransactionHash}</2> <1>{proposer}</1> <0>が提案した�
 
 #: src/components/ProposalActionsModal/steps/SelectProposalActionStep/index.tsx
 msgid "<0>Supported Action Types:</0><1/><2>• Transfer Funds: </2>Send a fixed amount of ETH or USDC.<3/><4>• Function Call: </4>Call a contract function."
-msgstr ""
+msgstr "<0>対応可能なアクション</0><1/><2>• 資金のトランスファー: </2>一定額のETHを送金<3/><4>• コントラクト呼び出し: </4>コントラクトの関数を呼び出す"
 
 #: src/components/NounProfileVoteRow/index.tsx
 #: src/components/profileEvent/eventData/ProposalVoteHeadline/index.tsx
@@ -80,25 +80,25 @@ msgstr "アクションを追加"
 
 #: src/components/ProposalActionsModal/steps/SelectProposalActionStep/index.tsx
 msgid "Add Action Details"
-msgstr ""
+msgstr "アクションの詳細を追加"
 
 #: src/components/ProposalActionsModal/steps/FunctionCallSelectFunctionStep/index.tsx
 msgid "Add Arguments"
-msgstr ""
+msgstr "引数を追加"
 
 #: src/components/ProposalActionsModal/steps/FunctionCallEnterArgsStep/index.tsx
 #: src/components/ProposalActionsModal/steps/FunctionCallSelectFunctionStep/index.tsx
 msgid "Add Function Call Arguments"
-msgstr ""
+msgstr "コントラクト呼び出しの引数を追加"
 
 #: src/components/ProposalActionsModal/steps/SelectProposalActionStep/index.tsx
 msgid "Add Proposal Action"
-msgstr ""
+msgstr "提案アクションの追加"
 
 #: src/components/ProposalActionsModal/steps/TransferFundsDetailsStep/index.tsx
 #: src/components/ProposalActionsModal/steps/TransferFundsReviewStep/index.tsx
 msgid "Add Transfer Funds Action"
-msgstr ""
+msgstr "資金のトランスファーを追加"
 
 #: src/pages/CreateProposal/index.tsx
 msgid "Add one or more proposal actions and describe your proposal for the community. The proposal cannot be modified after submission, so please verify all information before submitting. The voting period will begin after 2 days and last for 5 days."
@@ -223,7 +223,7 @@ msgstr "WalletConnect データを消去"
 #: src/components/CurrentDelegatePannel/index.tsx
 #: src/components/ProposalActionsModal/steps/SelectProposalActionStep/index.tsx
 msgid "Close"
-msgstr "近い"
+msgstr "閉じる"
 
 #: src/components/NounsIntroSection/index.tsx
 msgid "Collect it"
@@ -567,12 +567,12 @@ msgstr "コントラクト呼び出しの引数を追加"
 
 #: src/components/ProposalActionsModal/steps/TransferFundsReviewStep/index.tsx
 msgid "Review Transfer Funds Action"
-msgstr ""
+msgstr "資金のトランスファーを追加"
 
 #: src/components/ProposalActionsModal/steps/FunctionCallEnterArgsStep/index.tsx
 #: src/components/ProposalActionsModal/steps/TransferFundsDetailsStep/index.tsx
 msgid "Review and Add"
-msgstr ""
+msgstr "確認して追加"
 
 #: src/components/Bid/index.tsx
 msgid "Settle"
