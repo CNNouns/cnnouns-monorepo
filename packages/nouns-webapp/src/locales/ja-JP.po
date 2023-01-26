@@ -482,7 +482,7 @@ msgstr "投票できるのは {0} 以前に所有していたCN Nounのみです
 #: src/components/ProposalStatus/index.tsx
 #: src/components/ProposalStatusCopy/index.tsx
 msgid "Pending"
-msgstr "保留中"
+msgstr "待機中"
 
 #: src/components/Bid/index.tsx
 #: src/components/Bid/index.tsx
