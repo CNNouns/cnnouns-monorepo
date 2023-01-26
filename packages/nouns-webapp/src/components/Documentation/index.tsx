@@ -41,22 +41,22 @@ const Documentation = (props: DocumentationProps = { backgroundColor: '#FFF' }) 
           </h1>
           <p className={classes.aboutText}>
             <NoTrans>
-              搾取の時代に、さよならを
+              クリエイターの可能性を信じよう。
             </NoTrans>
           </p>
           <p className={classes.aboutText}>
             <NoTrans>
-              CryptoNinja Nouns（以下、CN Nouns） は、クリエイターエコノミーのためのトレジャリー（共同財源）を形成するための実験的な試みです
+              CryptoNinja Nounsは、創造的なクリエイターを支援するためのプロジェクトです。
             </NoTrans>
           </p>
           <p className={classes.aboutText}>
             <NoTrans>
-              CN Nounsの目的は、クリエイター主導の経済を加速させることです
+              世界を変えるビッグアイデアも、身近な誰かを笑顔にする小さなアイデアも、私たちは歓迎します！
             </NoTrans>
           </p>
           <p className={classes.aboutText} style={{ paddingBottom: '4rem' }}>
             <NoTrans>
-              トレジャリーは上記の目的のために使われます。資金使途はCN Nounsオーナーたち（Ninjarz）の投票によって決定します。本プロジェクトのスマートコントラクトは、Nounsをフォークし、改善したものです
+              CryptoNinja Nounsは、みんなのためにあります。
             </NoTrans>
           </p>
         </div>
