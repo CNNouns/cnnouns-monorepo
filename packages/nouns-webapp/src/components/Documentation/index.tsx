@@ -41,7 +41,7 @@ const Documentation = (props: DocumentationProps = { backgroundColor: '#FFF' }) 
           </h1>
           <p className={classes.aboutText}>
             <NoTrans>
-              クリエイターの可能性を信じよう。
+              <b>クリエイターの可能性を信じよう。</b>
             </NoTrans>
           </p>
           <p className={classes.aboutText}>
