@@ -23,11 +23,11 @@ contract NounsTokenTest is Test, DeployUtils {
     }
 
     function testSymbol() public {
-        assertEq(nounsToken.symbol(), 'NOUN');
+        assertEq(nounsToken.symbol(), 'CNN');
     }
 
     function testName() public {
-        assertEq(nounsToken.name(), 'Nouns');
+        assertEq(nounsToken.name(), 'CNNouns');
     }
 
     function testMintANounToSelfAndRewardsNoundersDao() public {

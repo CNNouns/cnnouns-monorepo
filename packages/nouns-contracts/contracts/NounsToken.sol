@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title The Nouns ERC-721 token
+/// @title The CNNouns ERC-721 token
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -16,6 +16,13 @@
  *********************************/
 
 pragma solidity ^0.8.6;
+
+// LICENSE
+// This file is a modified version of nounsDAO's NounsToken.sol:
+// https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/NounsToken.sol
+//
+// NounsToken.sol licensed under the GPL-3.0 license.
+// With modifications by CNNouns DAO.
 
 import { Ownable } from '@openzeppelin/contracts/access/Ownable.sol';
 import { ERC721Checkpointable } from './base/ERC721Checkpointable.sol';
@@ -106,7 +113,7 @@ contract NounsToken is INounsToken, Ownable, ERC721Checkpointable {
         INounsDescriptorMinimal _descriptor,
         INounsSeeder _seeder,
         IProxyRegistry _proxyRegistry
-    ) ERC721('Nouns', 'NOUN') {
+    ) ERC721('CNNouns', 'CNN') {
         noundersDAO = _noundersDAO;
         minter = _minter;
         descriptor = _descriptor;
