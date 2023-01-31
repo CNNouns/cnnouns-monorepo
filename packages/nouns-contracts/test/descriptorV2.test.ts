@@ -66,14 +66,15 @@ describe('NounsDescriptorV2', () => {
         head: Math.min(i, heads.length - 1),
         glasses: Math.min(i, glasses.length - 1),
         skill: Math.min(i, skills.length - 1),
-      });
+      },
+      { gasLimit: 200_000_000 });
       const { name, description, image } = JSON.parse(
         Buffer.from(tokenUri.replace('data:application/json;base64,', ''), 'base64').toString(
           'ascii',
         ),
       );
-      expect(name).to.equal(`Noun ${i}`);
-      expect(description).to.equal(`Noun ${i} is a member of the Nouns DAO`);
+      expect(name).to.equal(`CNNoun ${i}`);
+      expect(description).to.equal(`CNNoun ${i} is a member of the CNNouns DAO`);
       expect(image).to.not.be.undefined;
 
       appendFileSync(
@@ -85,5 +86,5 @@ describe('NounsDescriptorV2', () => {
         console.log(`${Math.round((i / max) * 100)}% complete`);
       }
     }
-  });
+  }).timeout(6 * 60 * 60 * 1_000);
 });
