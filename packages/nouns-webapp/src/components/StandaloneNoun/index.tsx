@@ -26,8 +26,8 @@ interface StandaloneNounWithSeedProps {
 
 export const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
   const id = nounId.toString();
-  const name = `CN Noun ${id}`;
-  const description = `CN Noun ${id} is a member of the CN Nouns DAO`;
+  const name = `CNNoun ${id}`;
+  const description = `CNNoun ${id} is a member of the CNNouns DAO`;
   const { parts, background } = getNounData(seed);
   const image = `data:image/svg+xml;base64,${btoa(buildSVG(parts, data.palette, background))}`;
 
@@ -63,7 +63,7 @@ const StandaloneNoun: React.FC<StandaloneNounProps> = (props: StandaloneNounProp
       className={classes.clickableNoun}
       onClick={onClickHandler}
     >
-      <Noun imgPath={noun ? noun.image : ''} alt={noun ? noun.description : 'CN Noun'} />
+      <Noun imgPath={noun ? noun.image : ''} alt={noun ? noun.description : 'CNNoun'} />
     </Link>
   );
 };
@@ -80,7 +80,7 @@ export const StandaloneNounCircular: React.FC<StandaloneCircularNounProps> = (
     dispatch(setOnDisplayAuctionNounId(nounId.toNumber()));
   };
 
-  if (!seed || !nounId) return <Noun imgPath="" alt="CN Noun" />;
+  if (!seed || !nounId) return <Noun imgPath="" alt="CNNoun" />;
 
   return (
     <Link
@@ -90,7 +90,7 @@ export const StandaloneNounCircular: React.FC<StandaloneCircularNounProps> = (
     >
       <Noun
         imgPath={noun ? noun.image : ''}
-        alt={noun ? noun.description : 'CN Noun'}
+        alt={noun ? noun.description : 'CNNoun'}
         wrapperClassName={nounClasses.circularNounWrapper}
         className={border ? nounClasses.circleWithBorder : nounClasses.circular}
       />
@@ -118,7 +118,7 @@ export const StandaloneNounRoundedCorners: React.FC<StandaloneNounProps> = (
     >
       <Noun
         imgPath={noun ? noun.image : ''}
-        alt={noun ? noun.description : 'CN Noun'}
+        alt={noun ? noun.description : 'CNNoun'}
         className={nounClasses.rounded}
       />
     </Link>
@@ -134,7 +134,7 @@ export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
   const seed = useNounSeed(nounId);
   const seedIsInvalid = Object.values(seed || {}).every(v => v === 0);
 
-  if (!seed || seedIsInvalid || !nounId || !onLoadSeed) return <Noun imgPath="" alt="CN Noun" />;
+  if (!seed || seedIsInvalid || !nounId || !onLoadSeed) return <Noun imgPath="" alt="CNNoun" />;
 
   onLoadSeed(seed);
 
