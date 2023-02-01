@@ -39,7 +39,7 @@ type TransferEvent @entity {
 }
 
 type Seed @entity {
-  "The Noun's ERC721 token id"
+  "The CNNoun's ERC721 token id"
   id: ID!
 
   "The background index"
@@ -59,7 +59,7 @@ type Seed @entity {
 }
 
 type Noun @entity {
-  "The Noun's ERC721 token id"
+  "The CNNoun's ERC721 token id"
   id: ID!
 
   "The seed used to determine the Noun's traits"
@@ -99,7 +99,7 @@ type Bid @entity {
 }
 
 type Auction @entity {
-  "The Noun's ERC721 token id"
+  "The CNNoun's ERC721 token id"
   id: ID!
 
   "The Noun"
@@ -140,16 +140,16 @@ type Account @entity {
   "Delegate address of the token holder which will participate in votings. Delegates don't need to hold any tokens and can even be the token holder itself."
   delegate: Delegate
 
-  "Noun balance of this address expressed in the smallest unit of the Nouns ERC721 Token"
+  "Noun balance of this address expressed in the smallest unit of the CNNouns ERC721 Token"
   tokenBalanceRaw: BigInt!
 
-  "Noun balance of this address expressed as a BigInt normalized value for the Nouns ERC721 Token"
+  "Noun balance of this address expressed as a BigInt normalized value for the CNNouns ERC721 Token"
   tokenBalance: BigInt!
 
-  "Total amount of Nouns ever held by this address expressed in the smallest unit of the Nouns ERC721 Token"
+  "Total amount of Nouns ever held by this address expressed in the smallest unit of the CNNouns ERC721 Token"
   totalTokensHeldRaw: BigInt!
 
-  "Total amount of Nouns ever held by this address expressed as a BigInt normalized value for the Nouns ERC721 Token"
+  "Total amount of Nouns ever held by this address expressed as a BigInt normalized value for the CNNouns ERC721 Token"
   totalTokensHeld: BigInt!
 
   "The Nouns owned by this account"
@@ -160,10 +160,10 @@ type Delegate @entity {
   "A Delegate is any address that has been delegated with voting tokens by a token holder, id is the blockchain address of said delegate"
   id: ID!
 
-  "Amount of votes delegated to this delegate to be used on proposal votings expressed in the smallest unit of the Nouns ERC721 Token"
+  "Amount of votes delegated to this delegate to be used on proposal votings expressed in the smallest unit of the CNNouns ERC721 Token"
   delegatedVotesRaw: BigInt!
 
-  "Amount of votes delegated to this delegate to be used on proposal votings expressed as a BigInt normalized value for the Nouns ERC721 Token"
+  "Amount of votes delegated to this delegate to be used on proposal votings expressed as a BigInt normalized value for the CNNouns ERC721 Token"
   delegatedVotes: BigInt!
 
   tokenHoldersRepresentedAmount: Int!
@@ -268,10 +268,10 @@ type Vote @entity {
   "The integer support value: against (0), for (1), or abstain (2)"
   supportDetailed: Int!
 
-  "Amount of votes in favour or against expressed in the smallest unit of the Nouns ERC721 Token"
+  "Amount of votes in favour or against expressed in the smallest unit of the CNNouns ERC721 Token"
   votesRaw: BigInt!
 
-  "Amount of votes in favour or against expressed as a BigInt normalized value for the Nouns ERC721 Token"
+  "Amount of votes in favour or against expressed as a BigInt normalized value for the CNNouns ERC721 Token"
   votes: BigInt!
 
   "The optional vote reason"
@@ -309,10 +309,10 @@ type Governance @entity {
   "Total number of delegates that held delegated votes"
   totalDelegates: BigInt!
 
-  "Total number of votes delegated expressed in the smallest unit of the Nouns ERC721 Token"
+  "Total number of votes delegated expressed in the smallest unit of the CNNouns ERC721 Token"
   delegatedVotesRaw: BigInt!
 
-  "Total number of votes delegated expressed as a BigInt normalized value for the Nouns ERC721 Token"
+  "Total number of votes delegated expressed as a BigInt normalized value for the CNNouns ERC721 Token"
   delegatedVotes: BigInt!
 
   "Number of proposals currently queued for execution"
