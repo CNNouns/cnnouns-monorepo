@@ -24,3 +24,7 @@ export * from './update-configs-daov2';
 export * from './deploy-short-times-daov1';
 export * from './deploy-and-configure-short-times-daov1';
 export * from './show-contract-uri';
+export * from './cnnouns-deploy';
+export * from './cnnouns-deploy-and-configure';
+export * from './cnnouns-populate-descriptor';
+export * from './show-cnnoun';
