@@ -113,17 +113,24 @@ describe('NounsToken', () => {
 
   describe('contractURI', async () => {
     it('should return correct contractURI', async () => {
-      expect(await nounsToken.contractURI()).to.eq(
-        'ipfs://QmZi1n79FqWt2tTLwCqiy6nLM6xLGRsEPQ5JmReJQKNNzX',
-      );
+      const uri = await nounsToken.contractURI();
+      const json = Buffer.from(uri.replace(/^data:application\/json;base64,/, ''), 'base64').toString('utf-8');
+      expect(json).to.eq(JSON.stringify({
+        name: "CNNouns",
+        description: "One CNNoun, every day, forever.\r\n\r\ncryptoninja-nouns.wtf",
+        image: "https://cryptoninja-nouns.wtf/logo.svg",
+        external_link: "https://cryptoninja-nouns.wtf",
+        seller_fee_basis_points: 0,
+        fee_recipient: "0x0000000000000000000000000000000000000000",
+      }));
     });
     it('should allow owner to set contractURI', async () => {
-      await nounsToken.setContractURIHash('ABC123');
+      await nounsToken.setContractURI('ipfs://ABC123');
       expect(await nounsToken.contractURI()).to.eq('ipfs://ABC123');
     });
     it('should not allow non owner to set contractURI', async () => {
       const [, nonOwner] = await ethers.getSigners();
-      await expect(nounsToken.connect(nonOwner).setContractURIHash('BAD')).to.be.revertedWith(
+      await expect(nounsToken.connect(nonOwner).setContractURI('ipfs://BAD')).to.be.revertedWith(
         'Ownable: caller is not the owner',
       );
     });

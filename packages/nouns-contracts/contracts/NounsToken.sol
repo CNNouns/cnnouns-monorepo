@@ -61,8 +61,8 @@ contract NounsToken is INounsToken, Ownable, ERC721Checkpointable {
     // The internal noun ID tracker
     uint256 private _currentNounId;
 
-    // IPFS content hash of contract-level metadata
-    string private _contractURIHash = 'QmZi1n79FqWt2tTLwCqiy6nLM6xLGRsEPQ5JmReJQKNNzX';
+    // Contract-level metadata
+    string private _contractURI = 'data:application/json;base64,eyJuYW1lIjoiQ05Ob3VucyIsImRlc2NyaXB0aW9uIjoiT25lIENOTm91biwgZXZlcnkgZGF5LCBmb3JldmVyLlxyXG5cclxuY3J5cHRvbmluamEtbm91bnMud3RmIiwiaW1hZ2UiOiJodHRwczovL2NyeXB0b25pbmphLW5vdW5zLnd0Zi9sb2dvLnN2ZyIsImV4dGVybmFsX2xpbmsiOiJodHRwczovL2NyeXB0b25pbmphLW5vdW5zLnd0ZiIsInNlbGxlcl9mZWVfYmFzaXNfcG9pbnRzIjowLCJmZWVfcmVjaXBpZW50IjoiMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIn0=';
 
     // OpenSea's Proxy Registry
     IProxyRegistry public immutable proxyRegistry;
@@ -122,18 +122,18 @@ contract NounsToken is INounsToken, Ownable, ERC721Checkpointable {
     }
 
     /**
-     * @notice The IPFS URI of contract-level metadata.
+     * @notice Contract-level metadata for OpenSea.
      */
     function contractURI() public view returns (string memory) {
-        return string(abi.encodePacked('ipfs://', _contractURIHash));
+        return _contractURI;
     }
 
     /**
-     * @notice Set the _contractURIHash.
+     * @notice Set the _contractURI.
      * @dev Only callable by the owner.
      */
-    function setContractURIHash(string memory newContractURIHash) external onlyOwner {
-        _contractURIHash = newContractURIHash;
+    function setContractURI(string memory newContractURI) external onlyOwner {
+        _contractURI= newContractURI;
     }
 
     /**
