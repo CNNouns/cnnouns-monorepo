@@ -949,11 +949,11 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "newContractURIHash",
+        "name": "newContractURI",
         "type": "string"
       }
     ],
-    "name": "setContractURIHash",
+    "name": "setContractURI",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

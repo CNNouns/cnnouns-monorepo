@@ -260,17 +260,17 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "oldProposalThresholdBPS",
+        "name": "oldProposalThreshold",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "newProposalThresholdBPS",
+        "name": "newProposalThreshold",
         "type": "uint256"
       }
     ],
-    "name": "ProposalThresholdBPSSet",
+    "name": "ProposalThresholdSet",
     "type": "event"
   },
   {
@@ -408,7 +408,7 @@
   },
   {
     "inputs": [],
-    "name": "MAX_PROPOSAL_THRESHOLD_BPS",
+    "name": "MAX_PROPOSAL_THRESHOLD",
     "outputs": [
       {
         "internalType": "uint256",
@@ -460,7 +460,7 @@
   },
   {
     "inputs": [],
-    "name": "MIN_PROPOSAL_THRESHOLD_BPS",
+    "name": "MIN_PROPOSAL_THRESHOLD",
     "outputs": [
       {
         "internalType": "uint256",
@@ -541,11 +541,11 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "newProposalThresholdBPS",
+        "name": "newProposalThreshold",
         "type": "uint256"
       }
     ],
-    "name": "_setProposalThresholdBPS",
+    "name": "_setProposalThreshold",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -832,7 +832,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "proposalThresholdBPS_",
+        "name": "proposalThreshold_",
         "type": "uint256"
       },
       {
@@ -933,19 +933,6 @@
   {
     "inputs": [],
     "name": "proposalThreshold",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "proposalThresholdBPS",
     "outputs": [
       {
         "internalType": "uint256",
