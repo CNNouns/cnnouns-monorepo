@@ -366,7 +366,7 @@ const getProposalState = (
     if (!blockTimestamp || !proposal.executionETA) {
       return ProposalState.UNDETERMINED;
     }
-    const GRACE_PERIOD = 14 * 60 * 60 * 24;
+    const GRACE_PERIOD = 30 * 60 * 24;
     if (blockTimestamp.getTime() / 1_000 >= parseInt(proposal.executionETA) + GRACE_PERIOD) {
       return ProposalState.EXPIRED;
     }

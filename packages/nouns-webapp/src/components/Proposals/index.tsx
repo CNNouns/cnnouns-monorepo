@@ -44,7 +44,7 @@ const getCountdownCopy = (
         )
       : undefined;
 
-  const expiresDate = proposal && dayjs(proposal.eta).add(14, 'days');
+  const expiresDate = proposal && dayjs(proposal.eta).add(30, 'minutes');
 
   const now = dayjs();
 
