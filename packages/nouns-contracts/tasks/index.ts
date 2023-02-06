@@ -27,4 +27,6 @@ export * from './show-contract-uri';
 export * from './cnnouns-deploy';
 export * from './cnnouns-deploy-and-configure';
 export * from './cnnouns-populate-descriptor';
+export * from './cnnouns-start-auction';
+export * from './cnnouns-verify-ownership';
 export * from './show-cnnoun';

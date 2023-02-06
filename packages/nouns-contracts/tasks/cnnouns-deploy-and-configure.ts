@@ -87,7 +87,7 @@ task('cnnouns-deploy-and-configure', 'Deploy and configure all contracts')
     // Optionally kick off the first auction and transfer ownership of the auction house
     // to the Nouns DAO executor.
     if (args.startAuction) {
-      console.log('Start auction');
+      console.log(`Start auction: auction=${contracts.NounsAuctionHouseProxy.address} executor=${executorAddress}`);
       const auctionHouse = contracts.NounsAuctionHouse.instance.attach(
         contracts.NounsAuctionHouseProxy.address,
       );
@@ -98,6 +98,8 @@ task('cnnouns-deploy-and-configure', 'Deploy and configure all contracts')
       console.log(
         'Started the first auction and transferred ownership of the auction house to the executor.',
       );
+    } else {
+      console.log(`Skip auction start: auction=${contracts.NounsAuctionHouseProxy.address} executor=${executorAddress}`);
     }
 
     // Optionally write the deployed addresses to the SDK and subgraph configs.
