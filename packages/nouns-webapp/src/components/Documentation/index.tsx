@@ -5,6 +5,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Link from '../Link';
 import { Trans } from '@lingui/macro';
 import { NoTrans } from '../../i18n/NoTrans';
+import proposalFlow from '../../assets/cnnouns-proposal-flow.jpg';
 
 interface DocumentationProps {
   backgroundColor?: string;
@@ -170,6 +171,13 @@ const Documentation = (props: DocumentationProps = { backgroundColor: '#FFF' }) 
                 </NoTrans>
                 <br/>
                 {ninjaDaoLnk}
+              </p>
+              <p className={classes.aboutText}>
+                <img
+                  src={proposalFlow}
+                  alt="Proposal Flow"
+                  className={classes.proposalFlow}
+              />
               </p>
             </Accordion.Body>
           </Accordion.Item>
