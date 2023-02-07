@@ -128,9 +128,12 @@ enum ProposalStatus {
   PENDING
   ACTIVE
   CANCELLED
+  DEFEATED,
+  SUCCEEDED,
+  QUEUED,
+  EXPIRED,
+  EXECUTED,
   VETOED
-  QUEUED
-  EXECUTED
 }
 
 type Account @entity {
