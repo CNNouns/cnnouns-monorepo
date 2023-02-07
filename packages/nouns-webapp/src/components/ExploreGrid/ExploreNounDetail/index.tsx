@@ -66,9 +66,9 @@ const ExploreNounDetail: React.FC<ExploreNounDetailProps> = props => {
     const traitMap = new Map([
       ['background', <Trans>Background</Trans>],
       ['body', <Trans>Body</Trans>],
-      ['accessory', <Trans>Accessory</Trans>],
       ['head', <Trans>Head</Trans>],
       ['glasses', <Trans>Glasses</Trans>],
+      ['skill', <Trans>Skill</Trans>],
     ]);
     return traitMap.get(s);
   };
@@ -77,9 +77,9 @@ const ExploreNounDetail: React.FC<ExploreNounDetailProps> = props => {
     const traitMap = new Map([
       ['background', 'backgrounds'],
       ['body', 'bodies'],
-      ['accessory', 'accessories'],
       ['head', 'heads'],
       ['glasses', 'glasses'],
+      ['skill', 'skills'],
     ]);
     const result = traitMap.get(s);
     if (result) {
@@ -99,9 +99,9 @@ const ExploreNounDetail: React.FC<ExploreNounDetailProps> = props => {
   const getOrderedTraits = (seed: {
     head: number;
     glasses: number;
-    accessory: number;
     body: number;
     background: number;
+    skill: number;
   }) => {
     let nounTraitsOrdered;
     const loadingNounTraits = [
@@ -116,7 +116,7 @@ const ExploreNounDetail: React.FC<ExploreNounDetailProps> = props => {
         partIndex: -1,
       },
       {
-        partType: 'accessory',
+        partType: 'skill',
         partName: 'Loading',
         partIndex: -1,
       },
@@ -136,18 +136,18 @@ const ExploreNounDetail: React.FC<ExploreNounDetailProps> = props => {
       nounTraitsOrdered = [
         {
           partType: 'head',
-          partName: parseTraitName(traitNames[3][seed.head]),
+          partName: parseTraitName(traitNames[2][seed.head]),
           partIndex: seed.head,
         },
         {
           partType: 'glasses',
-          partName: parseTraitName(traitNames[4][seed.glasses]),
+          partName: parseTraitName(traitNames[3][seed.glasses]),
           partIndex: seed.glasses,
         },
         {
-          partType: 'accessory',
-          partName: parseTraitName(traitNames[2][seed.accessory]),
-          partIndex: seed.accessory,
+          partType: 'skill',
+          partName: parseTraitName(traitNames[4][seed.skill]),
+          partIndex: seed.skill,
         },
         {
           partType: 'body',

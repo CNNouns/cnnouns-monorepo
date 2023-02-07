@@ -129,35 +129,30 @@ export const deployWeth = async (deployer?: SignerWithAddress): Promise<WETH> =>
 
 export const populateDescriptor = async (nounsDescriptor: NounsDescriptor): Promise<void> => {
   const { bgcolors, palette, images } = ImageData;
-  const { bodies, accessories, heads, glasses } = images;
+  const { bodies, heads, glasses, skills } = images;
 
-  // Split up head and accessory population due to high gas usage
+  // Split up head and skill population due to high gas usage
   await Promise.all([
     nounsDescriptor.addManyBackgrounds(bgcolors),
     nounsDescriptor.addManyColorsToPalette(0, palette),
     nounsDescriptor.addManyBodies(bodies.map(({ data }) => data)),
-    chunkArray(accessories, 10).map(chunk =>
-      nounsDescriptor.addManyAccessories(chunk.map(({ data }) => data)),
-    ),
     chunkArray(heads, 10).map(chunk => nounsDescriptor.addManyHeads(chunk.map(({ data }) => data))),
     nounsDescriptor.addManyGlasses(glasses.map(({ data }) => data)),
+    chunkArray(skills, 10).map(chunk =>
+      nounsDescriptor.addManySkills(chunk.map(({ data }) => data)),
+    ),
   ]);
 };
 
 export const populateDescriptorV2 = async (nounsDescriptor: NounsDescriptorV2): Promise<void> => {
   const { bgcolors, palette, images } = ImageDataV2;
-  const { bodies, accessories, heads, glasses } = images;
+  const { bodies, heads, glasses, skills } = images;
 
   const {
     encodedCompressed: bodiesCompressed,
     originalLength: bodiesLength,
     itemCount: bodiesCount,
   } = dataToDescriptorInput(bodies.map(({ data }) => data));
-  const {
-    encodedCompressed: accessoriesCompressed,
-    originalLength: accessoriesLength,
-    itemCount: accessoriesCount,
-  } = dataToDescriptorInput(accessories.map(({ data }) => data));
   const {
     encodedCompressed: headsCompressed,
     originalLength: headsLength,
@@ -168,13 +163,18 @@ export const populateDescriptorV2 = async (nounsDescriptor: NounsDescriptorV2): 
     originalLength: glassesLength,
     itemCount: glassesCount,
   } = dataToDescriptorInput(glasses.map(({ data }) => data));
+  const {
+    encodedCompressed: skillsCompressed,
+    originalLength: skillsLength,
+    itemCount: skillsCount,
+  } = dataToDescriptorInput(skills.map(({ data }) => data));
 
   await nounsDescriptor.addManyBackgrounds(bgcolors);
   await nounsDescriptor.setPalette(0, `0x000000${palette.join('')}`);
   await nounsDescriptor.addBodies(bodiesCompressed, bodiesLength, bodiesCount);
-  await nounsDescriptor.addAccessories(accessoriesCompressed, accessoriesLength, accessoriesCount);
   await nounsDescriptor.addHeads(headsCompressed, headsLength, headsCount);
   await nounsDescriptor.addGlasses(glassesCompressed, glassesLength, glassesCount);
+  await nounsDescriptor.addSkills(skillsCompressed, skillsLength, skillsCount);
 };
 
 export const deployGovAndToken = async (

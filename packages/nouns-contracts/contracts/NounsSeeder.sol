@@ -17,6 +17,13 @@
 
 pragma solidity ^0.8.6;
 
+// LICENSE
+// This file is a modified version of nounsDAO's NounsSeeder.sol:
+// https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/NounsSeeder.sol
+//
+// NounsSeeder.sol licensed under the GPL-3.0 license.
+// With modifications by CNNouns DAO.
+
 import { INounsSeeder } from './interfaces/INounsSeeder.sol';
 import { INounsDescriptorMinimal } from './interfaces/INounsDescriptorMinimal.sol';
 
@@ -32,9 +39,9 @@ contract NounsSeeder is INounsSeeder {
 
         uint256 backgroundCount = descriptor.backgroundCount();
         uint256 bodyCount = descriptor.bodyCount();
-        uint256 accessoryCount = descriptor.accessoryCount();
         uint256 headCount = descriptor.headCount();
         uint256 glassesCount = descriptor.glassesCount();
+        uint256 skillCount = descriptor.skillCount();
 
         return Seed({
             background: uint48(
@@ -43,14 +50,14 @@ contract NounsSeeder is INounsSeeder {
             body: uint48(
                 uint48(pseudorandomness >> 48) % bodyCount
             ),
-            accessory: uint48(
-                uint48(pseudorandomness >> 96) % accessoryCount
-            ),
             head: uint48(
-                uint48(pseudorandomness >> 144) % headCount
+                uint48(pseudorandomness >> 96) % headCount
             ),
             glasses: uint48(
-                uint48(pseudorandomness >> 192) % glassesCount
+                uint48(pseudorandomness >> 144) % glassesCount
+            ),
+            skill: uint48(
+                uint48(pseudorandomness >> 192) % skillCount
             )
         });
     }

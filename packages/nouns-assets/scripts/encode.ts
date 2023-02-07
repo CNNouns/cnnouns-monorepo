@@ -8,7 +8,7 @@ const DESTINATION = path.join(__dirname, '../src/image-data.json');
 const encode = async () => {
   const encoder = new PNGCollectionEncoder();
 
-  const partfolders = ['1-bodies', '2-accessories', '3-heads', '4-glasses'];
+  const partfolders = ['1-bodies', '3-heads', '4-glasses', '5-skills'];
   for (const folder of partfolders) {
     const folderpath = path.join(__dirname, '../images/v0', folder);
     const files = await fs.readdir(folderpath);

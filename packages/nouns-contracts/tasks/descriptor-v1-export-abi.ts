@@ -14,7 +14,7 @@ task(
   )
   .setAction(async ({ exportPath }, { ethers }) => {
     const { bgcolors, palette, images } = ImageData;
-    let { bodies, accessories, heads, glasses } = images;
+    let { bodies, heads, glasses, skills } = images;
 
     const abiEncoded = ethers.utils.defaultAbiCoder.encode(
       ['string[]', 'string[]', 'bytes[]', 'bytes[]', 'bytes[]', 'bytes[]'],
@@ -22,9 +22,9 @@ task(
         bgcolors,
         palette,
         bodies.map(({ data }) => data),
-        accessories.map(({ data }) => data),
         heads.map(({ data }) => data),
         glasses.map(({ data }) => data),
+        skills.map(({ data }) => data),
       ],
     );
 

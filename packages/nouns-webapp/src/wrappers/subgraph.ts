@@ -47,9 +47,9 @@ export const seedsQuery = (first = 1_000) => gql`
     id
     background
     body
-    accessory
     head
     glasses
+    skill
   }
 }
 `;
@@ -115,9 +115,9 @@ export const auctionQuery = (auctionId: number) => gql`
 		  id
 		  background
 		  body
-		  accessory
 		  head
 		  glasses
+		  skill
 		}
 		owner {
 		  id
@@ -158,9 +158,9 @@ export const nounQuery = (id: string) => gql`
 	  seed {
 	  background
 		body
-		accessory
 		head
 		glasses
+		skill
 	}
 	  owner {
 		id
