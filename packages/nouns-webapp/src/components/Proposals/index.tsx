@@ -82,7 +82,7 @@ const Proposals = ({ proposals }: { proposals: PartialProposal[] }) => {
   const activeLocale = useActiveLocale();
   const [showDelegateModal, setShowDelegateModal] = useState(false);
 
-  const threshold = (useProposalThreshold() ?? 0) + 1;
+  const threshold = (useProposalThreshold() ?? 1);
   const hasEnoughVotesToPropose = account !== undefined && connectedAccountNounVotes >= threshold;
   const hasNounBalance = (useUserNounTokenBalance() ?? 0) > 0;
 

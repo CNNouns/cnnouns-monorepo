@@ -31,7 +31,7 @@ const CreateProposalPage = () => {
   const latestProposalId = useProposalCount();
   const latestProposal = useProposal(latestProposalId ?? 0);
   const availableVotes = useUserVotes();
-  const proposalThreshold = useProposalThreshold();
+  const proposalThreshold = useProposalThreshold() ?? 1;
 
   const { propose, proposeState } = usePropose();
 
@@ -134,7 +134,7 @@ const CreateProposalPage = () => {
   );
 
   const hasEnoughVote = Boolean(
-    availableVotes && proposalThreshold !== undefined && availableVotes > proposalThreshold,
+    availableVotes && proposalThreshold !== undefined && availableVotes >= proposalThreshold,
   );
 
   const handleCreateProposal = async () => {

@@ -47,7 +47,7 @@ let noundersDAO: SignerWithAddress;
 
 // Governance Config
 const TIME_LOCK_DELAY = 172_800; // 2 days
-const PROPOSAL_THRESHOLD_BPS = 500; // 5%
+const PROPOSAL_THRESHOLD = 1;
 const QUORUM_VOTES_BPS = 1_000; // 10%
 const VOTING_PERIOD = 5_760; // About 24 hours with 15s blocks
 const VOTING_DELAY = 1; // 1 block
@@ -137,7 +137,7 @@ async function deploy() {
     govDelegate.address,
     VOTING_PERIOD,
     VOTING_DELAY,
-    PROPOSAL_THRESHOLD_BPS,
+    PROPOSAL_THRESHOLD,
     QUORUM_VOTES_BPS,
   );
 
