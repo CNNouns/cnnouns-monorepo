@@ -59,7 +59,7 @@ describe('NounsToken', () => {
   });
 
   it('should set symbol', async () => {
-    expect(await nounsToken.symbol()).to.eq('CNN');
+    expect(await nounsToken.symbol()).to.eq('CNNS');
   });
 
   it('should set name', async () => {

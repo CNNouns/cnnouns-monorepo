@@ -23,7 +23,7 @@ contract NounsTokenTest is Test, DeployUtils {
     }
 
     function testSymbol() public {
-        assertEq(nounsToken.symbol(), 'CNN');
+        assertEq(nounsToken.symbol(), 'CNNS');
     }
 
     function testName() public {
