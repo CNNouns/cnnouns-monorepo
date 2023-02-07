@@ -12,9 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {ethers, UnsignedTransaction, Signature, Bytes, BytesLike} from 'ethers';
-import {strict as assert} from 'assert';
-import axios, {AxiosRequestConfig} from 'axios';
+import {
+  ethers,
+  UnsignedTransaction,
+  Signature,
+  Bytes,
+  BytesLike,
+} from "ethers";
+import axios, { AxiosRequestConfig } from "axios";
 
 const {
   arrayify,
@@ -35,42 +40,52 @@ export type HashicorpVaultSignerOptions = {
   axiosRequestConfig?: AxiosRequestConfig;
 };
 
-const DEFAULT_PLUGIN_PATH = 'ethereum';
+const DEFAULT_PLUGIN_PATH = "ethereum";
 
 export class HashicorpVaultSigner extends ethers.Signer {
   readonly address: string;
   readonly options: HashicorpVaultSignerOptions;
   readonly provider: ethers.providers.Provider | undefined;
 
-  /*
   constructor(
     address: string,
     baseUrl: string,
     token: string,
-    provider?: ethers.providers.Provider,
+    provider?: ethers.providers.Provider
   );
 
   constructor(
     address: string,
     options: HashicorpVaultSignerOptions,
-    provider?: ethers.providers.Provider,
+    provider?: ethers.providers.Provider
   );
- */
 
   constructor(
     address: string,
-    options: HashicorpVaultSignerOptions,
-    provider?: ethers.providers.Provider,
+    baseUrlOrOptions: string | HashicorpVaultSignerOptions,
+    tokenOrProvider?: string | ethers.providers.Provider,
+    provider?: ethers.providers.Provider
   ) {
     super();
 
     // ethers.utils.defineReadOnly may cause `error TS2564: Property 'X' has
     // no initializer and is not definitely assigned in the constructor.` and
-    // I don't known how to solve it.
+    // I don't know how to solve it.
     this.address = getAddress(address);
 
-    this.options = {...options};
-    this.provider = provider;
+    if (
+      typeof baseUrlOrOptions === "string" &&
+      typeof tokenOrProvider === "string"
+    ) {
+      this.options = {
+        baseUrl: baseUrlOrOptions,
+        token: tokenOrProvider,
+      };
+      this.provider = provider;
+    } else {
+      this.options = { ...(baseUrlOrOptions as HashicorpVaultSignerOptions) };
+      this.provider = tokenOrProvider as ethers.providers.Provider;
+    }
   }
 
   getAddress(): Promise<string> {
@@ -85,7 +100,7 @@ export class HashicorpVaultSigner extends ethers.Signer {
   }
 
   convineAxiosRequestConfig(
-    axiosRequestConfig: AxiosRequestConfig,
+    axiosRequestConfig: AxiosRequestConfig
   ): AxiosRequestConfig {
     const conf = {
       ...(this.options.axiosRequestConfig ?? {}),
@@ -103,16 +118,16 @@ export class HashicorpVaultSigner extends ethers.Signer {
   async signDigest(digest: BytesLike): Promise<Signature> {
     const digestBytes = arrayify(digest);
     if (digestBytes.length !== 32) {
-      ethers.logger.throwArgumentError('bad digest length', 'digest', digest);
+      ethers.logger.throwArgumentError("bad digest length", "digest", digest);
     }
     const hash = hexlify(digestBytes);
 
     const url = this.signDigestUrl();
     let axiosConfig: AxiosRequestConfig = this.convineAxiosRequestConfig({
       url,
-      method: 'post',
-      responseType: 'json',
-      data: {hash},
+      method: "post",
+      responseType: "json",
+      data: { hash },
     });
 
     const resp = await axios(axiosConfig);
@@ -124,38 +139,24 @@ export class HashicorpVaultSigner extends ethers.Signer {
   }
 
   async signTransaction(
-    transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>,
+    transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>
   ): Promise<string> {
     const tx = await resolveProperties(transaction);
     if (tx.from != null) {
       if (getAddress(tx.from) !== this.address) {
         ethers.logger.throwArgumentError(
-          'transaction from address mismatch',
-          'transaction.from',
-          transaction.from,
+          "transaction from address mismatch",
+          "transaction.from",
+          transaction.from
         );
       }
       delete tx.from;
     }
 
     const signature = await this.signDigest(
-      keccak256(serializeTransaction(<UnsignedTransaction>tx)),
+      keccak256(serializeTransaction(<UnsignedTransaction>tx))
     );
     const signedTx = serializeTransaction(<UnsignedTransaction>tx, signature);
-
-    {
-      //console.log('unsignedTx', tx);
-      const parsedTx = ethers.utils.parseTransaction(signedTx);
-      //console.log('signedTx', parsedTx);
-      const address = ethers.utils.recoverAddress(
-        keccak256(serializeTransaction(<UnsignedTransaction>tx)),
-        signature,
-      );
-      //console.log('recoveredAddress', address);
-      assert.equal(address, parsedTx.from);
-    }
-    //throw new Error('BLOCK SEND TRANSACTION');
-
     return signedTx;
   }
 
