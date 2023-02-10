@@ -2,6 +2,7 @@ import chai from 'chai';
 import { solidity } from 'ethereum-waffle';
 
 import { BigNumber as EthersBN } from 'ethers';
+import { ethers } from 'hardhat';
 
 import { getSigners, TestSigners, setTotalSupply, deployGovAndToken } from '../../utils';
 
@@ -82,14 +83,27 @@ describe('NounsDAO#inflationHandling', () => {
     expect(await gov.quorumVotes()).to.equal(4);
   });
 
-  it('rejects if proposing below threshold', async () => {
-    // account0 has 1 token, requires 3
+  it('allow if proposing equals threshold', async () => {
+    // account0 has 1 token, requires 1
     await token.transferFrom(deployer.address, account0.address, 0);
     await mineBlock();
+    const snapshotId = await ethers.provider.send('evm_snapshot', []);
+
+    await propose(account0);
+    const proposal = await gov.proposals(proposalId);
+    expect(proposal.proposalThreshold).to.equal(1);
+    expect(proposal.quorumVotes).to.equal(4);
+
+    await ethers.provider.send('evm_revert', [snapshotId]);
+  });
+
+  it('rejects if proposing below threshold', async () => {
+    // account3 doesn't have a token, requires 1
     await expect(
       gov.connect(account3).propose(targets, values, signatures, callDatas, 'do nothing'),
     ).revertedWith('NounsDAO::propose: proposer votes below proposal threshold');
   });
+
   it('allows proposing if above threshold', async () => {
     // account0 has 3 token, requires 3
     await token.transferFrom(deployer.address, account0.address, 1);
@@ -125,13 +139,6 @@ describe('NounsDAO#inflationHandling', () => {
     expect(await gov.proposalThreshold()).to.equal(1);
     // 11% of 80 = 8.88, floored to 8
     expect(await gov.quorumVotes()).to.equal(8);
-  });
-
-  it('rejects proposals that were previously above proposal threshold, but due to increasing supply are now below', async () => {
-    // account3 does not have tokens, it never increase proposal threshold
-    await expect(
-      gov.connect(account3).propose(targets, values, signatures, callDatas, 'do nothing'),
-    ).revertedWith('NounsDAO::propose: proposer votes below proposal threshold');
   });
 
   it('does not change previous proposal attributes when total supply changes', async () => {
