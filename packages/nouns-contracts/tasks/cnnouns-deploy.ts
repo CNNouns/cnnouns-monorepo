@@ -29,7 +29,6 @@ task(
   'cnnouns-deploy',
   'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsToken',
 )
-  //.addFlag('autoDeploy', 'Deploy all contracts without user interaction')
   .addOptionalParam('weth', 'The WETH contract address', undefined, types.string)
   .addOptionalParam('noundersdao', 'The nounders DAO contract address', undefined, types.string)
   .addOptionalParam('vetoer', 'The vetoer address', undefined, types.string)
@@ -225,82 +224,12 @@ task(
     };
 
     for (const [name, contract] of Object.entries(contracts)) {
-      /*
-      let gasPrice = await ethers.provider.getGasPrice();
-      if (!args.autoDeploy) {
-        const gasInGwei = Math.round(Number(ethers.utils.formatUnits(gasPrice, 'gwei')));
-
-        promptjs.start();
-
-        const result = await promptjs.get([
-          {
-            properties: {
-              gasPrice: {
-                type: 'integer',
-                required: true,
-                description: 'Enter a gas price (gwei)',
-                default: gasInGwei,
-              },
-            },
-          },
-        ]);
-        gasPrice = ethers.utils.parseUnits(result.gasPrice.toString(), 'gwei');
-      }
-      */
-
       const factory = (await ethers.getContractFactory(name, {
         libraries: contract?.libraries?.(),
       })).connect(deployer);
 
-      /*
-      const deploymentGas = await factory.signer.estimateGas(
-        factory.getDeployTransaction(
-          ...(contract.args?.map(a => (typeof a === 'function' ? a() : a)) ?? []),
-          {
-            gasPrice,
-          },
-        ),
-      );
-      const deploymentCost = deploymentGas.mul(gasPrice);
-
-      console.log(
-        `Estimated cost to deploy ${name}: ${ethers.utils.formatUnits(
-          deploymentCost,
-          'ether',
-        )} ETH`,
-      );
-
-      if (!args.autoDeploy) {
-        const result = await promptjs.get([
-          {
-            properties: {
-              confirm: {
-                pattern: /^(DEPLOY|SKIP|EXIT)$/,
-                description:
-                  'Type "DEPLOY" to confirm, "SKIP" to skip this contract, or "EXIT" to exit.',
-              },
-            },
-          },
-        ]);
-        if (result.operation === 'SKIP') {
-          console.log(`Skipping ${name} deployment...`);
-          continue;
-        }
-        if (result.operation === 'EXIT') {
-          console.log('Exiting...');
-          return;
-        }
-      }
-      console.log(`Deploying ${name}...`);
-      */
-
       const deployedContract = await factory.deploy(
         ...(contract.args?.map(a => (typeof a === 'function' ? a() : a)) ?? []),
-        /*
-        {
-          gasPrice,
-        },
-        */
       );
 
       if (contract.waitForConfirmation) {
