@@ -14,7 +14,7 @@ task('cnnouns-start-auction', 'Start the first auction')
     '0xDa06AC4272B4D050e1b64B35d66FAa5E2D3092ec',
     types.string,
   )
-  .setAction(async (args, { ethers, run }) => {
+  .setAction(async (args, { ethers }) => {
     const signer = createSigner(ethers.provider);
 
     // kick off the first auction and transfer ownership of the auction house

@@ -1,4 +1,3 @@
-import { Result } from 'ethers/lib/utils';
 import { task, types } from 'hardhat/config';
 import { createSigner } from './utils/createSigner';
 

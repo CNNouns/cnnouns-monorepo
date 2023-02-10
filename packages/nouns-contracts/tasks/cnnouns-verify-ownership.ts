@@ -1,4 +1,3 @@
-import { Result } from 'ethers/lib/utils';
 import { task, types } from 'hardhat/config';
 import { createSigner } from './utils/createSigner';
 
@@ -39,7 +38,7 @@ task('cnnouns-verify-ownership', 'Verify ownership of contracts')
     '0x99A8AFdb4f8D6c02Cb5D5C27769a056aC79e45Fd',
     types.string,
   )
-  .setAction(async (args, { ethers, run }) => {
+  .setAction(async (args, { ethers }) => {
     const contracts = {
       NounsDescriptorV2: {
         address: args.nounsDescriptorV2,
