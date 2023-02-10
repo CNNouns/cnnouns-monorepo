@@ -827,7 +827,7 @@ msgstr "あなたはこの提案から<0>棄権</0>しました"
 
 #: src/pages/CreateProposal/index.tsx
 msgid "You <0>MUST</0> maintain enough voting power to meet the proposal threshold until your proposal is executed. If you fail to do so, anyone can cancel your proposal."
-msgstr "提案が実行されるまでしきい値を超える<0>投票権の維持が必要</0>になります。維持できない場合は誰でもあなたの提案をキャンセルすることができます。"
+msgstr "提案が実行されるまで、しきい値を超える<0>起案権（CN Nounsの保有数）を維持</0>してください。維持できない場合は他者があなたの提案をキャンセルできるようになります。"
 
 #: src/components/CreateProposalButton/index.tsx
 msgid "You already have an active or pending proposal"
