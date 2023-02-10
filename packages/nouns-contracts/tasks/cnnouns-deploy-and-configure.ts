@@ -57,7 +57,7 @@ task('cnnouns-deploy-and-configure', 'Deploy and configure all contracts')
 
     // Verify the contracts on Etherscan
     if (args.verifyEtherscan) {
-      console.log('Verifing contracts via Etherscan API');
+      console.log('Verifying contracts via Etherscan API');
       await run('verify-etherscan', {
         contracts,
       });
