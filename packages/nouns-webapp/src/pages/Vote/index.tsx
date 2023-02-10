@@ -410,7 +410,7 @@ const VotePage = ({
         <Row>
           <Col xl={4} lg={12}>
             <Card className={classes.voteInfoCard}>
-              <Card.Body className="p-2" style={{marginBottom:"0.9rem"}}>
+              <Card.Body className="p-2 mb-3">
                 <div className={classes.voteMetadataRow}>
                   <div className={classes.voteMetadataRowTitle}>
                     <h1>
@@ -430,8 +430,7 @@ const VotePage = ({
                     data-for="view-dq-info"
                     data-tip="View Dynamic Quorum Info"
                     onClick={() => setShowDynamicQuorumInfoModal(true && isV2Prop)}
-                    className={clsx(classes.thresholdInfo, isV2Prop ? classes.cursorPointer : '')}
-                    style={{marginTop:"0.5rem"}}
+                    className={`${clsx(classes.thresholdInfo, isV2Prop ? classes.cursorPointer : '')} mt-2`}
                   >
                     <h3>
                       <Trans>
