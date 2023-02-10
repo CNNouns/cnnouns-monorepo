@@ -53,7 +53,7 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
     // The base duration of a single auction
     uint256 public baseDuration;
 
-    // The origin date for calcurating duration
+    // The origin date for calculating duration
     uint256 public origin;
 
     // The active auction
@@ -195,7 +195,7 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
     }
 
     /**
-     * @notice Calculate an next auction duration.
+     * @notice Calculate a next auction duration.
      */
     function _calcDuration(uint256 _timestamp) internal view returns (uint256) {
         // It implements a geometric sequence that doubles in 4 years with
