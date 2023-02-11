@@ -54,6 +54,8 @@ task('show-cnnoun', 'Show a Noun')
     const art = await descriptorContract.art();
     console.log("art", art);
 
+    const background = await descriptorContract.backgrounds(seeds.background);
+    console.log("background", background);
     const head = await descriptorContract.heads(seeds.head);
     console.log("head", head);
     const body = await descriptorContract.bodies(seeds.body);
