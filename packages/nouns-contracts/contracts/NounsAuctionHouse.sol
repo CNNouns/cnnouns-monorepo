@@ -199,7 +199,7 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
      */
     function _calcDuration(uint256 _timestamp) internal view returns (uint256) {
         // It implements a geometric sequence that doubles in 4 years with
-        // an upper limit of 1 year
+        // an upper limit of 1.4 years
         uint256 interval = _timestamp - origin;
         if (interval >= 1135296000) {
             return 44236800;
