@@ -54,20 +54,21 @@ task('show-cnnoun', 'Show a Noun')
     const art = await descriptorContract.art();
     console.log("art", art);
 
+    const extra = { gasLimit: 200_000_000 };
     const background = await descriptorContract.backgrounds(seeds.background);
     console.log("background", background);
-    const head = await descriptorContract.heads(seeds.head);
+    const head = await descriptorContract.heads(seeds.head, extra);
     console.log("head", head);
-    const body = await descriptorContract.bodies(seeds.body);
+    const body = await descriptorContract.bodies(seeds.body, extra);
     console.log("body", body);
-    const glasses = await descriptorContract.glasses(seeds.glasses);
+    const glasses = await descriptorContract.glasses(seeds.glasses, extra);
     console.log("glasses", glasses);
-    const skill = await descriptorContract.skills(seeds.skill);
+    const skill = await descriptorContract.skills(seeds.skill, extra);
     console.log("skill", skill);
 
-    const svg = await descriptorContract.generateSVGImage(seeds);
+    const svg = await descriptorContract.generateSVGImage(seeds, extra);
     console.log("svg", `data:image/svg+xml;base64,${svg}`);
 
-    const tokenURI = await nftContract.tokenURI(0, { gasLimit: 200_000_000 });
+    const tokenURI = await nftContract.tokenURI(0, extra);
     console.log('tokenURI', tokenURI);
   });
