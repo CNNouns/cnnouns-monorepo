@@ -30,5 +30,3 @@ export * from './cnnouns-populate-descriptor';
 export * from './cnnouns-start-auction';
 export * from './cnnouns-verify-ownership';
 export * from './show-cnnoun';
-export * from './cnnouns-deploy-token';
-export * from './mint-cnnoun';
