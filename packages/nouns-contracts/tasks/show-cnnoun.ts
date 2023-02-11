@@ -69,6 +69,6 @@ task('show-cnnoun', 'Show a Noun')
     const svg = await descriptorContract.generateSVGImage(seeds, extra);
     console.log("svg", `data:image/svg+xml;base64,${svg}`);
 
-    const tokenURI = await nftContract.tokenURI(0, extra);
+    const tokenURI = await nftContract.tokenURI(tokenId, extra);
     console.log('tokenURI', tokenURI);
   });
