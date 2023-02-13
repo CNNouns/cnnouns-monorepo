@@ -62,6 +62,7 @@ task(
   console.log(`Nouns ERC721 address: ${contracts.NounsToken.instance.address}`);
   console.log(`Nouns DAO Executor address: ${contracts.NounsDAOExecutor.instance.address}`);
   console.log(`Nouns DAO Proxy address: ${contracts.NounsDAOProxyV2.instance.address}`);
+  console.log(`Multicall2 address: ${contracts.Multicall2.instance.address}`);
 
   await ethers.provider.send('evm_setIntervalMining', [12_000]);
 

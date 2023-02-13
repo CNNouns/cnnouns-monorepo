@@ -225,13 +225,13 @@ const Documentation = (props: DocumentationProps = { backgroundColor: '#FFF' }) 
                   <Trans>bodies (30)</Trans>
                 </li>
                 <li>
-                  <Trans>accessories (140) </Trans>
-                </li>
-                <li>
-                  <Trans>heads (242) </Trans>
+                  <Trans>heads (234) </Trans>
                 </li>
                 <li>
                   <Trans>glasses (23)</Trans>
+                </li>
+                <li>
+                  <Trans>skills (137)</Trans>
                 </li>
               </ul>
               <Trans>

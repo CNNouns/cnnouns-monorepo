@@ -69,7 +69,7 @@ const app: Record<SupportedChains, AppConfig> = {
   [ChainId.Goerli]: {
     jsonRpcUri: createNetworkHttpUrl('goerli'),
     wsRpcUri: createNetworkWsUrl('goerli'),
-    subgraphApiUri: 'https://api.thegraph.com/subgraphs/name/bcjgit/dao-v2-test',
+    subgraphApiUri: 'https://api.thegraph.com/subgraphs/name/tnplimited/cnnouns-subgraph-goerli',
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
   },
   [ChainId.Mainnet]: {
@@ -81,7 +81,7 @@ const app: Record<SupportedChains, AppConfig> = {
   [ChainId.Hardhat]: {
     jsonRpcUri: 'http://localhost:8545',
     wsRpcUri: 'ws://localhost:8545',
-    subgraphApiUri: 'http://localhost:8000/subgraphs/name/nounsdao/nouns-subgraph',
+    subgraphApiUri: 'http://localhost:8000/subgraphs/name/nounsdao/nouns-subgraph-hardhat',
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
   },
 };
@@ -132,4 +132,4 @@ const config = {
 
 export default config;
 
-export const multicallOnLocalhost = '0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e';
+export const multicallOnLocalhost = '0x9A676e781A523b5d0C0e43731313A708CB607508';

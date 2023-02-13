@@ -35,7 +35,7 @@ const minBidEth = (minBid: BigNumber): string => {
     return '0.01';
   }
 
-  const eth = utils.formatEther(EthersBN.from(minBid.toString()));
+  const eth = utils.formatEther(EthersBN.from(minBid.toFixed(0)));
   return new BigNumber(eth).toFixed(2, BigNumber.ROUND_CEIL);
 };
 
