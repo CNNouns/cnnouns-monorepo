@@ -54,8 +54,8 @@ task('deploy-short-times', 'Deploy all Nouns contracts with short gov times for 
     types.int,
   )
   .addOptionalParam(
-    'auctionDuration',
-    'The auction duration (seconds)',
+    'auctionBaseDuration',
+    'The auction base duration (seconds)',
     60 * 2 /* 2 minutes */,
     types.int,
   )
@@ -164,7 +164,7 @@ task('deploy-short-times', 'Deploy all Nouns contracts with short gov times for 
               args.auctionTimeBuffer,
               args.auctionReservePrice,
               args.auctionMinIncrementBidPercentage,
-              args.auctionDuration,
+              args.auctionBaseDuration,
             ]),
         ],
         waitForConfirmation: true,

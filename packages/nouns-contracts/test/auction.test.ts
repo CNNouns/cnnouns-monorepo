@@ -29,6 +29,7 @@ describe('NounsAuctionHouse', () => {
   const RESERVE_PRICE = 2;
   const MIN_INCREMENT_BID_PERCENTAGE = 5;
   const DURATION = 60 * 60 * 24;
+  const DAYS_IN_4YEARS = 1460;
 
   async function deploy(deployer?: SignerWithAddress) {
     const auctionHouseFactory = await ethers.getContractFactory('NounsAuctionHouse', deployer);
@@ -243,7 +244,11 @@ describe('NounsAuctionHouse', () => {
 
     expect(createdEvent?.args?.nounId).to.equal(nounId.add(1));
     expect(createdEvent?.args?.startTime).to.equal(timestamp);
-    expect(createdEvent?.args?.endTime).to.equal(timestamp + DURATION);
+
+    const origin = (await nounsAuctionHouse.origin()).toNumber();
+    const interval = timestamp - origin;
+    const duration = Math.floor(86400 * 2 ** (interval / (DAYS_IN_4YEARS * 86400)));
+    expect(createdEvent?.args?.endTime).to.equal(createdEvent?.args?.startTime?.add(duration));
   });
 
   it('should not create a new auction if the auction house is paused and unpaused while an auction is ongoing', async () => {
@@ -285,7 +290,11 @@ describe('NounsAuctionHouse', () => {
 
     expect(createdEvent?.args?.nounId).to.equal(nounId.add(1));
     expect(createdEvent?.args?.startTime).to.equal(timestamp);
-    expect(createdEvent?.args?.endTime).to.equal(timestamp + DURATION);
+
+    const origin = (await nounsAuctionHouse.origin()).toNumber();
+    const interval = timestamp - origin;
+    const duration = Math.floor(86400 * 2 ** (interval / (DAYS_IN_4YEARS * 86400)));
+    expect(createdEvent?.args?.endTime).to.equal(createdEvent?.args?.startTime?.add(duration));
   });
 
   it('should settle the current auction and pause the contract if the minter is updated while the auction house is unpaused', async () => {
@@ -324,5 +333,53 @@ describe('NounsAuctionHouse', () => {
     await expect(tx)
       .to.emit(nounsAuctionHouse, 'AuctionSettled')
       .withArgs(nounId, '0x0000000000000000000000000000000000000000', 0);
+  });
+
+  it('should set origin at deploy', async () => {
+    await (await nounsAuctionHouse.unpause()).wait();
+    const origin = await nounsAuctionHouse.origin();
+    expect(origin.toNumber()).to.be.greaterThan(0);
+  });
+
+  it(`should grow duration 86400 for first auction`, async () => {
+    await (await nounsAuctionHouse.unpause()).wait();
+    const auction = await nounsAuctionHouse.auction();
+    expect(auction.endTime.sub(auction.startTime)).to.equals(86400);
+  });
+
+  [
+    [86400 + 20 * 60, 86441],
+    [2 * 86400, 86482],
+    [3 * 86400, 86523],
+    [4 * 86400, 86564],
+    [5 * 86400, 86605],
+    [365 * 86400, 102747],
+    [(DAYS_IN_4YEARS - 1) * 86400, 172717],
+    [DAYS_IN_4YEARS * 86400, 172800],
+    [(DAYS_IN_4YEARS + 1) * 86400, 172882],
+    [2190 * 86400, 244376],
+    [(DAYS_IN_4YEARS * 2 - 1) * 86400, 345435],
+    [DAYS_IN_4YEARS * 2 * 86400, 345600],
+    [(DAYS_IN_4YEARS * 2 + 1) * 86400, 345764],
+    [(DAYS_IN_4YEARS * 3 - 1) * 86400, 690871],
+    [DAYS_IN_4YEARS * 3 * 86400, 691200],
+    [(DAYS_IN_4YEARS * 3 + 1) * 86400, 691528],
+    [36 * 365 * 86400 - 1, 44236799],
+    [36 * 365 * 86400, 44236800],
+    [36 * 365 * 86400 + 1, 44236800],
+    [72 * 365 * 86400, 44236800],
+  ].forEach(([increaseTime, duration]) => {
+    it(`should grow duration ${duration} for ${increaseTime}`, async () => {
+      await (await nounsAuctionHouse.unpause()).wait();
+
+      const origin = await nounsAuctionHouse.origin();
+      const { startTime } = await nounsAuctionHouse.auction();
+      const interval = startTime.sub(origin).toNumber();
+
+      await ethers.provider.send('evm_increaseTime', [increaseTime - interval]);
+      await nounsAuctionHouse.connect(bidderA).settleCurrentAndCreateNewAuction();
+      const auction = await nounsAuctionHouse.auction();
+      expect(auction.endTime.sub(auction.startTime)).to.equals(duration);
+    });
   });
 });
