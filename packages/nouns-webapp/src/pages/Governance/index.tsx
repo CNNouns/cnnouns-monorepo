@@ -12,7 +12,7 @@ import { i18n } from '@lingui/core';
 const GovernancePage = () => {
   const { data: proposals } = useAllProposals();
   const threshold = useProposalThreshold();
-  const nounsRequired = threshold !== undefined ? threshold + 1 : '...';
+  const nounsRequired = threshold !== undefined ? threshold : '...';
 
   const treasuryBalance = useTreasuryBalance();
   const treasuryBalanceUSD = useTreasuryUSDValue();

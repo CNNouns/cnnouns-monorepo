@@ -40,7 +40,7 @@ contract NounsDAOUpgradeToV2 is NounsDAOLogicSharedBaseTest {
                         address(daoLogic),
                         votingPeriod,
                         votingDelay,
-                        proposalThresholdBPS,
+                        proposalThreshold,
                         1000
                     )
                 )

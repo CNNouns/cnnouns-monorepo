@@ -2,6 +2,7 @@ import chai from 'chai';
 import { solidity } from 'ethereum-waffle';
 
 import { BigNumber as EthersBN } from 'ethers';
+import { ethers } from 'hardhat';
 
 import { getSigners, TestSigners, setTotalSupply, deployGovAndToken } from '../../utils';
 
@@ -28,12 +29,13 @@ let deployer: SignerWithAddress;
 let account0: SignerWithAddress;
 let account1: SignerWithAddress;
 let account2: SignerWithAddress;
+let account3: SignerWithAddress;
 let signers: TestSigners;
 
 let gov: NounsDAOLogicV1;
 const timelockDelay = 172800; // 2 days
 
-const proposalThresholdBPS = 678; // 6.78%
+const proposalThreshold = 1;
 const quorumVotesBPS = 1100; // 11%
 
 let targets: string[];
@@ -49,6 +51,7 @@ describe('NounsDAO#inflationHandling', () => {
     account0 = signers.account0;
     account1 = signers.account1;
     account2 = signers.account2;
+    account3 = signers.account3;
 
     targets = [account0.address];
     values = ['0'];
@@ -58,13 +61,13 @@ describe('NounsDAO#inflationHandling', () => {
     ({ token, gov } = await deployGovAndToken(
       deployer,
       timelockDelay,
-      proposalThresholdBPS,
+      proposalThreshold,
       quorumVotesBPS,
     ));
   });
 
   it('set parameters correctly', async () => {
-    expect(await gov.proposalThresholdBPS()).to.equal(proposalThresholdBPS);
+    expect(await gov.proposalThreshold()).to.equal(proposalThreshold);
     expect(await gov.quorumVotesBPS()).to.equal(quorumVotesBPS);
   });
 
@@ -74,20 +77,33 @@ describe('NounsDAO#inflationHandling', () => {
 
     await mineBlock();
 
-    // 6.78% of 40 = 2.712, floored to 2
-    expect(await gov.proposalThreshold()).to.equal(2);
+    // always 1
+    expect(await gov.proposalThreshold()).to.equal(1);
     // 11% of 40 = 4.4, floored to 4
     expect(await gov.quorumVotes()).to.equal(4);
   });
 
-  it('rejects if proposing below threshold', async () => {
-    // account0 has 1 token, requires 3
+  it('allow if proposing equals threshold', async () => {
+    // account0 has 1 token, requires 1
     await token.transferFrom(deployer.address, account0.address, 0);
     await mineBlock();
+    const snapshotId = await ethers.provider.send('evm_snapshot', []);
+
+    await propose(account0);
+    const proposal = await gov.proposals(proposalId);
+    expect(proposal.proposalThreshold).to.equal(1);
+    expect(proposal.quorumVotes).to.equal(4);
+
+    await ethers.provider.send('evm_revert', [snapshotId]);
+  });
+
+  it('rejects if proposing below threshold', async () => {
+    // account3 doesn't have a token, requires 1
     await expect(
-      gov.connect(account0).propose(targets, values, signatures, callDatas, 'do nothing'),
+      gov.connect(account3).propose(targets, values, signatures, callDatas, 'do nothing'),
     ).revertedWith('NounsDAO::propose: proposer votes below proposal threshold');
   });
+
   it('allows proposing if above threshold', async () => {
     // account0 has 3 token, requires 3
     await token.transferFrom(deployer.address, account0.address, 1);
@@ -111,7 +127,7 @@ describe('NounsDAO#inflationHandling', () => {
 
   it('sets proposal attributes correctly', async () => {
     const proposal = await gov.proposals(proposalId);
-    expect(proposal.proposalThreshold).to.equal(2);
+    expect(proposal.proposalThreshold).to.equal(1);
     expect(proposal.quorumVotes).to.equal(4);
   });
 
@@ -119,22 +135,15 @@ describe('NounsDAO#inflationHandling', () => {
     // Total Supply = 80
     await setTotalSupply(token, 80);
 
-    // 6.78% of 80 = 5.424, floored to 5
-    expect(await gov.proposalThreshold()).to.equal(5);
+    // always 1
+    expect(await gov.proposalThreshold()).to.equal(1);
     // 11% of 80 = 8.88, floored to 8
     expect(await gov.quorumVotes()).to.equal(8);
   });
 
-  it('rejects proposals that were previously above proposal threshold, but due to increasing supply are now below', async () => {
-    // account1 has 3 tokens, but requires 5 to pass new proposal threshold when totalSupply = 80 and threshold = 5%
-    await expect(
-      gov.connect(account1).propose(targets, values, signatures, callDatas, 'do nothing'),
-    ).revertedWith('NounsDAO::propose: proposer votes below proposal threshold');
-  });
-
   it('does not change previous proposal attributes when total supply changes', async () => {
     const proposal = await gov.proposals(proposalId);
-    expect(proposal.proposalThreshold).to.equal(2);
+    expect(proposal.proposalThreshold).to.equal(1);
     expect(proposal.quorumVotes).to.equal(4);
   });
 

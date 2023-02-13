@@ -24,7 +24,7 @@ contract NounsDAOLogicV2Test is Test, DeployUtils {
     address proposer = address(0x7);
     uint256 votingPeriod = 6000;
     uint256 votingDelay = 1;
-    uint256 proposalThresholdBPS = 200;
+    uint256 proposalThreshold = 1;
 
     event Withdraw(uint256 amount, bool sent);
 
@@ -45,7 +45,7 @@ contract NounsDAOLogicV2Test is Test, DeployUtils {
                     address(daoLogic),
                     votingPeriod,
                     votingDelay,
-                    proposalThresholdBPS,
+                    proposalThreshold,
                     NounsDAOStorageV2.DynamicQuorumParams({
                         minQuorumVotesBPS: 200,
                         maxQuorumVotesBPS: 2000,

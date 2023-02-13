@@ -70,12 +70,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     Math.round(3 * 60 * 24 * (60 / 13)) /* 3 days (13s blocks) */,
     types.int,
   )
-  .addOptionalParam(
-    'proposalThresholdBps',
-    'The proposal threshold (basis points)',
-    100 /* 1% */,
-    types.int,
-  )
+  .addOptionalParam('proposalThreshold', 'The proposal threshold', 1, types.int)
   .addOptionalParam(
     'quorumVotesBps',
     'Votes required for quorum (basis points)',
@@ -189,7 +184,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
           () => deployment.NounsDAOLogicV1.address,
           args.votingPeriod,
           args.votingDelay,
-          args.proposalThresholdBps,
+          args.proposalThreshold,
           args.quorumVotesBps,
         ],
         waitForConfirmation: true,

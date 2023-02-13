@@ -28,7 +28,7 @@ let signers: TestSigners;
 
 const votingDelay = 5;
 const votingPeriod = 5760;
-const proposalThresholdBPs = 1000; // 10%
+const proposalThreshold = 1;
 const MIN_QUORUM_VOTES_BPS = 2000; // 20%
 const MAX_QUORUM_VOTES_BPS = 4000; // 40%
 
@@ -50,7 +50,7 @@ describe('NounsDAOV2#propose', async () => {
       deployer.address,
       votingPeriod,
       votingDelay,
-      proposalThresholdBPs,
+      proposalThreshold,
       {
         minQuorumVotesBPS: MIN_QUORUM_VOTES_BPS,
         maxQuorumVotesBPS: MAX_QUORUM_VOTES_BPS,
