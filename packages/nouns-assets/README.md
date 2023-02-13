@@ -16,7 +16,7 @@ yarn
 import { ImageData } from '@nouns/assets';
 
 const { bgcolors, palette, images } = ImageData;
-const { bodies, accessories, heads, glasses } = images;
+const { bodies, heads, glasses, skills } = images;
 ```
 
 **Get Noun Part & Background Data**
@@ -27,9 +27,9 @@ import { getNounData } from '@nouns/assets';
 const seed = {
   background: 0,
   body: 17,
-  accessory: 41,
   head: 71,
   glasses: 2,
+  skill: 41,
 };
 const { parts, background } = getNounData(seed);
 ```

@@ -284,7 +284,7 @@ contract NounsArt is INounsArt {
      * RLE-encoded images, abi encoding it as a bytes array, and finally compressing it using deflate.
      * @param decompressedLength the size in bytes the images bytes were prior to compression; required input for Inflate.
      * @param imageCount the number of images in this batch; used when searching for images among batches
-     * @dev This function can only be called by the descriptor..
+     * @dev This function can only be called by the descriptor.
      */
     function addHeadsFromPointer(
         address pointer,

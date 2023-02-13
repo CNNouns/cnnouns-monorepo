@@ -377,7 +377,7 @@ describe('NounsAuctionHouse', () => {
       const interval = startTime.sub(origin).toNumber();
 
       await ethers.provider.send('evm_increaseTime', [increaseTime - interval]);
-      await await nounsAuctionHouse.connect(bidderA).settleCurrentAndCreateNewAuction();
+      await nounsAuctionHouse.connect(bidderA).settleCurrentAndCreateNewAuction();
       const auction = await nounsAuctionHouse.auction();
       expect(auction.endTime.sub(auction.startTime)).to.equals(duration);
     });
