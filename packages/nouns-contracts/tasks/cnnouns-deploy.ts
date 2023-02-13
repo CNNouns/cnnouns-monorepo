@@ -25,10 +25,7 @@ const NOUNS_ART_NONCE_OFFSET = 4;
 const AUCTION_HOUSE_PROXY_NONCE_OFFSET = 9;
 const GOVERNOR_N_DELEGATOR_NONCE_OFFSET = 12;
 
-task(
-  'cnnouns-deploy',
-  'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsToken',
-)
+task('cnnouns-deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsToken')
   .addOptionalParam('weth', 'The WETH contract address', undefined, types.string)
   .addOptionalParam('noundersdao', 'The nounders DAO contract address', undefined, types.string)
   .addOptionalParam('vetoer', 'The vetoer address', undefined, types.string)
@@ -103,9 +100,7 @@ task(
       args.noundersdao = deployer.address;
     }
     if (!args.vetoer) {
-      console.log(
-        `Vetoer address not provided. Setting to deployer (${deployer.address})...`,
-      );
+      console.log(`Vetoer address not provided. Setting to deployer (${deployer.address})...`);
       args.vetoer = deployer.address;
     }
 
@@ -224,9 +219,11 @@ task(
     };
 
     for (const [name, contract] of Object.entries(contracts)) {
-      const factory = (await ethers.getContractFactory(name, {
-        libraries: contract?.libraries?.(),
-      })).connect(deployer);
+      const factory = (
+        await ethers.getContractFactory(name, {
+          libraries: contract?.libraries?.(),
+        })
+      ).connect(deployer);
 
       const deployedContract = await factory.deploy(
         ...(contract.args?.map(a => (typeof a === 'function' ? a() : a)) ?? []),
@@ -246,8 +243,14 @@ task(
 
       contract.validateDeployment?.();
 
-      const gasFee = deployedContract?.deployTransaction.maxFeePerGas?.mul(deployedContract?.deployTransaction?.gasLimit);
-      console.log(`${name} contract deployed to ${deployedContract.address} from ${deployedContract.deployTransaction.from} with ${ethers.utils.formatUnits(gasFee ?? 0, 'ether')} ETH`);
+      const gasFee = deployedContract?.deployTransaction.maxFeePerGas?.mul(
+        deployedContract?.deployTransaction?.gasLimit,
+      );
+      console.log(
+        `${name} contract deployed to ${deployedContract.address} from ${
+          deployedContract.deployTransaction.from
+        } with ${ethers.utils.formatUnits(gasFee ?? 0, 'ether')} ETH`,
+      );
     }
 
     return deployment;

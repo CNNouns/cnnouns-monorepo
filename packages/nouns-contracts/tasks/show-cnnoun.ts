@@ -20,12 +20,7 @@ task('show-cnnoun', 'Show a Noun')
     '0x00Ad9422fF4A060858f184Afdf7576111076ccDF',
     types.string,
   )
-  .addOptionalParam(
-    'tokenId',
-    '`NounsToken` id',
-    0,
-    types.int,
-  )
+  .addOptionalParam('tokenId', '`NounsToken` id', 0, types.int)
   .setAction(async ({ nounsToken, nftDescriptor, nounsDescriptor, tokenId }, { ethers }) => {
     console.log('nounsToken', nounsToken);
     console.log('nftDescriptor', nftDescriptor);
@@ -42,7 +37,7 @@ task('show-cnnoun', 'Show a Noun')
     console.log('owner', owner);
 
     const seeds = await nftContract.seeds(tokenId);
-    console.log("seeds", seeds);
+    console.log('seeds', seeds);
 
     const descriptorFactory = await ethers.getContractFactory('NounsDescriptorV2', {
       libraries: {
@@ -52,22 +47,22 @@ task('show-cnnoun', 'Show a Noun')
     const descriptorContract = descriptorFactory.connect(signer).attach(nounsDescriptor);
 
     const art = await descriptorContract.art();
-    console.log("art", art);
+    console.log('art', art);
 
     const extra = { gasLimit: 200_000_000 };
     const background = await descriptorContract.backgrounds(seeds.background);
-    console.log("background", background);
+    console.log('background', background);
     const head = await descriptorContract.heads(seeds.head, extra);
-    console.log("head", head);
+    console.log('head', head);
     const body = await descriptorContract.bodies(seeds.body, extra);
-    console.log("body", body);
+    console.log('body', body);
     const glasses = await descriptorContract.glasses(seeds.glasses, extra);
-    console.log("glasses", glasses);
+    console.log('glasses', glasses);
     const skill = await descriptorContract.skills(seeds.skill, extra);
-    console.log("skill", skill);
+    console.log('skill', skill);
 
     const svg = await descriptorContract.generateSVGImage(seeds, extra);
-    console.log("svg", `data:image/svg+xml;base64,${svg}`);
+    console.log('svg', `data:image/svg+xml;base64,${svg}`);
 
     const tokenURI = await nftContract.tokenURI(tokenId, extra);
     console.log('tokenURI', tokenURI);
