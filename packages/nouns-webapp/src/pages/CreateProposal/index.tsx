@@ -208,10 +208,6 @@ const CreateProposalPage = () => {
           </h3>
         </div>
         <Alert variant="secondary" className={classes.voterIneligibleAlert}>
-          <b>
-            <Trans>Tip</Trans>
-          </b>
-          :{' '}
           <Trans>
             Add one or more proposal actions and describe your proposal for the community. The
             proposal cannot be modified after submission, so please verify all information before

@@ -56,7 +56,7 @@ const NounHoverCard: React.FC<NounHoverCardProps> = props => {
           <StandaloneNounCircular nounId={BigNumber.from(nounId)} />
         </div>
         <div>
-          <h1>Noun {nounId}</h1>
+          <h1>CN Noun {nounId}</h1>
         </div>
       </div>
 

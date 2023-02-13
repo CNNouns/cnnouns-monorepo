@@ -8,6 +8,7 @@ import clsx from 'clsx';
 import { useTreasuryBalance, useTreasuryUSDValue } from '../../hooks/useTreasuryBalance';
 import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
+import { NoTrans } from '../../i18n/NoTrans';
 
 const GovernancePage = () => {
   const { data: proposals } = useAllProposals();
@@ -17,10 +18,6 @@ const GovernancePage = () => {
   const treasuryBalance = useTreasuryBalance();
   const treasuryBalanceUSD = useTreasuryUSDValue();
 
-  // Note: We have to extract this copy out of the <span> otherwise the Lingui macro gets confused
-  const nounSingular = <Trans>Noun</Trans>;
-  const nounPlural = <Trans>Nouns</Trans>;
-
   return (
     <Section fullWidth={false} className={classes.section}>
       <Col lg={10} className={classes.wrapper}>
@@ -29,18 +26,11 @@ const GovernancePage = () => {
             <Trans>Governance</Trans>
           </span>
           <h1>
-            <Trans>Nouns DAO</Trans>
+            <Trans>CN Nouns DAO</Trans>
           </h1>
         </Row>
         <p className={classes.subheading}>
-          <Trans>
-            Nouns govern <span className={classes.boldText}>Nouns DAO</span>. Nouns can vote on
-            proposals or delegate their vote to a third party. A minimum of{' '}
-            <span className={classes.boldText}>
-              {nounsRequired} {threshold === 0 ? nounSingular : nounPlural}
-            </span>{' '}
-            is required to submit proposals.
-          </Trans>
+          <NoTrans><span className={classes.boldText}>CN Nouns DAO</span>では提案に対して投票を行えます。また、提案の提出には最低でも<span className={classes.boldText}>{nounsRequired}体</span>のCN Nounが必要です。</NoTrans>
         </p>
 
         <Row className={classes.treasuryInfoCard}>
@@ -71,9 +61,9 @@ const GovernancePage = () => {
           </Col>
           <Col className={classes.treasuryInfoText}>
             <Trans>
-              This treasury exists for <span className={classes.boldText}>Nouns DAO</span>{' '}
+              This treasury exists for <span className={classes.boldText}>CN Nouns DAO</span>{' '}
               participants to allocate resources for the long-term growth and prosperity of the
-              Nouns project.
+              CN Nouns project.
             </Trans>
           </Col>
         </Row>

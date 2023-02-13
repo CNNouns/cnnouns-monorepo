@@ -7,7 +7,6 @@ import { nounPath } from '../../utils/history';
 import useOnDisplayAuction from '../../wrappers/onDisplayAuction';
 import { useEffect } from 'react';
 import ProfileActivityFeed from '../../components/ProfileActivityFeed';
-import NounsIntroSection from '../../components/NounsIntroSection';
 
 interface AuctionPageProps {
   initialAuctionId?: number;
@@ -51,7 +50,9 @@ const AuctionPage: React.FC<AuctionPageProps> = props => {
       <Auction auction={onDisplayAuction} />
       {onDisplayAuctionNounId !== undefined && onDisplayAuctionNounId !== lastAuctionNounId ? (
         <ProfileActivityFeed nounId={onDisplayAuctionNounId} />
-      ) : (<NounsIntroSection />)}
+      ) : (
+        <></>
+      )}
       <Documentation
         backgroundColor={
           onDisplayAuctionNounId === undefined || onDisplayAuctionNounId === lastAuctionNounId ? backgroundColor : undefined

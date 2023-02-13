@@ -34,6 +34,7 @@ import {
 } from '../../wrappers/subgraph';
 import { getNounVotes } from '../../utils/getNounsVotes';
 import { Trans } from '@lingui/macro';
+import { NoTrans } from '../../i18n/NoTrans';
 import { i18n } from '@lingui/core';
 import { ReactNode } from 'react-markdown/lib/react-markdown';
 import { AVERAGE_BLOCK_TIME_IN_SECS } from '../../utils/constants';
@@ -57,7 +58,7 @@ const VotePage = ({
   const [showVoteModal, setShowVoteModal] = useState<boolean>(false);
   const [showDynamicQuorumInfoModal, setShowDynamicQuorumInfoModal] = useState<boolean>(false);
   // Toggle between Noun centric view and delegate view
-  const [isDelegateView, setIsDelegateView] = useState(false);
+  const [isDelegateView] = useState(false);
 
   const [isQueuePending, setQueuePending] = useState<boolean>(false);
   const [isExecutePending, setExecutePending] = useState<boolean>(false);
@@ -156,7 +157,6 @@ const VotePage = ({
     return endDate;
   };
 
-  const moveStateButtonAction = hasSucceeded ? <Trans>Queue</Trans> : <Trans>Execute</Trans>;
   const moveStateAction = (() => {
     if (hasSucceeded) {
       return () => {
@@ -172,7 +172,6 @@ const VotePage = ({
     };
   })();
 
-  const destructiveStateButtonAction = isCancellable ? <Trans>Cancel</Trans> : '';
   const destructiveStateAction = (() => {
     if (isCancellable) {
       return () => {
@@ -251,7 +250,7 @@ const VotePage = ({
   );
 
   useEffect(
-    () => onTransactionStateChange(cancelProposalState, 'Proposal Canceled!', setCancelPending),
+    () => onTransactionStateChange(cancelProposalState, '提案をキャンセルしました！', setCancelPending),
     [cancelProposalState, onTransactionStateChange, setModal],
   );
 
@@ -353,7 +352,11 @@ const VotePage = ({
                   {isQueuePending || isExecutePending ? (
                     <Spinner animation="border" />
                   ) : (
-                    <Trans>{moveStateButtonAction} Proposal ⌐◧-◧</Trans>
+                    hasSucceeded ? (
+                      <NoTrans>提案を実行待ちにする ⌐◧-◧</NoTrans>
+                    ) : (
+                      <NoTrans>提案を実行する ⌐◧-◧</NoTrans>
+                    )
                   )}
                 </Button>
               )}
@@ -368,7 +371,7 @@ const VotePage = ({
                   {isCancelPending ? (
                     <Spinner animation="border" />
                   ) : (
-                    <Trans>{destructiveStateButtonAction} Proposal ⌐◧-◧</Trans>
+                    <NoTrans>提案をキャンセルする ⌐◧-◧</NoTrans>
                   )}
                 </Button>
               )}
@@ -376,16 +379,6 @@ const VotePage = ({
           </Row>
         )}
 
-        <p
-          onClick={() => setIsDelegateView(!isDelegateView)}
-          className={classes.toggleDelegateVoteView}
-        >
-          {isDelegateView ? (
-            <Trans>Switch to Noun view</Trans>
-          ) : (
-            <Trans>Switch to delegate view</Trans>
-          )}
-        </p>
         <Row>
           <VoteCard
             proposal={proposal}
@@ -417,7 +410,7 @@ const VotePage = ({
         <Row>
           <Col xl={4} lg={12}>
             <Card className={classes.voteInfoCard}>
-              <Card.Body className="p-2">
+              <Card.Body className="p-2 mb-3">
                 <div className={classes.voteMetadataRow}>
                   <div className={classes.voteMetadataRowTitle}>
                     <h1>
@@ -437,11 +430,8 @@ const VotePage = ({
                     data-for="view-dq-info"
                     data-tip="View Dynamic Quorum Info"
                     onClick={() => setShowDynamicQuorumInfoModal(true && isV2Prop)}
-                    className={clsx(classes.thresholdInfo, isV2Prop ? classes.cursorPointer : '')}
+                    className={`${clsx(classes.thresholdInfo, isV2Prop ? classes.cursorPointer : '')} mt-2`}
                   >
-                    <span>
-                      {isV2Prop ? <Trans>Current Threshold</Trans> : <Trans>Threshold</Trans>}
-                    </span>
                     <h3>
                       <Trans>
                         {isV2Prop ? i18n.number(currentQuorum ?? 0) : proposal.quorumVotes} votes
@@ -485,7 +475,7 @@ const VotePage = ({
               <Card.Body className="p-2">
                 <div className={classes.voteMetadataRow}>
                   <div className={classes.voteMetadataRowTitle}>
-                    <h1>Snapshot</h1>
+                    <h1><Trans>Snapshot</Trans></h1>
                   </div>
                   <div className={classes.snapshotBlock}>
                     <span>

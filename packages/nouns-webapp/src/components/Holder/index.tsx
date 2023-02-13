@@ -9,6 +9,9 @@ import { nounQuery } from '../../wrappers/subgraph';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
 import React from 'react';
 import Tooltip from '../Tooltip';
+import { useShortAddress } from '../../utils/addressAndENSDisplayUtils';
+import { useNoundersDAO } from '../../wrappers/nounToken';
+
 
 interface HolderProps {
   nounId: number;
@@ -19,6 +22,7 @@ const Holder: React.FC<HolderProps> = props => {
   const { nounId, isNounders } = props;
 
   const isCool = useAppSelector(state => state.application.isCoolBackground);
+  const nounderNounContent = useShortAddress(useNoundersDAO() ?? '');
 
   const { loading, error, data } = useQuery(nounQuery(nounId.toString()));
 
@@ -27,7 +31,7 @@ const Holder: React.FC<HolderProps> = props => {
   } else if (error) {
     return (
       <div>
-        <Trans>Failed to fetch Noun info</Trans>
+        <Trans>Failed to fetch CN Noun info</Trans>
       </div>
     );
   }
@@ -52,8 +56,6 @@ const Holder: React.FC<HolderProps> = props => {
       </Tooltip>
     </a>
   );
-
-  const nounderNounContent = 'nounders.eth';
 
   return (
     <>

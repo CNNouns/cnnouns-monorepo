@@ -16,7 +16,7 @@ const ProposalEditor = ({
   onTitleInput: (title: string) => void;
   onBodyInput: (body: string) => void;
 }) => {
-  const bodyPlaceholder = `## Summary\n\nInsert your summary here\n\n## Methodology\n\nInsert your methodology here\n\n## Conclusion\n\nInsert your conclusion here`;
+  const bodyPlaceholder = `## 概要\n\n（ここに提案の要約を記述してください）\n\n## 実現方法\n\n（ここに実現方法を記述してください）\n\n## 結論\n\n（ここに結論を記述してください）`;
   const [proposalText, setProposalText] = useState('');
 
   const onBodyChange = (body: string) => {
@@ -34,7 +34,7 @@ const ProposalEditor = ({
           className={classes.titleInput}
           value={title}
           onChange={e => onTitleInput(e.target.value)}
-          placeholder="Proposal Title"
+          placeholder="提案タイトル"
         />
         <hr className={classes.divider} />
         <FormControl
