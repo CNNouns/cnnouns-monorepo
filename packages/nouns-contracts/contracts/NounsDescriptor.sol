@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title The Nouns NFT descriptor
+/// @title The CNNouns NFT descriptor
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -16,6 +16,13 @@
  *********************************/
 
 pragma solidity ^0.8.6;
+
+// LICENSE
+// This file is a modified version of nounsDAO's NounsDescriptor.sol:
+// https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/NounsDescriptor.sol
+//
+// NounsDescriptor.sol licensed under the GPL-3.0 license.
+// With modifications by CNNouns DAO.
 
 import { Ownable } from '@openzeppelin/contracts/access/Ownable.sol';
 import { Strings } from '@openzeppelin/contracts/utils/Strings.sol';
@@ -49,14 +56,14 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     // Noun Bodies (Custom RLE)
     bytes[] public override bodies;
 
-    // Noun Accessories (Custom RLE)
-    bytes[] public override accessories;
-
     // Noun Heads (Custom RLE)
     bytes[] public override heads;
 
     // Noun Glasses (Custom RLE)
     bytes[] public override glasses;
+
+    // Noun Skills (Custom RLE)
+    bytes[] public override skills;
 
     /**
      * @notice Require that the parts have not been locked.
@@ -81,13 +88,6 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Get the number of available Noun `accessories`.
-     */
-    function accessoryCount() external view override returns (uint256) {
-        return accessories.length;
-    }
-
-    /**
      * @notice Get the number of available Noun `heads`.
      */
     function headCount() external view override returns (uint256) {
@@ -99,6 +99,13 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
      */
     function glassesCount() external view override returns (uint256) {
         return glasses.length;
+    }
+
+    /**
+     * @notice Get the number of available Noun `skills`.
+     */
+    function skillCount() external view override returns (uint256) {
+        return skills.length;
     }
 
     /**
@@ -133,16 +140,6 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Batch add Noun accessories.
-     * @dev This function can only be called by the owner when not locked.
-     */
-    function addManyAccessories(bytes[] calldata _accessories) external override onlyOwner whenPartsNotLocked {
-        for (uint256 i = 0; i < _accessories.length; i++) {
-            _addAccessory(_accessories[i]);
-        }
-    }
-
-    /**
      * @notice Batch add Noun heads.
      * @dev This function can only be called by the owner when not locked.
      */
@@ -161,6 +158,17 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
             _addGlasses(_glasses[i]);
         }
     }
+
+    /**
+     * @notice Batch add Noun skills.
+     * @dev This function can only be called by the owner when not locked.
+     */
+    function addManySkills(bytes[] calldata _skills) external override onlyOwner whenPartsNotLocked {
+        for (uint256 i = 0; i < _skills.length; i++) {
+            _addSkill(_skills[i]);
+        }
+    }
+
 
     /**
      * @notice Add a single color to a color palette.
@@ -188,14 +196,6 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Add a Noun accessory.
-     * @dev This function can only be called by the owner when not locked.
-     */
-    function addAccessory(bytes calldata _accessory) external override onlyOwner whenPartsNotLocked {
-        _addAccessory(_accessory);
-    }
-
-    /**
      * @notice Add a Noun head.
      * @dev This function can only be called by the owner when not locked.
      */
@@ -209,6 +209,14 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
      */
     function addGlasses(bytes calldata _glasses) external override onlyOwner whenPartsNotLocked {
         _addGlasses(_glasses);
+    }
+
+    /**
+     * @notice Add a Noun skill.
+     * @dev This function can only be called by the owner when not locked.
+     */
+    function addSkill(bytes calldata _skill) external override onlyOwner whenPartsNotLocked {
+        _addSkill(_skill);
     }
 
     /**
@@ -246,7 +254,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Given a token ID and seed, construct a token URI for an official Nouns DAO noun.
+     * @notice Given a token ID and seed, construct a token URI for an official CNNouns DAO noun.
      * @dev The returned value may be a base64 encoded data URI or an API URL.
      */
     function tokenURI(uint256 tokenId, INounsSeeder.Seed memory seed) external view override returns (string memory) {
@@ -257,12 +265,12 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Given a token ID and seed, construct a base64 encoded data URI for an official Nouns DAO noun.
+     * @notice Given a token ID and seed, construct a base64 encoded data URI for an official CNNouns DAO noun.
      */
     function dataURI(uint256 tokenId, INounsSeeder.Seed memory seed) public view override returns (string memory) {
         string memory nounId = tokenId.toString();
-        string memory name = string(abi.encodePacked('Noun ', nounId));
-        string memory description = string(abi.encodePacked('Noun ', nounId, ' is a member of the Nouns DAO'));
+        string memory name = string(abi.encodePacked('CNNoun ', nounId));
+        string memory description = string(abi.encodePacked('CNNoun ', nounId, ' is a member of the CNNouns DAO'));
 
         return genericDataURI(name, description, seed);
     }
@@ -317,13 +325,6 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Add a Noun accessory.
-     */
-    function _addAccessory(bytes calldata _accessory) internal {
-        accessories.push(_accessory);
-    }
-
-    /**
      * @notice Add a Noun head.
      */
     function _addHead(bytes calldata _head) internal {
@@ -338,14 +339,21 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
+     * @notice Add a Noun skill.
+     */
+    function _addSkill(bytes calldata _skill) internal {
+        skills.push(_skill);
+    }
+
+    /**
      * @notice Get all Noun parts for the passed `seed`.
      */
     function _getPartsForSeed(INounsSeeder.Seed memory seed) internal view returns (bytes[] memory) {
         bytes[] memory _parts = new bytes[](4);
         _parts[0] = bodies[seed.body];
-        _parts[1] = accessories[seed.accessory];
-        _parts[2] = heads[seed.head];
-        _parts[3] = glasses[seed.glasses];
+        _parts[1] = heads[seed.head];
+        _parts[2] = glasses[seed.glasses];
+        _parts[3] = skills[seed.skill];
         return _parts;
     }
 }

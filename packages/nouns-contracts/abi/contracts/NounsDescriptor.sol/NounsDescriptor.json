@@ -53,51 +53,6 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "accessories",
-    "outputs": [
-      {
-        "internalType": "bytes",
-        "name": "",
-        "type": "bytes"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "accessoryCount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes",
-        "name": "_accessory",
-        "type": "bytes"
-      }
-    ],
-    "name": "addAccessory",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "string",
         "name": "_background",
         "type": "string"
@@ -168,19 +123,6 @@
   {
     "inputs": [
       {
-        "internalType": "bytes[]",
-        "name": "_accessories",
-        "type": "bytes[]"
-      }
-    ],
-    "name": "addManyAccessories",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "string[]",
         "name": "_backgrounds",
         "type": "string[]"
@@ -244,6 +186,32 @@
       }
     ],
     "name": "addManyHeads",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes[]",
+        "name": "_skills",
+        "type": "bytes[]"
+      }
+    ],
+    "name": "addManySkills",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_skill",
+        "type": "bytes"
+      }
+    ],
+    "name": "addSkill",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -359,17 +327,17 @@
           },
           {
             "internalType": "uint48",
-            "name": "accessory",
-            "type": "uint48"
-          },
-          {
-            "internalType": "uint48",
             "name": "head",
             "type": "uint48"
           },
           {
             "internalType": "uint48",
             "name": "glasses",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "skill",
             "type": "uint48"
           }
         ],
@@ -405,17 +373,17 @@
           },
           {
             "internalType": "uint48",
-            "name": "accessory",
-            "type": "uint48"
-          },
-          {
-            "internalType": "uint48",
             "name": "head",
             "type": "uint48"
           },
           {
             "internalType": "uint48",
             "name": "glasses",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "skill",
             "type": "uint48"
           }
         ],
@@ -461,17 +429,17 @@
           },
           {
             "internalType": "uint48",
-            "name": "accessory",
-            "type": "uint48"
-          },
-          {
-            "internalType": "uint48",
             "name": "head",
             "type": "uint48"
           },
           {
             "internalType": "uint48",
             "name": "glasses",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "skill",
             "type": "uint48"
           }
         ],
@@ -634,6 +602,38 @@
   },
   {
     "inputs": [],
+    "name": "skillCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "skills",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "toggleDataURIEnabled",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -660,17 +660,17 @@
           },
           {
             "internalType": "uint48",
-            "name": "accessory",
-            "type": "uint48"
-          },
-          {
-            "internalType": "uint48",
             "name": "head",
             "type": "uint48"
           },
           {
             "internalType": "uint48",
             "name": "glasses",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "skill",
             "type": "uint48"
           }
         ],

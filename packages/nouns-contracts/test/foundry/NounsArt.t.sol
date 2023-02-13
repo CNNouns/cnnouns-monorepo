@@ -16,7 +16,7 @@ contract NounsArtTest is Test, DescriptorHelpers {
 
     event BodiesAdded(uint16 count);
 
-    event AccessoriesAdded(uint16 count);
+    event SkillsAdded(uint16 count);
 
     event HeadsAdded(uint16 count);
 
@@ -345,87 +345,87 @@ contract NounsArtTest is Test, DescriptorHelpers {
     }
 
     ///
-    /// addAccessories, addAccessoriesFromPointer, accessories, getAccessoriesTrait
+    /// addSkills, addSkillsFromPointer, skills, getSkillsTrait
     ///
 
-    function testAccessoriesRevertsGivenNoArt() public {
+    function testSkillsRevertsGivenNoArt() public {
         vm.expectRevert(INounsArt.ImageNotFound.selector);
-        art.accessories(0);
+        art.skills(0);
     }
 
-    function testAddAccessoriesRevertsIfSenderNotDescriptor() public {
+    function testAddSkillsRevertsIfSenderNotDescriptor() public {
         vm.expectRevert(INounsArt.SenderIsNotDescriptor.selector);
-        art.addAccessories(hex'123456', uint80(12), uint16(1));
+        art.addSkills(hex'123456', uint80(12), uint16(1));
     }
 
-    function testCannotAddAccessoriesWithNoBytes() public {
+    function testCannotAddSkillsWithNoBytes() public {
         vm.prank(descriptor);
         vm.expectRevert(INounsArt.EmptyBytes.selector);
-        art.addAccessories(new bytes(0), 0, 0);
+        art.addSkills(new bytes(0), 0, 0);
     }
 
-    function testCannotAddAccessoriesWithZeroDecompressedLength() public {
+    function testCannotAddSkillsWithZeroDecompressedLength() public {
         vm.prank(descriptor);
         vm.expectRevert(INounsArt.BadDecompressedLength.selector);
-        art.addAccessories(FIRST_TWO_IMAGES_COMPRESSED, 0, 0);
+        art.addSkills(FIRST_TWO_IMAGES_COMPRESSED, 0, 0);
     }
 
-    function testCannotAddAccessoriesWithZeroImageCount() public {
+    function testCannotAddSkillsWithZeroImageCount() public {
         vm.prank(descriptor);
         vm.expectRevert(INounsArt.BadImageCount.selector);
-        art.addAccessories(FIRST_TWO_IMAGES_COMPRESSED, FIRST_TWO_IMAGES_DEFLATED_LENGTH, 0);
+        art.addSkills(FIRST_TWO_IMAGES_COMPRESSED, FIRST_TWO_IMAGES_DEFLATED_LENGTH, 0);
     }
 
-    function testAddAccessoriesWorksWithMultiplePages() public {
-        assertEq(art.getAccessoriesTrait().storedImagesCount, 0);
+    function testAddSkillsWorksWithMultiplePages() public {
+        assertEq(art.getSkillsTrait().storedImagesCount, 0);
         vm.expectEmit(true, true, true, true);
-        emit AccessoriesAdded(2);
+        emit SkillsAdded(2);
         vm.expectEmit(true, true, true, true);
-        emit AccessoriesAdded(2);
+        emit SkillsAdded(2);
 
         vm.startPrank(descriptor);
-        art.addAccessories(FIRST_TWO_IMAGES_COMPRESSED, FIRST_TWO_IMAGES_DEFLATED_LENGTH, uint16(2));
-        art.addAccessories(NEXT_TWO_IMAGES_COMPRESSED, NEXT_TWO_IMAGES_DEFLATED_LENGTH, uint16(2));
+        art.addSkills(FIRST_TWO_IMAGES_COMPRESSED, FIRST_TWO_IMAGES_DEFLATED_LENGTH, uint16(2));
+        art.addSkills(NEXT_TWO_IMAGES_COMPRESSED, NEXT_TWO_IMAGES_DEFLATED_LENGTH, uint16(2));
         vm.stopPrank();
 
-        _assertAccessoriesStoredOK();
+        _assertSkillsStoredOK();
     }
 
-    function testCannotAddAccessoriesFromPointerWithZeroDecompressedLength() public {
+    function testCannotAddSkillsFromPointerWithZeroDecompressedLength() public {
         address pointer = SSTORE2.write(FIRST_TWO_IMAGES_COMPRESSED);
         vm.prank(descriptor);
         vm.expectRevert(INounsArt.BadDecompressedLength.selector);
-        art.addAccessoriesFromPointer(pointer, 0, 0);
+        art.addSkillsFromPointer(pointer, 0, 0);
     }
 
-    function testCannotAddAccessoriesFromPointerWithZeroImageCount() public {
+    function testCannotAddSkillsFromPointerWithZeroImageCount() public {
         address pointer = SSTORE2.write(FIRST_TWO_IMAGES_COMPRESSED);
         vm.prank(descriptor);
         vm.expectRevert(INounsArt.BadImageCount.selector);
-        art.addAccessoriesFromPointer(pointer, FIRST_TWO_IMAGES_DEFLATED_LENGTH, 0);
+        art.addSkillsFromPointer(pointer, FIRST_TWO_IMAGES_DEFLATED_LENGTH, 0);
     }
 
-    function testAddAccessoriesFromPointerWorksWithMultiplePages() public {
-        assertEq(art.getAccessoriesTrait().storedImagesCount, 0);
+    function testAddSkillsFromPointerWorksWithMultiplePages() public {
+        assertEq(art.getSkillsTrait().storedImagesCount, 0);
         vm.expectEmit(true, true, true, true);
-        emit AccessoriesAdded(2);
+        emit SkillsAdded(2);
         vm.expectEmit(true, true, true, true);
-        emit AccessoriesAdded(2);
+        emit SkillsAdded(2);
 
         vm.startPrank(descriptor);
-        art.addAccessoriesFromPointer(
+        art.addSkillsFromPointer(
             SSTORE2.write(FIRST_TWO_IMAGES_COMPRESSED),
             FIRST_TWO_IMAGES_DEFLATED_LENGTH,
             uint16(2)
         );
-        art.addAccessoriesFromPointer(
+        art.addSkillsFromPointer(
             SSTORE2.write(NEXT_TWO_IMAGES_COMPRESSED),
             NEXT_TWO_IMAGES_DEFLATED_LENGTH,
             uint16(2)
         );
         vm.stopPrank();
 
-        _assertAccessoriesStoredOK();
+        _assertSkillsStoredOK();
     }
 
     ///
@@ -626,16 +626,16 @@ contract NounsArtTest is Test, DescriptorHelpers {
         assertEq(art.bodies(3), IMAGE_3);
     }
 
-    function _assertAccessoriesStoredOK() internal {
-        assertEq(art.getAccessoriesTrait().storedImagesCount, 4);
+    function _assertSkillsStoredOK() internal {
+        assertEq(art.getSkillsTrait().storedImagesCount, 4);
 
         // These hard-coded values are copied from image-data.json -> images -> BODIES -> the first items
-        assertEq(art.accessories(0), IMAGE_0);
-        assertEq(art.accessories(1), IMAGE_1);
+        assertEq(art.skills(0), IMAGE_0);
+        assertEq(art.skills(1), IMAGE_1);
 
         // These hard-coded values are copied from image-data.json -> images -> HEADS -> the first items
-        assertEq(art.accessories(2), IMAGE_2);
-        assertEq(art.accessories(3), IMAGE_3);
+        assertEq(art.skills(2), IMAGE_2);
+        assertEq(art.skills(3), IMAGE_3);
     }
 
     function _assertHeadsStoredOK() internal {

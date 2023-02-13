@@ -43,7 +43,7 @@ task(
       }
 
       if (ImageData.images) {
-        const { bodies, accessories, heads, glasses } = ImageData.images;
+        const { bodies, heads, glasses, skills } = ImageData.images;
 
         if (bodies) {
           const bodiesPage = dataToDescriptorInput(
@@ -93,21 +93,21 @@ task(
           );
         }
 
-        if (accessories) {
-          const accessoriesPage = dataToDescriptorInput(
-            (accessories as [{ data: string }]).map(({ data }) => data),
+        if (skills) {
+          const skillsPage = dataToDescriptorInput(
+            (skills as [{ data: string }]).map(({ data }) => data),
           );
 
           targets.push(nounsDescriptor);
           values.push(0);
-          signatures.push('addAccessories(bytes,uint80,uint16)');
+          signatures.push('addSkills(bytes,uint80,uint16)');
           calldatas.push(
             ethers.utils.defaultAbiCoder.encode(
               ['bytes', 'uint80', 'uint16'],
               [
-                accessoriesPage.encodedCompressed,
-                accessoriesPage.originalLength,
-                accessoriesPage.itemCount,
+                skillsPage.encodedCompressed,
+                skillsPage.originalLength,
+                skillsPage.itemCount,
               ],
             ),
           );

@@ -2,6 +2,13 @@
 
 pragma solidity ^0.8.15;
 
+// LICENSE
+// This file is a modified version of nounsDAO's NounsTokenHarness.sol:
+// https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/test/NounsTokenHarness.sol
+//
+// NounsTokenHarness.sol licensed under the GPL-3.0 license.
+// With modifications by CNNouns DAO.
+
 import { NounsToken } from '../NounsToken.sol';
 import { INounsDescriptorMinimal } from '../interfaces/INounsDescriptorMinimal.sol';
 import { INounsSeeder } from '../interfaces/INounsSeeder.sol';
@@ -32,16 +39,16 @@ contract NounsTokenHarness is NounsToken {
         address to,
         uint48 background,
         uint48 body,
-        uint48 accessory,
         uint48 head,
-        uint48 glasses
+        uint48 glasses,
+        uint48 skill
     ) public {
         seeds[currentNounId] = INounsSeeder.Seed({
             background: background,
             body: body,
-            accessory: accessory,
             head: head,
-            glasses: glasses
+            glasses: glasses,
+            skill: skill
         });
 
         _mint(owner(), to, currentNounId++);

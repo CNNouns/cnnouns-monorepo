@@ -17,6 +17,13 @@
 
 pragma solidity ^0.8.6;
 
+// LICENSE
+// This file is a modified version of nounsDAO's INounsDescriptorV2.sol:
+// https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/interfaces/INounsDescriptorV2.sol
+//
+// INounsDescriptorV2.sol licensed under the GPL-3.0 license.
+// With modifications by CNNouns DAO.
+
 import { INounsSeeder } from './INounsSeeder.sol';
 import { ISVGRenderer } from './ISVGRenderer.sol';
 import { INounsArt } from './INounsArt.sol';
@@ -49,21 +56,21 @@ interface INounsDescriptorV2 is INounsDescriptorMinimal {
 
     function bodies(uint256 index) external view returns (bytes memory);
 
-    function accessories(uint256 index) external view returns (bytes memory);
-
     function heads(uint256 index) external view returns (bytes memory);
 
     function glasses(uint256 index) external view returns (bytes memory);
+
+    function skills(uint256 index) external view returns (bytes memory);
 
     function backgroundCount() external view override returns (uint256);
 
     function bodyCount() external view override returns (uint256);
 
-    function accessoryCount() external view override returns (uint256);
-
     function headCount() external view override returns (uint256);
 
     function glassesCount() external view override returns (uint256);
+
+    function skillCount() external view override returns (uint256);
 
     function addManyBackgrounds(string[] calldata backgrounds) external;
 
@@ -72,12 +79,6 @@ interface INounsDescriptorV2 is INounsDescriptorMinimal {
     function setPalette(uint8 paletteIndex, bytes calldata palette) external;
 
     function addBodies(
-        bytes calldata encodedCompressed,
-        uint80 decompressedLength,
-        uint16 imageCount
-    ) external;
-
-    function addAccessories(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
@@ -95,15 +96,15 @@ interface INounsDescriptorV2 is INounsDescriptorMinimal {
         uint16 imageCount
     ) external;
 
-    function setPalettePointer(uint8 paletteIndex, address pointer) external;
-
-    function addBodiesFromPointer(
-        address pointer,
+    function addSkills(
+        bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
     ) external;
 
-    function addAccessoriesFromPointer(
+    function setPalettePointer(uint8 paletteIndex, address pointer) external;
+
+    function addBodiesFromPointer(
         address pointer,
         uint80 decompressedLength,
         uint16 imageCount
@@ -116,6 +117,12 @@ interface INounsDescriptorV2 is INounsDescriptorMinimal {
     ) external;
 
     function addGlassesFromPointer(
+        address pointer,
+        uint80 decompressedLength,
+        uint16 imageCount
+    ) external;
+
+    function addSkillsFromPointer(
         address pointer,
         uint80 decompressedLength,
         uint16 imageCount

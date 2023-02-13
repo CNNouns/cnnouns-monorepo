@@ -19,17 +19,17 @@ abstract contract DescriptorHelpers is Test, Constants {
             string[] memory bgcolors,
             string[] memory palette,
             bytes[] memory bodies,
-            bytes[] memory accessories,
             bytes[] memory heads,
-            bytes[] memory glasses
+            bytes[] memory glasses,
+            bytes[] memory skills
         ) = abi.decode(content, (string[], string[], bytes[], bytes[], bytes[], bytes[]));
 
         descriptor.addManyBackgrounds(bgcolors);
         descriptor.addManyColorsToPalette(0, palette);
         descriptor.addManyBodies(bodies);
-        descriptor.addManyAccessories(accessories);
         descriptor.addManyHeads(heads);
         descriptor.addManyGlasses(glasses);
+        descriptor.addManySkills(skills);
     }
 
     function _populateDescriptorV2(NounsDescriptorV2 descriptor) internal {
@@ -53,17 +53,18 @@ abstract contract DescriptorHelpers is Test, Constants {
         );
         descriptor.addHeads(heads, headsLength, headsCount);
 
-        (bytes memory accessories, uint80 accessoriesLength, uint16 accessoriesCount) = abi.decode(
-            readFile('./test/foundry/files/descriptor_v2/accessoriesPage.abi'),
-            (bytes, uint80, uint16)
-        );
-        descriptor.addAccessories(accessories, accessoriesLength, accessoriesCount);
-
         (bytes memory glasses, uint80 glassesLength, uint16 glassesCount) = abi.decode(
             readFile('./test/foundry/files/descriptor_v2/glassesPage.abi'),
             (bytes, uint80, uint16)
         );
         descriptor.addGlasses(glasses, glassesLength, glassesCount);
+
+        (bytes memory skills, uint80 skillsLength, uint16 skillsCount) = abi.decode(
+            readFile('./test/foundry/files/descriptor_v2/skillsPage.abi'),
+            (bytes, uint80, uint16)
+        );
+        descriptor.addSkills(skills, skillsLength, skillsCount);
+
     }
 
     function readFile(string memory filepath) internal returns (bytes memory output) {

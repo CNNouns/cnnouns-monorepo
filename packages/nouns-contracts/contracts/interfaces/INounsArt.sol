@@ -17,6 +17,13 @@
 
 pragma solidity ^0.8.6;
 
+// LICENSE
+// This file is a modified version of nounsDAO's INounsArt.sol:
+// https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/interfaces/INounsArt.sol
+//
+// INounsArt.sol licensed under the GPL-3.0 license.
+// With modifications by CNNouns DAO.
+
 import { Inflate } from '../libs/Inflate.sol';
 import { IInflator } from './IInflator.sol';
 
@@ -47,11 +54,11 @@ interface INounsArt {
 
     event BodiesAdded(uint16 count);
 
-    event AccessoriesAdded(uint16 count);
-
     event HeadsAdded(uint16 count);
 
     event GlassesAdded(uint16 count);
+
+    event SkillsAdded(uint16 count);
 
     struct NounArtStoragePage {
         uint16 imageCount;
@@ -86,12 +93,6 @@ interface INounsArt {
         uint16 imageCount
     ) external;
 
-    function addAccessories(
-        bytes calldata encodedCompressed,
-        uint80 decompressedLength,
-        uint16 imageCount
-    ) external;
-
     function addHeads(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
@@ -99,6 +100,12 @@ interface INounsArt {
     ) external;
 
     function addGlasses(
+        bytes calldata encodedCompressed,
+        uint80 decompressedLength,
+        uint16 imageCount
+    ) external;
+
+    function addSkills(
         bytes calldata encodedCompressed,
         uint80 decompressedLength,
         uint16 imageCount
@@ -112,12 +119,6 @@ interface INounsArt {
 
     function setPalettePointer(uint8 paletteIndex, address pointer) external;
 
-    function addAccessoriesFromPointer(
-        address pointer,
-        uint80 decompressedLength,
-        uint16 imageCount
-    ) external;
-
     function addHeadsFromPointer(
         address pointer,
         uint80 decompressedLength,
@@ -125,6 +126,12 @@ interface INounsArt {
     ) external;
 
     function addGlassesFromPointer(
+        address pointer,
+        uint80 decompressedLength,
+        uint16 imageCount
+    ) external;
+
+    function addSkillsFromPointer(
         address pointer,
         uint80 decompressedLength,
         uint16 imageCount
@@ -138,15 +145,15 @@ interface INounsArt {
 
     function bodies(uint256 index) external view returns (bytes memory);
 
-    function accessories(uint256 index) external view returns (bytes memory);
-
     function glasses(uint256 index) external view returns (bytes memory);
 
-    function getBodiesTrait() external view returns (Trait memory);
+    function skills(uint256 index) external view returns (bytes memory);
 
-    function getAccessoriesTrait() external view returns (Trait memory);
+    function getBodiesTrait() external view returns (Trait memory);
 
     function getHeadsTrait() external view returns (Trait memory);
 
     function getGlassesTrait() external view returns (Trait memory);
+
+    function getSkillsTrait() external view returns (Trait memory);
 }

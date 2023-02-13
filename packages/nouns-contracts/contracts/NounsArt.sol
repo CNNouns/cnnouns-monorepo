@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title The Nouns art storage contract
+/// @title The CNNouns art storage contract
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -16,6 +16,13 @@
  *********************************/
 
 pragma solidity ^0.8.6;
+
+// LICENSE
+// This file is a modified version of nounsDAO's NounsArt.sol:
+// https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/NounsArt.sol
+//
+// NounsArt.sol licensed under the GPL-3.0 license.
+// With modifications by CNNouns DAO.
 
 import { INounsArt } from './interfaces/INounsArt.sol';
 import { SSTORE2 } from './libs/SSTORE2.sol';
@@ -37,14 +44,14 @@ contract NounsArt is INounsArt {
     /// @notice Noun Bodies Trait
     Trait public bodiesTrait;
 
-    /// @notice Noun Accessories Trait
-    Trait public accessoriesTrait;
-
     /// @notice Noun Heads Trait
     Trait public headsTrait;
 
     /// @notice Noun Glasses Trait
     Trait public glassesTrait;
+
+    /// @notice Noun Skills Trait
+    Trait public skillsTrait;
 
     /**
      * @notice Require that the sender is the descriptor.
@@ -94,16 +101,6 @@ contract NounsArt is INounsArt {
     }
 
     /**
-     * @notice Get the Trait struct for accessories.
-     * @dev This explicit getter is needed because implicit getters for structs aren't fully supported yet:
-     * https://github.com/ethereum/solidity/issues/11826
-     * @return Trait the struct, including a total image count, and an array of storage pages.
-     */
-    function getAccessoriesTrait() external view override returns (Trait memory) {
-        return accessoriesTrait;
-    }
-
-    /**
      * @notice Get the Trait struct for heads.
      * @dev This explicit getter is needed because implicit getters for structs aren't fully supported yet:
      * https://github.com/ethereum/solidity/issues/11826
@@ -121,6 +118,16 @@ contract NounsArt is INounsArt {
      */
     function getGlassesTrait() external view override returns (Trait memory) {
         return glassesTrait;
+    }
+
+    /**
+     * @notice Get the Trait struct for skills.
+     * @dev This explicit getter is needed because implicit getters for structs aren't fully supported yet:
+     * https://github.com/ethereum/solidity/issues/11826
+     * @return Trait the struct, including a total image count, and an array of storage pages.
+     */
+    function getSkillsTrait() external view override returns (Trait memory) {
+        return skillsTrait;
     }
 
     /**
@@ -183,24 +190,6 @@ contract NounsArt is INounsArt {
     }
 
     /**
-     * @notice Add a batch of accessory images.
-     * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
-     * and finally compressing it using deflate.
-     * @param decompressedLength the size in bytes the images bytes were prior to compression; required input for Inflate.
-     * @param imageCount the number of images in this batch; used when searching for images among batches.
-     * @dev This function can only be called by the descriptor.
-     */
-    function addAccessories(
-        bytes calldata encodedCompressed,
-        uint80 decompressedLength,
-        uint16 imageCount
-    ) external override onlyDescriptor {
-        addPage(accessoriesTrait, encodedCompressed, decompressedLength, imageCount);
-
-        emit AccessoriesAdded(imageCount);
-    }
-
-    /**
      * @notice Add a batch of head images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
      * and finally compressing it using deflate.
@@ -234,6 +223,24 @@ contract NounsArt is INounsArt {
         addPage(glassesTrait, encodedCompressed, decompressedLength, imageCount);
 
         emit GlassesAdded(imageCount);
+    }
+
+    /**
+     * @notice Add a batch of skill images.
+     * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
+     * and finally compressing it using deflate.
+     * @param decompressedLength the size in bytes the images bytes were prior to compression; required input for Inflate.
+     * @param imageCount the number of images in this batch; used when searching for images among batches.
+     * @dev This function can only be called by the descriptor.
+     */
+    function addSkills(
+        bytes calldata encodedCompressed,
+        uint80 decompressedLength,
+        uint16 imageCount
+    ) external override onlyDescriptor {
+        addPage(skillsTrait, encodedCompressed, decompressedLength, imageCount);
+
+        emit SkillsAdded(imageCount);
     }
 
     /**
@@ -271,32 +278,13 @@ contract NounsArt is INounsArt {
     }
 
     /**
-     * @notice Add a batch of accessory images from an existing storage contract.
-     * @param pointer the address of a contract where the image batch was stored using SSTORE2. The data
-     * format is expected to be like {encodedCompressed}: bytes created by taking a string array of
-     * RLE-encoded images, abi encoding it as a bytes array, and finally compressing it using deflate.
-     * @param decompressedLength the size in bytes the images bytes were prior to compression; required input for Inflate.
-     * @param imageCount the number of images in this batch; used when searching for images among batches.
-     * @dev This function can only be called by the descriptor.
-     */
-    function addAccessoriesFromPointer(
-        address pointer,
-        uint80 decompressedLength,
-        uint16 imageCount
-    ) external override onlyDescriptor {
-        addPage(accessoriesTrait, pointer, decompressedLength, imageCount);
-
-        emit AccessoriesAdded(imageCount);
-    }
-
-    /**
      * @notice Add a batch of head images from an existing storage contract.
      * @param pointer the address of a contract where the image batch was stored using SSTORE2. The data
      * format is expected to be like {encodedCompressed}: bytes created by taking a string array of
      * RLE-encoded images, abi encoding it as a bytes array, and finally compressing it using deflate.
      * @param decompressedLength the size in bytes the images bytes were prior to compression; required input for Inflate.
      * @param imageCount the number of images in this batch; used when searching for images among batches
-     * @dev This function can only be called by the descriptor..
+     * @dev This function can only be called by the descriptor.
      */
     function addHeadsFromPointer(
         address pointer,
@@ -328,6 +316,25 @@ contract NounsArt is INounsArt {
     }
 
     /**
+     * @notice Add a batch of skill images from an existing storage contract.
+     * @param pointer the address of a contract where the image batch was stored using SSTORE2. The data
+     * format is expected to be like {encodedCompressed}: bytes created by taking a string array of
+     * RLE-encoded images, abi encoding it as a bytes array, and finally compressing it using deflate.
+     * @param decompressedLength the size in bytes the images bytes were prior to compression; required input for Inflate.
+     * @param imageCount the number of images in this batch; used when searching for images among batches.
+     * @dev This function can only be called by the descriptor.
+     */
+    function addSkillsFromPointer(
+        address pointer,
+        uint80 decompressedLength,
+        uint16 imageCount
+    ) external override onlyDescriptor {
+        addPage(skillsTrait, pointer, decompressedLength, imageCount);
+
+        emit SkillsAdded(imageCount);
+    }
+
+    /**
      * @notice Get the number of available Noun `backgrounds`.
      */
     function backgroundsCount() public view override returns (uint256) {
@@ -349,17 +356,17 @@ contract NounsArt is INounsArt {
     }
 
     /**
-     * @notice Get a accessory image bytes (RLE-encoded).
-     */
-    function accessories(uint256 index) public view override returns (bytes memory) {
-        return imageByIndex(accessoriesTrait, index);
-    }
-
-    /**
      * @notice Get a glasses image bytes (RLE-encoded).
      */
     function glasses(uint256 index) public view override returns (bytes memory) {
         return imageByIndex(glassesTrait, index);
+    }
+
+    /**
+     * @notice Get a skill image bytes (RLE-encoded).
+     */
+    function skills(uint256 index) public view override returns (bytes memory) {
+        return imageByIndex(skillsTrait, index);
     }
 
     /**
