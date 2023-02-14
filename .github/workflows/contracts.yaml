@@ -3,7 +3,7 @@ name: Contracts CI
 on:
   push:
     branches:
-      - develop
+      - release
   pull_request:
     paths:
       - 'packages/nouns-contracts/**'
