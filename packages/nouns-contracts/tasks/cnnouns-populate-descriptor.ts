@@ -35,33 +35,42 @@ task('cnnouns-populate-descriptor', 'Populates the descriptor with color palette
     const glassesPage = dataToDescriptorInput(glasses.map(({ data }) => data));
     const skillsPage = dataToDescriptorInput(skills.map(({ data }) => data));
 
-    await descriptorContract.addManyBackgrounds(bgcolors);
-    await descriptorContract.setPalette(0, `0x000000${palette.join('')}`);
+    await (await descriptorContract.addManyBackgrounds(bgcolors)).wait();
+    await (await descriptorContract.setPalette(0, `0x000000${palette.join('')}`)).wait();
 
-    await descriptorContract.addBodies(
-      bodiesPage.encodedCompressed,
-      bodiesPage.originalLength,
-      bodiesPage.itemCount,
-      options,
-    );
-    await descriptorContract.addHeads(
-      headsPage.encodedCompressed,
-      headsPage.originalLength,
-      headsPage.itemCount,
-      options,
-    );
-    await descriptorContract.addGlasses(
-      glassesPage.encodedCompressed,
-      glassesPage.originalLength,
-      glassesPage.itemCount,
-      options,
-    );
-    await descriptorContract.addSkills(
-      skillsPage.encodedCompressed,
-      skillsPage.originalLength,
-      skillsPage.itemCount,
-      options,
-    );
+    await (
+      await descriptorContract.addBodies(
+        bodiesPage.encodedCompressed,
+        bodiesPage.originalLength,
+        bodiesPage.itemCount,
+        options,
+      )
+    ).wait();
+    await (
+      await descriptorContract.addHeads(
+        headsPage.encodedCompressed,
+        headsPage.originalLength,
+        headsPage.itemCount,
+        options,
+      )
+    ).wait();
+
+    await (
+      await descriptorContract.addGlasses(
+        glassesPage.encodedCompressed,
+        glassesPage.originalLength,
+        glassesPage.itemCount,
+        options,
+      )
+    ).wait();
+    await (
+      await descriptorContract.addSkills(
+        skillsPage.encodedCompressed,
+        skillsPage.originalLength,
+        skillsPage.itemCount,
+        options,
+      )
+    ).wait();
 
     console.log('Descriptor populated with palettes and parts.');
   });
