@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title The Nouns NFT descriptor
+/// @title The CNNouns NFT descriptor
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -16,6 +16,13 @@
  *********************************/
 
 pragma solidity ^0.8.6;
+
+// LICENSE
+// This file is a modified version of nounsDAO's NounsDescriptorV2.sol:
+// https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/NounsDescriptorV2.sol
+//
+// NounsDescriptorV2.sol licensed under the GPL-3.0 license.
+// With modifications by CNNouns DAO.
 
 import { Ownable } from '@openzeppelin/contracts/access/Ownable.sol';
 import { Strings } from '@openzeppelin/contracts/utils/Strings.sol';
@@ -114,13 +121,6 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
     }
 
     /**
-     * @notice Get the number of available Noun `accessories`.
-     */
-    function accessoryCount() external view override returns (uint256) {
-        return art.getAccessoriesTrait().storedImagesCount;
-    }
-
-    /**
      * @notice Get the number of available Noun `heads`.
      */
     function headCount() external view override returns (uint256) {
@@ -132,6 +132,13 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
      */
     function glassesCount() external view override returns (uint256) {
         return art.getGlassesTrait().storedImagesCount;
+    }
+
+    /**
+     * @notice Get the number of available Noun `skills`.
+     */
+    function skillCount() external view override returns (uint256) {
+        return art.getSkillsTrait().storedImagesCount;
     }
 
     /**
@@ -178,22 +185,6 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
     }
 
     /**
-     * @notice Add a batch of accessory images.
-     * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
-     * and finally compressing it using deflate.
-     * @param decompressedLength the size in bytes the images bytes were prior to compression; required input for Inflate.
-     * @param imageCount the number of images in this batch; used when searching for images among batches.
-     * @dev This function can only be called by the owner when not locked.
-     */
-    function addAccessories(
-        bytes calldata encodedCompressed,
-        uint80 decompressedLength,
-        uint16 imageCount
-    ) external override onlyOwner whenPartsNotLocked {
-        art.addAccessories(encodedCompressed, decompressedLength, imageCount);
-    }
-
-    /**
      * @notice Add a batch of head images.
      * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
      * and finally compressing it using deflate.
@@ -226,6 +217,22 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
     }
 
     /**
+     * @notice Add a batch of skill images.
+     * @param encodedCompressed bytes created by taking a string array of RLE-encoded images, abi encoding it as a bytes array,
+     * and finally compressing it using deflate.
+     * @param decompressedLength the size in bytes the images bytes were prior to compression; required input for Inflate.
+     * @param imageCount the number of images in this batch; used when searching for images among batches.
+     * @dev This function can only be called by the owner when not locked.
+     */
+    function addSkills(
+        bytes calldata encodedCompressed,
+        uint80 decompressedLength,
+        uint16 imageCount
+    ) external override onlyOwner whenPartsNotLocked {
+        art.addSkills(encodedCompressed, decompressedLength, imageCount);
+    }
+
+    /**
      * @notice Update a single color palette. This function can be used to
      * add a new color palette or update an existing palette. This function does not check for data length validity
      * (len <= 768, len % 3 == 0).
@@ -253,23 +260,6 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
         uint16 imageCount
     ) external override onlyOwner whenPartsNotLocked {
         art.addBodiesFromPointer(pointer, decompressedLength, imageCount);
-    }
-
-    /**
-     * @notice Add a batch of accessory images from an existing storage contract.
-     * @param pointer the address of a contract where the image batch was stored using SSTORE2. The data
-     * format is expected to be like {encodedCompressed}: bytes created by taking a string array of
-     * RLE-encoded images, abi encoding it as a bytes array, and finally compressing it using deflate.
-     * @param decompressedLength the size in bytes the images bytes were prior to compression; required input for Inflate.
-     * @param imageCount the number of images in this batch; used when searching for images among batches.
-     * @dev This function can only be called by the owner when not locked.
-     */
-    function addAccessoriesFromPointer(
-        address pointer,
-        uint80 decompressedLength,
-        uint16 imageCount
-    ) external override onlyOwner whenPartsNotLocked {
-        art.addAccessoriesFromPointer(pointer, decompressedLength, imageCount);
     }
 
     /**
@@ -307,6 +297,23 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
     }
 
     /**
+     * @notice Add a batch of skill images from an existing storage contract.
+     * @param pointer the address of a contract where the image batch was stored using SSTORE2. The data
+     * format is expected to be like {encodedCompressed}: bytes created by taking a string array of
+     * RLE-encoded images, abi encoding it as a bytes array, and finally compressing it using deflate.
+     * @param decompressedLength the size in bytes the images bytes were prior to compression; required input for Inflate.
+     * @param imageCount the number of images in this batch; used when searching for images among batches.
+     * @dev This function can only be called by the owner when not locked.
+     */
+    function addSkillsFromPointer(
+        address pointer,
+        uint80 decompressedLength,
+        uint16 imageCount
+    ) external override onlyOwner whenPartsNotLocked {
+        art.addSkillsFromPointer(pointer, decompressedLength, imageCount);
+    }
+
+    /**
      * @notice Get a background color by ID.
      * @param index the index of the background.
      * @return string the RGB hex value of the background.
@@ -334,21 +341,21 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
     }
 
     /**
-     * @notice Get an accessory image by ID.
-     * @param index the index of the accessory.
-     * @return bytes the RLE-encoded bytes of the image.
-     */
-    function accessories(uint256 index) public view override returns (bytes memory) {
-        return art.accessories(index);
-    }
-
-    /**
      * @notice Get a glasses image by ID.
      * @param index the index of the glasses.
      * @return bytes the RLE-encoded bytes of the image.
      */
     function glasses(uint256 index) public view override returns (bytes memory) {
         return art.glasses(index);
+    }
+
+    /**
+     * @notice Get an skill image by ID.
+     * @param index the index of the skill.
+     * @return bytes the RLE-encoded bytes of the image.
+     */
+    function skills(uint256 index) public view override returns (bytes memory) {
+        return art.skills(index);
     }
 
     /**
@@ -395,7 +402,7 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
     }
 
     /**
-     * @notice Given a token ID and seed, construct a token URI for an official Nouns DAO noun.
+     * @notice Given a token ID and seed, construct a token URI for an official CNNouns DAO noun.
      * @dev The returned value may be a base64 encoded data URI or an API URL.
      */
     function tokenURI(uint256 tokenId, INounsSeeder.Seed memory seed) external view override returns (string memory) {
@@ -406,12 +413,12 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
     }
 
     /**
-     * @notice Given a token ID and seed, construct a base64 encoded data URI for an official Nouns DAO noun.
+     * @notice Given a token ID and seed, construct a base64 encoded data URI for an official CNNouns DAO noun.
      */
     function dataURI(uint256 tokenId, INounsSeeder.Seed memory seed) public view override returns (string memory) {
         string memory nounId = tokenId.toString();
-        string memory name = string(abi.encodePacked('Noun ', nounId));
-        string memory description = string(abi.encodePacked('Noun ', nounId, ' is a member of the Nouns DAO'));
+        string memory name = string(abi.encodePacked('CNNoun ', nounId));
+        string memory description = string(abi.encodePacked('CNNoun ', nounId, ' is a member of the CNNouns DAO'));
 
         return genericDataURI(name, description, seed);
     }
@@ -449,15 +456,15 @@ contract NounsDescriptorV2 is INounsDescriptorV2, Ownable {
      */
     function getPartsForSeed(INounsSeeder.Seed memory seed) public view returns (ISVGRenderer.Part[] memory) {
         bytes memory body = art.bodies(seed.body);
-        bytes memory accessory = art.accessories(seed.accessory);
         bytes memory head = art.heads(seed.head);
         bytes memory glasses_ = art.glasses(seed.glasses);
+        bytes memory skill = art.skills(seed.skill);
 
         ISVGRenderer.Part[] memory parts = new ISVGRenderer.Part[](4);
         parts[0] = ISVGRenderer.Part({ image: body, palette: _getPalette(body) });
-        parts[1] = ISVGRenderer.Part({ image: accessory, palette: _getPalette(accessory) });
-        parts[2] = ISVGRenderer.Part({ image: head, palette: _getPalette(head) });
-        parts[3] = ISVGRenderer.Part({ image: glasses_, palette: _getPalette(glasses_) });
+        parts[1] = ISVGRenderer.Part({ image: head, palette: _getPalette(head) });
+        parts[2] = ISVGRenderer.Part({ image: glasses_, palette: _getPalette(glasses_) });
+        parts[3] = ISVGRenderer.Part({ image: skill, palette: _getPalette(skill) });
         return parts;
     }
 

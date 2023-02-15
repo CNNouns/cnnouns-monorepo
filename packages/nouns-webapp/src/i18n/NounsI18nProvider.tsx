@@ -4,7 +4,7 @@
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { DEFAULT_LOCALE, SupportedLocale } from './locales';
-import { en, ja } from 'make-plural/plurals';
+import { ja } from 'make-plural/plurals';
 import { PluralCategory } from 'make-plural/plurals';
 import { ReactNode, useEffect } from 'react';
 
@@ -13,9 +13,7 @@ type LocalePlural = {
 };
 
 const plurals: LocalePlural = {
-  'en-US': en,
   'ja-JP': ja,
-  pseudo: en,
 };
 
 export async function dynamicActivate(locale: SupportedLocale) {
@@ -54,11 +52,9 @@ export function NounsI18nProvider({
   // This renders the translation _keys_, not the translation _messages_, which is only acceptable while loading the DEFAULT_LOCALE,
   // as [there are no "default" messages](https://github.com/lingui/js-lingui/issues/388#issuecomment-497779030).
   // See https://github.com/lingui/js-lingui/issues/1194#issuecomment-1068488619.
-  if (i18n.locale === undefined && locale === DEFAULT_LOCALE) {
-    i18n.loadLocaleData(DEFAULT_LOCALE, { plurals: () => plurals[DEFAULT_LOCALE] });
-    i18n.load(DEFAULT_LOCALE, {});
-    i18n.activate(DEFAULT_LOCALE);
-  }
+  i18n.loadLocaleData(DEFAULT_LOCALE, { plurals: () => plurals[DEFAULT_LOCALE] });
+  i18n.load(DEFAULT_LOCALE, {});
+  i18n.activate(DEFAULT_LOCALE);
 
   return (
     <I18nProvider forceRenderOnLocaleChange={forceRenderAfterLocaleChange} i18n={i18n}>

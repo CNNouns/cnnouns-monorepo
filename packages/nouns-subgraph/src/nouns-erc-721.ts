@@ -15,9 +15,9 @@ export function handleNounCreated(event: NounCreated): void {
   let seed = new Seed(nounId);
   seed.background = event.params.seed.background;
   seed.body = event.params.seed.body;
-  seed.accessory = event.params.seed.accessory;
   seed.head = event.params.seed.head;
   seed.glasses = event.params.seed.glasses;
+  seed.skill = event.params.seed.skill;
   seed.save();
 
   let noun = Noun.load(nounId);

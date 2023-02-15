@@ -337,7 +337,7 @@ const getProposalState = (
   blockTimestamp: Date | undefined,
   proposal: PartialProposalSubgraphEntity,
 ) => {
-  const status = ProposalState[proposal.status];
+  let status = ProposalState[proposal.status];
   if (status === ProposalState.PENDING) {
     if (!blockNumber) {
       return ProposalState.UNDETERMINED;
@@ -345,7 +345,7 @@ const getProposalState = (
     if (blockNumber <= parseInt(proposal.startBlock)) {
       return ProposalState.PENDING;
     }
-    return ProposalState.ACTIVE;
+    status = ProposalState.ACTIVE;
   }
   if (status === ProposalState.ACTIVE) {
     if (!blockNumber) {

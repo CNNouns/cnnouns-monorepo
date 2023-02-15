@@ -10,19 +10,18 @@ const linguiConfig = {
   ],
   compileNamespace: 'cjs',
   fallbackLocales: {
-    default: 'en-US',
-    pseudo: 'en-US',
+    default: 'ja-JP',
   },
   format: 'po',
   formatOptions: {
     lineNumbers: false,
   },
-  locales: ['en-US', 'ja-JP', 'pseudo'],
+  locales: ['ja-JP'],
   orderBy: 'messageId',
   rootDir: '.',
   runtimeConfigModule: ['@lingui/core', 'i18n'],
   sourceLocale: 'en-US',
-  pseudoLocale: 'pseudo',
+  pseudoLocale: '',
 };
 
 export default linguiConfig;

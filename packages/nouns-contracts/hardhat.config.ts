@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { HardhatUserConfig } from 'hardhat/config';
+import { NetworkUserConfig } from 'hardhat/types';
 import dotenv from 'dotenv';
 import '@nomiclabs/hardhat-waffle';
 import '@nomiclabs/hardhat-etherscan';
@@ -11,6 +12,16 @@ import 'hardhat-gas-reporter';
 import './tasks';
 
 dotenv.config();
+
+const userConfig: NetworkUserConfig = {};
+
+if (process.env.MNEMONIC) {
+  userConfig['accounts'] = { mnemonic: process.env.MNEMONIC };
+} else if (process.env.WALLET_PRIVATE_KEY) {
+  userConfig['accounts'] = [process.env.WALLET_PRIVATE_KEY];
+} else if (process.env.ADDRESS_FROM) {
+  userConfig['from'] = process.env.ADDRESS_FROM;
+}
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -35,9 +46,7 @@ const config: HardhatUserConfig = {
     },
     goerli: {
       url: `https://goerli.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
-      accounts: process.env.MNEMONIC
-        ? { mnemonic: process.env.MNEMONIC }
-        : [process.env.WALLET_PRIVATE_KEY!].filter(Boolean),
+      ...userConfig,
     },
     hardhat: {
       initialBaseFeePerGas: 0,

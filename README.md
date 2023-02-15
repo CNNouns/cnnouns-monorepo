@@ -1,6 +1,6 @@
-# nouns-monorepo
+# cnnouns-monorepo
 
-Nouns DAO is a generative avatar art collective run by a group of crypto misfits.
+CNNouns DAO is a generative avatar art collective.
 
 ## Packages
 
@@ -18,7 +18,7 @@ The [nouns bots](packages/nouns-bots) package contains a bot that monitors for c
 
 ### nouns-contracts
 
-The [nouns contracts](packages/nouns-contracts) is the suite of Solidity contracts powering Nouns DAO.
+The [nouns contracts](packages/nouns-contracts) is the suite of Solidity contracts powering CNNouns DAO.
 
 ### nouns-sdk
 
@@ -30,7 +30,7 @@ In order to make retrieving more complex data from the auction history, [nouns s
 
 ### nouns-webapp
 
-The [nouns webapp](packages/nouns-webapp) is the frontend for interacting with Noun auctions as hosted at [nouns.wtf](https://nouns.wtf).
+The [nouns webapp](packages/nouns-webapp) is the frontend for interacting with Noun auctions as hosted at [cryptoninja-nouns.wtf](https://cryptoninja-nouns.wtf).
 
 ## Quickstart
 

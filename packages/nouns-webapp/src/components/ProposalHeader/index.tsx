@@ -16,8 +16,6 @@ import { transactionLink } from '../ProposalContent';
 import ShortAddress from '../ShortAddress';
 import { useActiveLocale } from '../../hooks/useActivateLocale';
 import { Locales } from '../../i18n/locales';
-import HoverCard from '../HoverCard';
-import ByLineHoverCard from '../ByLineHoverCard';
 
 interface ProposalHeaderProps {
   proposal: Proposal;
@@ -138,38 +136,26 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
 
       <div className={classes.byLineWrapper}>
         {activeLocale === Locales.ja_JP ? (
-          <HoverCard
-            hoverCardContent={(tip: string) => <ByLineHoverCard proposerAddress={tip} />}
-            tip={proposal && proposal.proposer ? proposal.proposer : ''}
-            id="byLineHoverCard"
-          >
-            <div className={classes.proposalByLineWrapperJp}>
-              <Trans>
-                <span className={classes.proposedByJp}>Proposed by: </span>
-                <span className={classes.proposerJp}>{proposer}</span>
-                <span className={classes.propTransactionWrapperJp}>
-                  {proposedAtTransactionHash}
-                </span>
-              </Trans>
-            </div>
-          </HoverCard>
+          <div className={classes.proposalByLineWrapperJp}>
+            <Trans>
+              <span className={classes.proposedByJp}>Proposed by: </span>
+              <span className={classes.proposerJp}>{proposer}</span>
+              <span className={classes.propTransactionWrapperJp}>
+                {proposedAtTransactionHash}
+              </span>
+            </Trans>
+          </div>
         ) : (
           <>
             <h3>Proposed by</h3>
 
             <div className={classes.byLineContentWrapper}>
-              <HoverCard
-                hoverCardContent={(tip: string) => <ByLineHoverCard proposerAddress={tip} />}
-                tip={proposal && proposal.proposer ? proposal.proposer : ''}
-                id="byLineHoverCard"
-              >
-                <h3>
-                  {proposer}
-                  <span className={classes.propTransactionWrapper}>
-                    {proposedAtTransactionHash}
-                  </span>
-                </h3>
-              </HoverCard>
+              <h3>
+                {proposer}
+                <span className={classes.propTransactionWrapper}>
+                  {proposedAtTransactionHash}
+                </span>
+              </h3>
             </div>
           </>
         )}
@@ -188,7 +174,7 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
       {proposal && isActiveForVoting && proposalCreationTimestamp && !!availableVotes && !hasVoted && (
         <Alert variant="success" className={classes.voterIneligibleAlert}>
           <Trans>
-            Only Nouns you owned or were delegated to you before{' '}
+            Only CN Nouns you owned or were delegated to you before{' '}
             {i18n.date(new Date(proposalCreationTimestamp * 1000), {
               dateStyle: 'long',
               timeStyle: 'long',

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title The Nouns ERC-721 token
+/// @title The CNNouns ERC-721 token
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -16,6 +16,13 @@
  *********************************/
 
 pragma solidity ^0.8.6;
+
+// LICENSE
+// This file is a modified version of nounsDAO's NounsToken.sol:
+// https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/NounsToken.sol
+//
+// NounsToken.sol licensed under the GPL-3.0 license.
+// With modifications by CNNouns DAO.
 
 import { Ownable } from '@openzeppelin/contracts/access/Ownable.sol';
 import { ERC721Checkpointable } from './base/ERC721Checkpointable.sol';
@@ -54,8 +61,8 @@ contract NounsToken is INounsToken, Ownable, ERC721Checkpointable {
     // The internal noun ID tracker
     uint256 private _currentNounId;
 
-    // IPFS content hash of contract-level metadata
-    string private _contractURIHash = 'QmZi1n79FqWt2tTLwCqiy6nLM6xLGRsEPQ5JmReJQKNNzX';
+    // Contract-level metadata
+    string private _contractURI = 'data:application/json;base64,eyJuYW1lIjoiQ05Ob3VucyIsImRlc2NyaXB0aW9uIjoiT25lIENOTm91biwgZXZlcnkgZGF5LCBmb3JldmVyLlxyXG5cclxuY3J5cHRvbmluamEtbm91bnMud3RmIiwiaW1hZ2UiOiJodHRwczovL2NyeXB0b25pbmphLW5vdW5zLnd0Zi9sb2dvLnN2ZyIsImV4dGVybmFsX2xpbmsiOiJodHRwczovL2NyeXB0b25pbmphLW5vdW5zLnd0ZiIsInNlbGxlcl9mZWVfYmFzaXNfcG9pbnRzIjowLCJmZWVfcmVjaXBpZW50IjoiMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIn0=';
 
     // OpenSea's Proxy Registry
     IProxyRegistry public immutable proxyRegistry;
@@ -106,7 +113,7 @@ contract NounsToken is INounsToken, Ownable, ERC721Checkpointable {
         INounsDescriptorMinimal _descriptor,
         INounsSeeder _seeder,
         IProxyRegistry _proxyRegistry
-    ) ERC721('Nouns', 'NOUN') {
+    ) ERC721('CNNouns', 'CNNS') {
         noundersDAO = _noundersDAO;
         minter = _minter;
         descriptor = _descriptor;
@@ -115,18 +122,18 @@ contract NounsToken is INounsToken, Ownable, ERC721Checkpointable {
     }
 
     /**
-     * @notice The IPFS URI of contract-level metadata.
+     * @notice Contract-level metadata for OpenSea.
      */
     function contractURI() public view returns (string memory) {
-        return string(abi.encodePacked('ipfs://', _contractURIHash));
+        return _contractURI;
     }
 
     /**
-     * @notice Set the _contractURIHash.
+     * @notice Set the _contractURI.
      * @dev Only callable by the owner.
      */
-    function setContractURIHash(string memory newContractURIHash) external onlyOwner {
-        _contractURIHash = newContractURIHash;
+    function setContractURI(string memory newContractURI) external onlyOwner {
+        _contractURI= newContractURI;
     }
 
     /**
@@ -143,7 +150,8 @@ contract NounsToken is INounsToken, Ownable, ERC721Checkpointable {
     /**
      * @notice Mint a Noun to the minter, along with a possible nounders reward
      * Noun. Nounders reward Nouns are minted every 10 Nouns, starting at 0,
-     * until 183 nounder Nouns have been minted (5 years w/ 24 hour auctions).
+     * until 183 nounder Nouns have been minted (5 years w/ 24 hour plus growth
+     * auctions).
      * @dev Call _mintTo with the to address(es).
      */
     function mint() public override onlyMinter returns (uint256) {

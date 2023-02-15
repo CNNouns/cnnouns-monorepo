@@ -35,6 +35,10 @@
   margin: 0px !important;
 }
 
+.proposalFlow {
+  max-width: 100%;
+}
+
 .accordionItem,
 .headerWrapper {
   font-size: 1.3rem;

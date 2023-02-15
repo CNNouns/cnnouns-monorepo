@@ -25,7 +25,7 @@ abstract contract NounsDAOLogicSharedBaseTest is Test, DeployUtils {
     address proposer = address(0x7);
     uint256 votingPeriod = 6000;
     uint256 votingDelay = 1;
-    uint256 proposalThresholdBPS = 200;
+    uint256 proposalThreshold = 1;
     Utils utils;
 
     function setUp() public virtual {

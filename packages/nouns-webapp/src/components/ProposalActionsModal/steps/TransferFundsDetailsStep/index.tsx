@@ -3,22 +3,21 @@ import BigNumber from 'bignumber.js';
 import { utils } from 'ethers';
 import React, { useEffect, useState } from 'react';
 import { ProposalActionModalStepProps } from '../..';
-import BrandDropdown from '../../../BrandDropdown';
 import BrandTextEntry from '../../../BrandTextEntry';
 import BrandNumericEntry from '../../../BrandNumericEntry';
 import ModalBottomButtonRow from '../../../ModalBottomButtonRow';
 import ModalTitle from '../../../ModalTitle';
+import classes from '../TransferFundsReviewStep/TransferFundsReviewStep.module.css';
 
 export enum SupportedCurrency {
   ETH = 'ETH',
-  USDC = 'USDC',
 }
 
 const TransferFundsDetailsStep: React.FC<ProposalActionModalStepProps> = props => {
   const { onNextBtnClick, onPrevBtnClick, state, setState } = props;
 
-  const [currency, setCurrency] = useState<SupportedCurrency>(
-    state.TransferFundsCurrency ?? SupportedCurrency.ETH,
+  const [currency] = useState<SupportedCurrency>(
+    SupportedCurrency.ETH,
   );
   const [amount, setAmount] = useState<string>(state.amount ?? '');
   const [formattedAmount, setFormattedAmount] = useState<string>(state.amount ?? '');
@@ -37,35 +36,22 @@ const TransferFundsDetailsStep: React.FC<ProposalActionModalStepProps> = props =
         <Trans>Add Transfer Funds Action</Trans>
       </ModalTitle>
 
-      <BrandDropdown
-        label={'Currency'}
-        value={currency === SupportedCurrency.ETH ? 'ETH' : 'USDC'}
-        onChange={e => {
-          if (e.target.value === 'ETH') {
-            setCurrency(SupportedCurrency.ETH);
-          } else {
-            setCurrency(SupportedCurrency.USDC);
-          }
-        }}
-        chevronTop={38}
-      >
-        <option value="ETH">ETH</option>
-        <option value="USDC">USDC</option>
-      </BrandDropdown>
+      <span className={classes.label}>通貨</span>
+      <div className={classes.text}>ETH</div>
 
       <BrandNumericEntry
-        label={'Amount'}
+        label={'金額'}
         value={formattedAmount}
         onValueChange={e => {
           setAmount(e.value);
           setFormattedAmount(e.formattedValue);
         }}
-        placeholder={currency === SupportedCurrency.ETH ? '0 ETH' : '0 USDC'}
+        placeholder='0 ETH'
         isInvalid={parseFloat(amount) > 0 && new BigNumber(amount).isNaN()}
       />
 
       <BrandTextEntry
-        label={'Recipient'}
+        label={'受取ウォレットアドレス'}
         onChange={e => setAddress(e.target.value)}
         value={address}
         type="string"

@@ -193,7 +193,7 @@ contract NounsDAOLogicV1StateTest is NounsDAOLogicV1V2StateTest {
                         address(daoLogic),
                         votingPeriod,
                         votingDelay,
-                        proposalThresholdBPS,
+                        proposalThreshold,
                         1000
                     )
                 )
@@ -220,7 +220,7 @@ contract NounsDAOLogicV2StateTest is NounsDAOLogicV1V2StateTest {
                         address(daoLogic),
                         votingPeriod,
                         votingDelay,
-                        proposalThresholdBPS,
+                        proposalThreshold,
                         NounsDAOStorageV2.DynamicQuorumParams({
                             minQuorumVotesBPS: 200,
                             maxQuorumVotesBPS: 2000,
@@ -446,7 +446,7 @@ contract NounsDAOLogicV1VetoingTest is NounsDAOLogicV1V2VetoingTest {
                         address(daoLogic),
                         votingPeriod,
                         votingDelay,
-                        proposalThresholdBPS,
+                        proposalThreshold,
                         1000
                     )
                 )
@@ -544,7 +544,7 @@ contract NounsDAOLogicV2VetoingTest is NounsDAOLogicV1V2VetoingTest {
                         address(daoLogic),
                         votingPeriod,
                         votingDelay,
-                        proposalThresholdBPS,
+                        proposalThreshold,
                         NounsDAOStorageV2.DynamicQuorumParams({
                             minQuorumVotesBPS: 200,
                             maxQuorumVotesBPS: 2000,

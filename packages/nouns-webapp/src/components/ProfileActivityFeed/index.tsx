@@ -55,7 +55,7 @@ const ProfileActivityFeed: React.FC<ProfileActivityFeedProps> = props => {
   if (error) {
     return (
       <div>
-        <Trans>Failed to fetch Noun activity history</Trans>
+        <Trans>Failed to fetch CN Noun activity history</Trans>
       </div>
     );
   }
@@ -70,7 +70,7 @@ const ProfileActivityFeed: React.FC<ProfileActivityFeedProps> = props => {
         </div>
         {data && data.length === 0 ? (
           <div className={classes.nullStateCopy}>
-            <Trans>This Noun has no activity, since it was just created. Check back soon!</Trans>
+            <Trans>This CN Noun has no activity, since it was just created. Check back soon!</Trans>
           </div>
         ) : (
           <>

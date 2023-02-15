@@ -35,7 +35,7 @@ const minBidEth = (minBid: BigNumber): string => {
     return '0.01';
   }
 
-  const eth = utils.formatEther(EthersBN.from(minBid.toString()));
+  const eth = utils.formatEther(EthersBN.from(minBid.toFixed(0)));
   return new BigNumber(eth).toFixed(2, BigNumber.ROUND_CEIL);
 };
 
@@ -240,11 +240,6 @@ const Bid: React.FC<{
   const isDisabled =
     placeBidState.status === 'Mining' || settleAuctionState.status === 'Mining' || !activeAccount;
 
-  const fomoNounsBtnOnClickHandler = () => {
-    // Open Fomo Nouns in a new tab
-    window.open('https://fomonouns.wtf', '_blank')?.focus();
-  };
-
   const isWalletConnected = activeAccount !== undefined;
 
   return (
@@ -291,11 +286,6 @@ const Bid: React.FC<{
           </Button>
         ) : (
           <>
-            <Col lg={12} className={classes.voteForNextNounBtnWrapper}>
-              <Button className={classes.bidBtnAuctionEnded} onClick={fomoNounsBtnOnClickHandler}>
-                <Trans>Vote for the next Noun</Trans> ⌐◧-◧
-              </Button>
-            </Col>
             {/* Only show force settle button if wallet connected */}
             {isWalletConnected && (
               <Col lg={12}>

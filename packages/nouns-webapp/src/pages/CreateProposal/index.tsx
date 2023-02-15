@@ -31,7 +31,7 @@ const CreateProposalPage = () => {
   const latestProposalId = useProposalCount();
   const latestProposal = useProposal(latestProposalId ?? 0);
   const availableVotes = useUserVotes();
-  const proposalThreshold = useProposalThreshold();
+  const proposalThreshold = useProposalThreshold() ?? 1;
 
   const { propose, proposeState } = usePropose();
 
@@ -134,7 +134,7 @@ const CreateProposalPage = () => {
   );
 
   const hasEnoughVote = Boolean(
-    availableVotes && proposalThreshold !== undefined && availableVotes > proposalThreshold,
+    availableVotes && proposalThreshold !== undefined && availableVotes >= proposalThreshold,
   );
 
   const handleCreateProposal = async () => {
@@ -208,10 +208,6 @@ const CreateProposalPage = () => {
           </h3>
         </div>
         <Alert variant="secondary" className={classes.voterIneligibleAlert}>
-          <b>
-            <Trans>Tip</Trans>
-          </b>
-          :{' '}
           <Trans>
             Add one or more proposal actions and describe your proposal for the community. The
             proposal cannot be modified after submission, so please verify all information before

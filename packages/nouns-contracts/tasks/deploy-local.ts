@@ -28,11 +28,11 @@ task('deploy-local', 'Deploy contracts to hardhat')
     5,
     types.int,
   )
-  .addOptionalParam('auctionDuration', 'The auction duration (seconds)', 60 * 2, types.int) // Default: 2 minutes
+  .addOptionalParam('auctionBaseDuration', 'The auction base duration (seconds)', 60 * 2, types.int) // Default: 2 minutes
   .addOptionalParam('timelockDelay', 'The timelock delay (seconds)', 60 * 60 * 24 * 2, types.int) // Default: 2 days
   .addOptionalParam('votingPeriod', 'The voting period (blocks)', 4 * 60 * 24 * 3, types.int) // Default: 3 days
   .addOptionalParam('votingDelay', 'The voting delay (blocks)', 1, types.int) // Default: 1 block
-  .addOptionalParam('proposalThresholdBps', 'The proposal threshold (basis points)', 500, types.int) // Default: 5%
+  .addOptionalParam('proposalThreshold', 'The proposal threshold', 1, types.int) // Default: 1
   .addOptionalParam(
     'minQuorumVotesBPS',
     'Min basis points input for dynamic quorum',
@@ -115,7 +115,7 @@ task('deploy-local', 'Deploy contracts to hardhat')
               args.auctionTimeBuffer,
               args.auctionReservePrice,
               args.auctionMinIncrementBidPercentage,
-              args.auctionDuration,
+              args.auctionBaseDuration,
             ]),
         ],
       },
@@ -134,7 +134,7 @@ task('deploy-local', 'Deploy contracts to hardhat')
           () => contracts.NounsDAOLogicV2.instance?.address,
           args.votingPeriod,
           args.votingDelay,
-          args.proposalThresholdBps,
+          args.proposalThreshold,
           {
             minQuorumVotesBPS: args.minQuorumVotesBPS,
             maxQuorumVotesBPS: args.maxQuorumVotesBPS,

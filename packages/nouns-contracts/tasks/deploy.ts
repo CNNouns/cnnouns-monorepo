@@ -47,8 +47,8 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     types.int,
   )
   .addOptionalParam(
-    'auctionDuration',
-    'The auction duration (seconds)',
+    'auctionBaseDuration',
+    'The auction base duration (seconds)',
     60 * 60 * 24 /* 24 hours */,
     types.int,
   )
@@ -70,12 +70,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     Math.round(3 * 60 * 24 * (60 / 13)) /* 3 days (13s blocks) */,
     types.int,
   )
-  .addOptionalParam(
-    'proposalThresholdBps',
-    'The proposal threshold (basis points)',
-    100 /* 1% */,
-    types.int,
-  )
+  .addOptionalParam('proposalThreshold', 'The proposal threshold', 1, types.int)
   .addOptionalParam(
     'quorumVotesBps',
     'Votes required for quorum (basis points)',
@@ -160,7 +155,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
               args.auctionTimeBuffer,
               args.auctionReservePrice,
               args.auctionMinIncrementBidPercentage,
-              args.auctionDuration,
+              args.auctionBaseDuration,
             ]),
         ],
         waitForConfirmation: true,
@@ -189,7 +184,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
           () => deployment.NounsDAOLogicV1.address,
           args.votingPeriod,
           args.votingDelay,
-          args.proposalThresholdBps,
+          args.proposalThreshold,
           args.quorumVotesBps,
         ],
         waitForConfirmation: true,

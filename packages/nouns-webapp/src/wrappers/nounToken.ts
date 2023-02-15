@@ -13,11 +13,11 @@ interface NounToken {
 }
 
 export interface INounSeed {
-  accessory: number;
   background: number;
   body: number;
   glasses: number;
   head: number;
+  skill: number;
 }
 
 export enum NounsTokenContractFunction {
@@ -28,7 +28,7 @@ const abi = new utils.Interface(NounsTokenABI);
 const seedCacheKey = cacheKey(cache.seed, CHAIN_ID, config.addresses.nounsToken);
 
 const isSeedValid = (seed: Record<string, any> | undefined) => {
-  const expectedKeys = ['background', 'body', 'accessory', 'head', 'glasses'];
+  const expectedKeys = ['background', 'body', 'head', 'glasses', 'skill'];
   const hasExpectedKeys = expectedKeys.every(key => (seed || {}).hasOwnProperty(key));
   const hasValidValues = Object.values(seed || {}).some(v => v !== 0);
   return hasExpectedKeys && hasValidValues;
@@ -58,9 +58,9 @@ const seedArrayToObject = (seeds: (INounSeed & { id: string })[]) => {
     acc[seed.id] = {
       background: Number(seed.background),
       body: Number(seed.body),
-      accessory: Number(seed.accessory),
       head: Number(seed.head),
       glasses: Number(seed.glasses),
+      skill: Number(seed.skill),
     };
     return acc;
   }, {});
@@ -99,11 +99,11 @@ export const useNounSeed = (nounId: EthersBN): INounSeed => {
       const updatedSeedCache = JSON.stringify({
         ...JSON.parse(seedCache),
         [nounId.toString()]: {
-          accessory: response.accessory,
           background: response.background,
           body: response.body,
           glasses: response.glasses,
           head: response.head,
+          skill: response.skill,
         },
       });
       localStorage.setItem(seedCacheKey, updatedSeedCache);
@@ -184,4 +184,15 @@ export const useUserNounTokenBalance = (): number | undefined => {
       args: [account],
     }) || [];
   return tokenBalance?.toNumber();
+};
+
+export const useNoundersDAO = (): string | undefined => {
+  const [noundersDAO] =
+    useContractCall<[EthersBN]>({
+      abi,
+      address: config.addresses.nounsToken,
+      method: 'noundersDAO',
+      args: [],
+    }) || [];
+  return noundersDAO?.toString();
 };
