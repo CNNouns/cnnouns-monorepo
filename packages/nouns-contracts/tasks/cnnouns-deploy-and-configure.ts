@@ -77,12 +77,15 @@ task('cnnouns-deploy-and-configure', 'Deploy and configure all contracts')
     // We must maintain ownership of the auction house to kick off the first auction.
     console.log('Transfer ownerships');
     const executorAddress = contracts.NounsDAOExecutor.address;
+    console.log("NounsDescriptorV2", executorAddress);
     await (
       await contracts.NounsDescriptorV2.instance.transferOwnership(executorAddress)
     ).wait();
+    console.log("NounsToken", executorAddress);
     await (
       await contracts.NounsToken.instance.transferOwnership(executorAddress)
     ).wait();
+    console.log("NounsAuctionHouseProxyAdmin", executorAddress);
     await (
       await contracts.NounsAuctionHouseProxyAdmin.instance.transferOwnership(executorAddress)
     ).wait();

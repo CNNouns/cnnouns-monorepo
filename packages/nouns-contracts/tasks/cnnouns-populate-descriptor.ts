@@ -35,9 +35,13 @@ task('cnnouns-populate-descriptor', 'Populates the descriptor with color palette
     const glassesPage = dataToDescriptorInput(glasses.map(({ data }) => data));
     const skillsPage = dataToDescriptorInput(skills.map(({ data }) => data));
 
+    console.log("populate descriptor v2");
+    console.log("addManyBackgrounds");
     await (await descriptorContract.addManyBackgrounds(bgcolors)).wait();
+    console.log("setPalette");
     await (await descriptorContract.setPalette(0, `0x000000${palette.join('')}`)).wait();
 
+    console.log("addBodies");
     await (
       await descriptorContract.addBodies(
         bodiesPage.encodedCompressed,
@@ -46,6 +50,7 @@ task('cnnouns-populate-descriptor', 'Populates the descriptor with color palette
         options,
       )
     ).wait();
+    console.log("addHeads");
     await (
       await descriptorContract.addHeads(
         headsPage.encodedCompressed,
@@ -55,6 +60,7 @@ task('cnnouns-populate-descriptor', 'Populates the descriptor with color palette
       )
     ).wait();
 
+    console.log("addGlasses");
     await (
       await descriptorContract.addGlasses(
         glassesPage.encodedCompressed,
@@ -63,6 +69,7 @@ task('cnnouns-populate-descriptor', 'Populates the descriptor with color palette
         options,
       )
     ).wait();
+    console.log("addSkills");
     await (
       await descriptorContract.addSkills(
         skillsPage.encodedCompressed,

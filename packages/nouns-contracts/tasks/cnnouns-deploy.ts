@@ -219,6 +219,7 @@ task('cnnouns-deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and
         })
       ).connect(deployer);
 
+      console.log("deploying", name);
       const deployedContract = await factory.deploy(
         ...(contract.args?.map(a => (typeof a === 'function' ? a() : a)) ?? []),
       );
