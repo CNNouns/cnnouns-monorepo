@@ -45,7 +45,7 @@ task('cnnouns-verify-ownership', 'Verify ownership of contracts')
         libraries: { NFTDescriptorV2: args.nftDescriptorV2 },
       },
       NounsToken: { address: args.nounsToken, libraries: undefined },
-      NounsAuctionHouseProxyAdmin: { address: args.nounsToken, libraries: undefined },
+      NounsAuctionHouseProxyAdmin: { address: args.nounsAuctionHouseProxyAdmin, libraries: undefined },
       NounsAuctionHouse: { address: args.nounsAuctionHouseProxy, libraries: undefined },
     };
 
