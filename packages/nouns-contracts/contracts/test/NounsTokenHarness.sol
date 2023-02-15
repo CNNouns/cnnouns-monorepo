@@ -6,7 +6,7 @@ pragma solidity ^0.8.15;
 // This file is a modified version of nounsDAO's NounsTokenHarness.sol:
 // https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/test/NounsTokenHarness.sol
 //
-// NounsTokenHarness.sol licensed under the GPL-3.0 license.
+// NounsTokenHarness.sol source code Copyright Nouns licensed under the GPL-3.0 license.
 // With modifications by CNNouns DAO.
 
 import { NounsToken } from '../NounsToken.sol';

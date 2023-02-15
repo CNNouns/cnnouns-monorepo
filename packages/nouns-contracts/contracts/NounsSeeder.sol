@@ -21,7 +21,7 @@ pragma solidity ^0.8.6;
 // This file is a modified version of nounsDAO's NounsSeeder.sol:
 // https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/NounsSeeder.sol
 //
-// NounsSeeder.sol licensed under the GPL-3.0 license.
+// NounsSeeder.sol source code Copyright Nouns licensed under the GPL-3.0 license.
 // With modifications by CNNouns DAO.
 
 import { INounsSeeder } from './interfaces/INounsSeeder.sol';

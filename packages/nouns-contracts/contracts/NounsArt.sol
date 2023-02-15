@@ -21,7 +21,7 @@ pragma solidity ^0.8.6;
 // This file is a modified version of nounsDAO's NounsArt.sol:
 // https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/NounsArt.sol
 //
-// NounsArt.sol licensed under the GPL-3.0 license.
+// NounsArt.sol source code Copyright Nouns licensed under the GPL-3.0 license.
 // With modifications by CNNouns DAO.
 
 import { INounsArt } from './interfaces/INounsArt.sol';

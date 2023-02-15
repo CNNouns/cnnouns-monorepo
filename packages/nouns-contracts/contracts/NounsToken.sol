@@ -21,7 +21,7 @@ pragma solidity ^0.8.6;
 // This file is a modified version of nounsDAO's NounsToken.sol:
 // https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/NounsToken.sol
 //
-// NounsToken.sol licensed under the GPL-3.0 license.
+// NounsToken.sol source code Copyright Nouns licensed under the GPL-3.0 license.
 // With modifications by CNNouns DAO.
 
 import { Ownable } from '@openzeppelin/contracts/access/Ownable.sol';
