@@ -94,7 +94,7 @@ contract NounsDescriptorV2Test is Test {
     }
 
     function testToggleDataURIWorks() public {
-        descriptor.setBaseURI('https://nouns.wtf/');
+        descriptor.setBaseURI('https://cryptoninja-nouns.wtf/');
         _makeArtGettersNotRevert();
         vm.mockCall(
             address(renderer),
@@ -103,7 +103,7 @@ contract NounsDescriptorV2Test is Test {
         );
 
         descriptor.toggleDataURIEnabled();
-        assertEq(descriptor.tokenURI(42, INounsSeeder.Seed(0, 0, 0, 0, 0)), 'https://nouns.wtf/42');
+        assertEq(descriptor.tokenURI(42, INounsSeeder.Seed(0, 0, 0, 0, 0)), 'https://cryptoninja-nouns.wtf/42');
 
         descriptor.toggleDataURIEnabled();
         assertEq(

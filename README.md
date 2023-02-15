@@ -18,7 +18,7 @@ The [nouns bots](packages/nouns-bots) package contains a bot that monitors for c
 
 ### nouns-contracts
 
-The [nouns contracts](packages/nouns-contracts) is the suite of Solidity contracts powering Nouns DAO.
+The [nouns contracts](packages/nouns-contracts) is the suite of Solidity contracts powering CNNouns DAO.
 
 ### nouns-sdk
 
