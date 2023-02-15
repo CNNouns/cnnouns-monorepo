@@ -2,7 +2,11 @@
   "name": "@nouns/assets",
   "version": "0.4.2",
   "description": "Nouns run-length encoded image data",
-  "author": "Nounders",
+  "author": "CNNouns",
+  "contributors": [
+    "Nounders",
+    "CNNouns"
+  ],
   "homepage": "https://cryptoninja-nouns.wtf",
   "license": "GPL-3.0",
   "main": "dist/index.js",

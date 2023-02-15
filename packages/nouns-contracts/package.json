@@ -2,7 +2,11 @@
   "name": "@nouns/contracts",
   "version": "0.3.0",
   "description": "Nouns solidity contracts & artifacts",
-  "author": "Nounders",
+  "author": "CNNouns",
+  "contributors": [
+    "Nounders",
+    "CNNouns"
+  ],
   "homepage": "https://cryptoninja-nouns.wtf",
   "license": "GPL-3.0",
   "main": "dist/src/index.js",
