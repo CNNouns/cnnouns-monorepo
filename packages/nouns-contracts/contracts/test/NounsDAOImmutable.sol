@@ -6,7 +6,7 @@ pragma solidity ^0.8.6;
 // This file is a modified version of nounsDAO's NounsDAOImmutable.sol:
 // https://github.com/nounsDAO/nouns-monorepo/blob/854b9b64770401da71503972c65c4f9eda060ba6/packages/nouns-contracts/contracts/test/NounsDAOImmutable.sol
 //
-// NounsDAOImmutable.sol licensed under the MIT license.
+// NounsDAOImmutable.sol source code licensed under the MIT license.
 // With modifications by CNNouns DAO.
 //
 // Additional conditions of MIT can be found here: https://opensource.org/licenses/MIT
