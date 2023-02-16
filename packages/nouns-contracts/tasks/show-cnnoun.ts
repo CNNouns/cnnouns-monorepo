@@ -5,19 +5,19 @@ task('show-cnnoun', 'Show a Noun')
   .addOptionalParam(
     'nounsToken',
     'The `NounsToken` contract address',
-    '0xa0C8D694baCeeC69532E1547514B50006381dAAF',
+    '0xAc3aaFF5576CD40343651f1a32DD160Df3b36537',
     types.string,
   )
   .addOptionalParam(
     'nftDescriptor',
     'The `NFTDescriptorV2` contract address',
-    '0xf4aE9A4559523bf2f850d9eBC7f84544aBda1735',
+    '0x1EfBCe9A5A4add7a85cC4b30416D86E01Db2BFF5',
     types.string,
   )
   .addOptionalParam(
     'nounsDescriptor',
     'The `NounsDescriptorV2` contract address',
-    '0x00Ad9422fF4A060858f184Afdf7576111076ccDF',
+    '0x08d84A6cd9523Ddc7a16F94D004Db985C3406a70',
     types.string,
   )
   .addOptionalParam('tokenId', '`NounsToken` id', 0, types.int)
