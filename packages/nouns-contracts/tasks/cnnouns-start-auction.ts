@@ -22,12 +22,14 @@ task('cnnouns-start-auction', 'Start the first auction')
     console.log('Start auction', args.nounsAuctionHouseProxy);
     const auctonHouseFactory = await ethers.getContractFactory('NounsAuctionHouse');
     const auctionHouse = auctonHouseFactory.connect(signer).attach(args.nounsAuctionHouseProxy);
-    await auctionHouse.unpause({
-      gasLimit: 1_000_000,
-    });
+    await (
+      await auctionHouse.unpause({
+        gasLimit: 1_000_000,
+      })
+    ).wait();
 
     console.log('Transfer ownership', args.nounsDaoExecutor);
-    await auctionHouse.transferOwnership(args.nounsDaoExecutor);
+    await (await auctionHouse.transferOwnership(args.nounsDaoExecutor)).wait();
     console.log(
       'Started the first auction and transferred ownership of the auction house to the executor.',
     );

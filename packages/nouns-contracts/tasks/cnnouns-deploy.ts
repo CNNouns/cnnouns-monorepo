@@ -154,9 +154,7 @@ task('cnnouns-deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and
           proxyRegistryAddress,
         ],
       },
-      NounsAuctionHouse: {
-        waitForConfirmation: true,
-      },
+      NounsAuctionHouse: {},
       NounsAuctionHouseProxyAdmin: {},
       NounsAuctionHouseProxy: {
         args: [
@@ -172,7 +170,6 @@ task('cnnouns-deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and
               args.auctionBaseDuration,
             ]),
         ],
-        waitForConfirmation: true,
         validateDeployment: () => {
           const expected = expectedAuctionHouseProxyAddress.toLowerCase();
           const actual = deployment.NounsAuctionHouseProxy.address.toLowerCase();
@@ -186,9 +183,7 @@ task('cnnouns-deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and
       NounsDAOExecutor: {
         args: [expectedNounsDAOProxyAddress, args.timelockDelay],
       },
-      NounsDAOLogicV2: {
-        waitForConfirmation: true,
-      },
+      NounsDAOLogicV2: {},
       NounsDAOProxyV2: {
         args: [
           () => deployment.NounsDAOExecutor.address,
@@ -205,7 +200,6 @@ task('cnnouns-deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and
             quorumCoefficient: ethers.utils.parseUnits(args.quorumCoefficient.toString(), 6),
           },
         ],
-        waitForConfirmation: true,
         validateDeployment: () => {
           const expected = expectedNounsDAOProxyAddress.toLowerCase();
           const actual = deployment.NounsDAOProxyV2.address.toLowerCase();
@@ -225,13 +219,12 @@ task('cnnouns-deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and
         })
       ).connect(deployer);
 
+      console.log("deploying", name);
       const deployedContract = await factory.deploy(
         ...(contract.args?.map(a => (typeof a === 'function' ? a() : a)) ?? []),
       );
 
-      if (contract.waitForConfirmation) {
-        await deployedContract.deployed();
-      }
+      await deployedContract.deployed();
 
       deployment[name as ContractNameCNNouns] = {
         name,
