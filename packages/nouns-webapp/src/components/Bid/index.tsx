@@ -1,4 +1,8 @@
-import { Auction, AuctionHouseContractFunction } from '../../wrappers/nounsAuction';
+import {
+  Auction,
+  AuctionHouseContractFunction,
+  useSettleCurrentAndCreateNewAuction,
+} from '../../wrappers/nounsAuction';
 import { useEthers, useContractFunction } from '@usedapp/core';
 import { connectContractToSigner } from '@usedapp/core/dist/cjs/src/hooks';
 import { useAppSelector } from '../../hooks';
@@ -88,10 +92,7 @@ const Bid: React.FC<{
     nounsAuctionHouseContract,
     AuctionHouseContractFunction.createBid,
   );
-  const { send: settleAuction, state: settleAuctionState } = useContractFunction(
-    nounsAuctionHouseContract,
-    AuctionHouseContractFunction.settleCurrentAndCreateNewAuction,
-  );
+  const { send: settleAuction, state: settleAuctionState } = useSettleCurrentAndCreateNewAuction();
 
   const bidInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
