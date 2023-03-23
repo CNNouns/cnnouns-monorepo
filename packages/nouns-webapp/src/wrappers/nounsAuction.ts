@@ -1,6 +1,11 @@
-import { useContractCall } from '@usedapp/core';
+import {
+  connectContractToSigner,
+  useContractCall,
+  useEthers,
+  useContractFunction,
+} from '@usedapp/core';
 import { BigNumber as EthersBN, utils } from 'ethers';
-import { NounsAuctionHouseABI } from '@nouns/sdk';
+import { NounsAuctionHouseABI, NounsAuctionHouseFactory } from '@nouns/sdk';
 import config from '../config';
 import BigNumber from 'bignumber.js';
 import { isNounderNoun } from '../utils/nounderNoun';
@@ -26,6 +31,9 @@ export interface Auction {
 }
 
 const abi = new utils.Interface(NounsAuctionHouseABI);
+const nounsAuctionHouseContract = new NounsAuctionHouseFactory().attach(
+  config.addresses.nounsAuctionHouseProxy,
+);
 
 export const useAuction = (auctionHouseProxyAddress: string) => {
   const auction = useContractCall<Auction>({
@@ -75,4 +83,23 @@ export const useNounCanVoteTimestamp = (nounId: number) => {
   }
 
   return EthersBN.from(maybeNounCanVoteTimestamp);
+};
+
+export const useSettleCurrentAndCreateNewAuction = () => {
+  const { library } = useEthers();
+  const { send: settleAuction, state: settleAuctionState } = useContractFunction(
+    nounsAuctionHouseContract,
+    AuctionHouseContractFunction.settleCurrentAndCreateNewAuction,
+  );
+
+  return {
+    send: async (...args: any[]): Promise<void> => {
+      const contract = connectContractToSigner(nounsAuctionHouseContract, undefined, library);
+      const gasLimit = await contract.estimateGas.settleCurrentAndCreateNewAuction(...args);
+      settleAuction(...args, {
+        gasLimit: gasLimit.add(45_000), // A 45,000 gas pad is used to avoid 'Out of gas' errors
+      });
+    },
+    state: settleAuctionState,
+  };
 };
