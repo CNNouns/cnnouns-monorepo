@@ -1,13 +1,13 @@
 import { NounsDAOV2ABI, NounsDaoLogicV2Factory } from '@nouns/sdk';
 import {
   ChainId,
-  connectContractToSigner,
   useBlockNumber,
   useContractCall,
   useContractCalls,
   useContractFunction,
   useEthers,
 } from '@usedapp/core';
+import { connectContractToSigner } from '@usedapp/core/dist/cjs/src/hooks';
 import { utils, BigNumber as EthersBN } from 'ethers';
 import { defaultAbiCoder, Result } from 'ethers/lib/utils';
 import { useMemo } from 'react';
@@ -109,7 +109,9 @@ export interface PartialProposalSubgraphEntity {
   quorumVotes: string;
 }
 
-export interface ProposalSubgraphEntity extends ProposalTransactionDetails, PartialProposalSubgraphEntity {
+export interface ProposalSubgraphEntity
+  extends ProposalTransactionDetails,
+    PartialProposalSubgraphEntity {
   description: string;
   createdBlock: string;
   createdTransactionHash: string;
@@ -532,10 +534,10 @@ export const useCastRefundableVote = () => {
   );
 
   return {
-    castRefundableVote: async (...args: any[]): Promise<void> => {
+    castRefundableVote: async (proposalId: any, support: any): Promise<void> => {
       const contract = connectContractToSigner(nounsDaoContract, undefined, library);
-      const gasLimit = await contract.estimateGas.castRefundableVote(...args);
-      return castRefundableVote(...args, {
+      const gasLimit = await contract.estimateGas.castRefundableVote(proposalId, support);
+      await castRefundableVote(proposalId, support, {
         gasLimit: gasLimit.add(20_000), // A 20,000 gas pad is used to avoid 'Out of gas' errors
       });
     },
@@ -552,10 +554,18 @@ export const useCastRefundableVoteWithReason = () => {
   );
 
   return {
-    castRefundableVoteWithReason: async (...args: any[]): Promise<void> => {
+    castRefundableVoteWithReason: async (
+      proposalId: any,
+      support: any,
+      reason: any,
+    ): Promise<void> => {
       const contract = connectContractToSigner(nounsDaoContract, undefined, library);
-      const gasLimit = await contract.estimateGas.castRefundableVoteWithReason(...args);
-      return castRefundableVoteWithReason(...args, {
+      const gasLimit = await contract.estimateGas.castRefundableVoteWithReason(
+        proposalId,
+        support,
+        reason,
+      );
+      await castRefundableVoteWithReason(proposalId, support, reason, {
         gasLimit: gasLimit.add(20_000), // A 20,000 gas pad is used to avoid 'Out of gas' errors
       });
     },

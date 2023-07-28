@@ -1,9 +1,5 @@
-import {
-  connectContractToSigner,
-  useContractCall,
-  useEthers,
-  useContractFunction,
-} from '@usedapp/core';
+import { useContractCall, useEthers, useContractFunction } from '@usedapp/core';
+import { connectContractToSigner } from '@usedapp/core/dist/cjs/src/hooks';
 import { BigNumber as EthersBN, utils } from 'ethers';
 import { NounsAuctionHouseABI, NounsAuctionHouseFactory } from '@nouns/sdk';
 import config from '../config';
