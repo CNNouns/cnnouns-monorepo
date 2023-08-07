@@ -126,7 +126,11 @@ const Bid: React.FC<{
     }
 
     const value = utils.parseEther(bidInputRef.current.value.toString());
-    const contract = connectContractToSigner(nounsAuctionHouseContract, undefined, library?.getSigner());
+    const contract = connectContractToSigner(
+      nounsAuctionHouseContract,
+      undefined,
+      library && 'getSigner' in library ? library.getSigner() : undefined,
+    );
     const gasLimit = await contract.estimateGas.createBid(auction.nounId, {
       value,
     });

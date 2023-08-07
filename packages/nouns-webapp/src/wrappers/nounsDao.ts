@@ -535,7 +535,11 @@ export const useCastRefundableVote = () => {
 
   return {
     castRefundableVote: async (proposalId: any, support: any): Promise<void> => {
-      const contract = connectContractToSigner(nounsDaoContract, undefined, library?.getSigner());
+      const contract = connectContractToSigner(
+        nounsDaoContract,
+        undefined,
+        library && 'getSigner' in library ? library.getSigner() : undefined,
+      );
       const gasLimit = await contract.estimateGas.castRefundableVote(proposalId, support);
       await castRefundableVote(proposalId, support, {
         gasLimit: gasLimit.add(20_000), // A 20,000 gas pad is used to avoid 'Out of gas' errors
@@ -559,7 +563,11 @@ export const useCastRefundableVoteWithReason = () => {
       support: any,
       reason: any,
     ): Promise<void> => {
-      const contract = connectContractToSigner(nounsDaoContract, undefined, library?.getSigner());
+      const contract = connectContractToSigner(
+        nounsDaoContract,
+        undefined,
+        library && 'getSigner' in library ? library.getSigner() : undefined,
+      );
       const gasLimit = await contract.estimateGas.castRefundableVoteWithReason(
         proposalId,
         support,

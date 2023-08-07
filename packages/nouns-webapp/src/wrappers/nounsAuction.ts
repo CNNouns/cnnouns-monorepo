@@ -90,7 +90,11 @@ export const useSettleCurrentAndCreateNewAuction = () => {
 
   return {
     send: async (...args: any[]): Promise<void> => {
-      const contract = connectContractToSigner(nounsAuctionHouseContract, undefined, library?.getSigner());
+      const contract = connectContractToSigner(
+        nounsAuctionHouseContract,
+        undefined,
+        library && 'getSigner' in library ? library.getSigner() : undefined,
+      );
       const gasLimit = await contract.estimateGas.settleCurrentAndCreateNewAuction(...args);
       settleAuction(...args, {
         gasLimit: gasLimit.add(45_000), // A 45,000 gas pad is used to avoid 'Out of gas' errors
