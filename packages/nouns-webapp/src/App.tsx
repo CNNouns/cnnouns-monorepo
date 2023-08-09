@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ChainId, useEthers } from '@usedapp/core';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { setActiveAccount } from './state/slices/account';
@@ -24,7 +24,8 @@ import dayjs from 'dayjs';
 import DelegatePage from './pages/DelegatePage';
 
 function App() {
-  const { account, chainId, library } = useEthers();
+  const { account, chainId, library, isLoading } = useEthers();
+  const [cachedChainId, setCachedChainId] = useState(chainId);
   const dispatch = useAppDispatch();
   dayjs.extend(relativeTime);
 
@@ -33,11 +34,17 @@ function App() {
     dispatch(setActiveAccount(account));
   }, [account, dispatch]);
 
+  useEffect(() => {
+    if (!isLoading) {
+      setCachedChainId(chainId);
+    }
+  }, [chainId, isLoading]);
+
   const alertModal = useAppSelector(state => state.application.alertModal);
 
   return (
     <div className={`${classes.wrapper}`}>
-      {Number(CHAIN_ID) !== chainId && <NetworkAlert />}
+      {Number(CHAIN_ID) !== cachedChainId && <NetworkAlert />}
       {alertModal.show && (
         <AlertModal
           title={alertModal.title}
