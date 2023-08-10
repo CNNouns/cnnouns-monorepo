@@ -31,19 +31,17 @@ jobs:
       - run: yarn
       - run: yarn build
       - name: Run contract tests
-        run: |
-          cd packages/nouns-contracts
-          yarn test
+        run: yarn test
+        working-directory: packages/nouns-contracts
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
       - name: Run Forge build
         run: |
-          cd packages/nouns-contracts
           forge --version
           forge build --sizes
+        working-directory: packages/nouns-contracts
       - name: Run Forge tests
-        run: |
-          cd packages/nouns-contracts
-          forge test -vvv --ffi
+        run: forge test -vvv --ffi
+        working-directory: packages/nouns-contracts
