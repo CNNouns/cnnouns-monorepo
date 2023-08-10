@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: 16
       - run: npm install -g yarn
-      - run: yarn
+      - run: yarn install --frozen-lockfile --ignore-optional
       - run: yarn build
       - run: yarn test
         working-directory: packages/nouns-contracts
