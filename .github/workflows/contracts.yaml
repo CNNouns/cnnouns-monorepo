@@ -34,9 +34,6 @@ jobs:
         run: |
           cd packages/nouns-contracts
           yarn test
-      - name: Uninstall Yarn
-        if: always()
-        run: npm uninstall -g yarn
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
