@@ -19,34 +19,23 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
-      - name: Install Yarn
-        run: npm install -g yarn
-      - run: yarn
+          node-version: 16
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile --ignore-optional
       - run: yarn build
-      - name: Run contract tests
-        run: |
-          cd packages/nouns-contracts
-          yarn test
-      - name: Uninstall Yarn
-        if: always()
-        run: npm uninstall -g yarn
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
+      - run: yarn test
+        working-directory: packages/nouns-contracts
+      - uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
-      - name: Run Forge build
-        run: |
-          cd packages/nouns-contracts
-          forge --version
-          forge build --sizes
-      - name: Run Forge tests
-        run: |
-          cd packages/nouns-contracts
-          forge test -vvv --ffi
+      - run: forge --version
+        working-directory: packages/nouns-contracts
+      - run: forge build --sizes
+        working-directory: packages/nouns-contracts
+      - run: forge test -vvv --ffi
+        working-directory: packages/nouns-contracts
