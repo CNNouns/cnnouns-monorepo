@@ -13,6 +13,6 @@ export function useReadonlyProvider(): providers.JsonRpcProvider | undefined {
     if (!rpcURL) {
       return;
     }
-    return new providers.JsonRpcProvider(rpcURL);
+    return new providers.StaticJsonRpcProvider(rpcURL);
   }, [rpcURL]);
 }

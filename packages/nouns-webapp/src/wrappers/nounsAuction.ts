@@ -1,9 +1,5 @@
-import {
-  connectContractToSigner,
-  useContractCall,
-  useEthers,
-  useContractFunction,
-} from '@usedapp/core';
+import { useContractCall, useEthers, useContractFunction } from '@usedapp/core';
+import { connectContractToSigner } from '@usedapp/core/dist/cjs/src/hooks';
 import { BigNumber as EthersBN, utils } from 'ethers';
 import { NounsAuctionHouseABI, NounsAuctionHouseFactory } from '@nouns/sdk';
 import config from '../config';
@@ -94,9 +90,13 @@ export const useSettleCurrentAndCreateNewAuction = () => {
 
   return {
     send: async (...args: any[]): Promise<void> => {
-      const contract = connectContractToSigner(nounsAuctionHouseContract, undefined, library);
+      const contract = connectContractToSigner(
+        nounsAuctionHouseContract,
+        undefined,
+        library && 'getSigner' in library ? library.getSigner() : undefined,
+      );
       const gasLimit = await contract.estimateGas.settleCurrentAndCreateNewAuction(...args);
-      settleAuction(...args, {
+      await settleAuction(...args, {
         gasLimit: gasLimit.add(45_000), // A 45,000 gas pad is used to avoid 'Out of gas' errors
       });
     },
