@@ -31,7 +31,8 @@
   "resolutions": {
     "**/ethers": "5.6.9",
     "@usedapp/core/ethers": "5.6.9",
-    "**/@ethersproject/contracts": "5.6.2"
+    "**/@ethersproject/contracts": "5.6.2",
+    "node-hid": "^2.1.2"
   },
   "workspaces": [
     "packages/*"
