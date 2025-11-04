@@ -75,7 +75,7 @@ const app: Record<SupportedChains, AppConfig> = {
   [ChainId.Mainnet]: {
     jsonRpcUri: createNetworkHttpUrl('mainnet'),
     wsRpcUri: createNetworkWsUrl('mainnet'),
-    subgraphApiUri: process.env.REACT_APP_MAINNET_SUBGRAPH_QUERY_URL,
+    subgraphApiUri: process.env.REACT_APP_MAINNET_SUBGRAPH_QUERY_URL ?? '',
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
   },
   [ChainId.Hardhat]: {
